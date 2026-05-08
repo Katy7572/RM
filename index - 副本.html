@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上市公司机构业务机会看板</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="data.js"></script>
+<script src="capital_data.js"></script>
+<script src="executive_data.js"></script>
+<script src="news_data.js"></script>
+<script src="research_data.js"></script>
+<style>
+:root{
+  --navy:#003778;--coral:#FF6464;--crimson:#C00000;--ice:#C9F0FF;
+  --navy-l:#eaf2fb;--coral-l:#fff2f2;--ice-l:#f2fbff;
+  --navy-d:#002555;--navy-m:#4a7ab5;
+  --g50:#f8f9fb;--g100:#f1f3f5;--g200:#e2e6ea;--g300:#d0d5db;--g500:#8a94a0;--g700:#495057;--g800:#343a40;--g900:#1a1e24;
+  --success:#28a745;--warning:#ffc107;--danger:#dc3545;--info:#17a2b8;
+  --gold:#f0c040;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"KaiTi","STKaiti","楷体","SimSun",serif;
+  background:#f5f7fa;color:var(--g800);line-height:1.7;
+}
+
+/* ── NAV ── */
+.topnav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(0,55,120,.97);backdrop-filter:blur(12px);
+  display:flex;align-items:center;gap:0;
+  padding:0 12px;height:52px;overflow-x:auto;overflow-y:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.2);
+  scrollbar-width:none;
+}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{
+  font-size:13px;color:rgba(255,255,255,.8);text-decoration:none;
+  padding:14px 12px;white-space:nowrap;border-bottom:2.5px solid transparent;
+  transition:.2s;font-family:"KaiTi","STKaiti","楷体","SimSun",serif;
+}
+.topnav a:hover,.topnav a.active{color:#fff;border-bottom-color:var(--coral)}
+.topnav .brand{
+  font-weight:700;color:#fff;padding:6px 14px;border-radius:6px;margin-right:12px;
+  font-size:13px;border:none;background:var(--coral);
+}
+.topnav .brand.active{border:none;border-bottom:2.5px solid #fff}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-d) 60%,#0a1628 100%);
+  color:#fff;padding:40px 24px 28px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(255,100,100,.08) 0%,transparent 70%);border-radius:50%;
+}
+.hero h1{font-size:clamp(20px,3vw,30px);letter-spacing:3px;font-weight:700;margin-bottom:8px}
+.hero .sub{color:var(--ice);font-size:14px;opacity:.85}
+.hero .date{display:inline-block;margin-top:12px;padding:4px 16px;background:rgba(255,255,255,.15);border-radius:20px;font-size:13px;color:var(--ice)}
+.hero-province-btn{
+  margin-top:24px;display:flex;align-items:center;gap:12px;padding:14px 28px;
+  background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;
+  cursor:pointer;color:#fff;font-size:14px;transition:all .2s;
+}
+.hero-province-btn:hover{background:rgba(255,255,255,.25);border-color:var(--coral);transform:translateY(-2px)}
+.hero-province-icon{font-size:24px}
+.hero-province-text{font-weight:700}
+.hero-province-current{
+  font-size:11px;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:10px;
+  color:rgba(255,255,255,.8);
+}
+.province-page-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;padding:10px 40px 40px;max-width:1200px;margin:0 auto;
+}
+.province-page-card{
+  background:#f8f9fb;border-radius:8px;padding:8px 6px;text-align:center;
+  cursor:pointer;transition:all .15s;border:2px solid transparent;
+}
+.province-page-card:hover{background:#eaf2fb;border-color:var(--navy-m);transform:translateY(-1px)}
+.province-page-card.active{border-color:var(--coral);background:#fff2f2}
+.province-page-card .pv-icon{font-size:18px;margin-bottom:2px}
+.province-page-card .pv-name{font-size:12px;font-weight:600;color:var(--g800);margin-bottom:1px}
+.province-page-card .pv-count{font-size:10px;color:var(--g500)}
+.province-all-card{grid-column:1/-1;max-width:200px;justify-self:center}
+.province-all-card .pv-icon{font-size:24px}
+.province-all-card .pv-name{font-size:14px}
+.province-all-card .pv-count{font-size:12px;color:var(--g500)}
+.province-filter-bar{
+  display:none;align-items:center;gap:8px;padding:8px 16px;
+  background:var(--coral-l);border-radius:8px;margin-bottom:12px;
+  font-size:13px;color:var(--coral);
+}
+.province-filter-bar.show{display:flex}
+.province-filter-bar .clear-btn{
+  padding:2px 10px;background:var(--coral);color:#fff;border:none;
+  border-radius:4px;cursor:pointer;font-size:12px;font-family:inherit;
+}
+
+/* ── DASHBOARD CARDS ── */
+.dashboard{
+  max-width:1400px;margin:0 auto 0;padding:0 16px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;z-index:10;
+}
+.stat-card{
+  background:#fff;border-radius:10px;padding:16px;text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);transition:.2s;
+}
+.stat-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.stat-card .icon{font-size:24px;margin-bottom:4px}
+.stat-card .value{font-size:24px;font-weight:700;color:var(--navy)}
+.stat-card .label{font-size:12px;color:var(--g500);margin-top:2px}
+.stat-card.up .value{color:var(--danger)}  /* 红涨 */
+.stat-card.down .value{color:var(--success)}  /* 绿跌 */
+.stat-card.gold .value{color:var(--gold)}
+
+/* ── SECTION ── */
+.section{max-width:1400px;margin:24px auto;padding:0 16px}
+.section-anchor{display:block;position:relative;top:-56px;visibility:hidden}
+.section-title{
+  font-size:18px;color:var(--navy);font-weight:700;margin-bottom:14px;
+  padding-left:12px;border-left:4px solid var(--coral);letter-spacing:2px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-title .icon{font-size:20px}
+.section-title .badge{
+  font-size:11px;background:var(--coral);color:#fff;padding:2px 8px;
+  border-radius:10px;font-weight:400;
+}
+
+/* ── CARDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:14px 0}
+.card{
+  background:#fff;border-radius:10px;padding:16px;border:1px solid var(--g200);
+  box-shadow:0 1px 4px rgba(0,0,0,.03);transition:.2s;
+}
+.card:hover{border-color:var(--navy-m);box-shadow:0 2px 8px rgba(0,55,120,.06)}
+.card h4{font-size:15px;color:var(--navy);margin-bottom:8px;letter-spacing:1px}
+.card p{font-size:13px;color:var(--g700);line-height:1.6}
+.card .meta{font-size:12px;color:var(--g500);margin-top:6px;padding-top:6px;border-top:1px solid var(--g100)}
+
+/* ── TABLE ── */
+.tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--g200);background:#fff;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--navy);color:#fff;padding:10px 12px;text-align:left;font-weight:600;white-space:nowrap;font-size:12px}
+td{padding:9px 12px;border-bottom:1px solid var(--g200);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--ice-l)}
+.text-up{color:var(--danger);font-weight:600}  /* 红涨 */
+.text-down{color:var(--success);font-weight:600}  /* 绿跌 */
+
+/* ── TAGS ── */
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;margin:1px}
+.tag-navy{background:var(--navy-l);color:var(--navy)}
+.tag-coral{background:var(--coral-l);color:var(--crimson)}
+.tag-ice{background:var(--ice);color:var(--navy)}
+.tag-success{background:rgba(40,167,69,.12);color:var(--success)}
+.tag-warning{background:rgba(255,193,7,.12);color:#d4a000}
+.tag-danger{background:rgba(220,53,69,.12);color:var(--danger)}
+.tag-gold{background:rgba(240,192,64,.12);color:#a07020}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:14px;border-bottom:2px solid var(--g200)}
+.tab-btn{
+  padding:8px 14px;font-size:13px;background:none;border:none;
+  font-family:"KaiTi","STKaiti","楷体","SimSun",serif;color:var(--g500);cursor:pointer;
+  border-bottom:2.5px solid transparent;margin-bottom:-2px;transition:.2s;
+  border-radius:4px 4px 0 0;
+}
+.tab-btn:hover{color:var(--navy);background:var(--g50)}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--coral);font-weight:600;background:var(--navy-l)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── CHART BOX ── */
+.chart-box{
+  background:#fff;border-radius:10px;padding:16px;border:1px solid var(--g200);
+  box-shadow:0 1px 4px rgba(0,0,0,.03);margin:12px 0;
+}
+.chart{width:100%;height:350px}
+
+/* ── OPPORTUNITY/RISK CARDS ── */
+.opportunity-card{
+  background:linear-gradient(135deg,#f0fff4 0%,#e6fffa 100%);
+  border:1px solid #9ae6b4;border-radius:10px;padding:14px;position:relative;overflow:hidden;
+}
+.opportunity-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--success)}
+.summary-card{background:#fff;padding:20px 24px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.summary-metric{text-align:center;padding:12px;border-radius:8px;background:var(--g50)}
+.summary-metric .num{font-size:24px;font-weight:700;color:var(--navy);font-family:Arial}
+.summary-metric .lbl{font-size:12px;color:var(--g500);margin-top:4px}
+
+/* ── LAYER CARDS ── */
+.layer-card{padding:18px;border-radius:12px;margin:12px 0;border:2px solid}
+.layer-card.strategic{background:linear-gradient(135deg,#fff8e1,#fff3cd);border-color:var(--gold)}
+.layer-card.potential{background:linear-gradient(135deg,var(--navy-l),var(--ice-l));border-color:var(--navy-m)}
+.layer-card.maintenance{background:linear-gradient(135deg,var(--g50),#f0f0f0);border-color:var(--g300)}
+.layer-card h4{font-size:16px;margin-bottom:6px}
+
+/* ── NEWS CARDS ── */
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.news-card{
+  background:#fff;border-radius:10px;padding:14px;border:1px solid var(--g200);
+  transition:.2s;cursor:pointer;
+}
+.news-card:hover{border-color:var(--navy-m);box-shadow:0 2px 8px rgba(0,55,120,.06)}
+.news-card .meta{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.news-card .title{font-size:14px;color:var(--g800);line-height:1.5;margin-bottom:6px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news-card .stock{font-size:12px;color:var(--navy-m);font-weight:600}
+.news-card .time{font-size:11px;color:var(--g500);margin-left:auto}
+
+/* ── CAPITAL CARDS (新增) ── */
+.capital-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding:12px;background:var(--g50);border-radius:8px}
+.capital-search{position:relative;flex:0 0 200px}
+.capital-search input{width:100%;padding:6px 10px 6px 28px;border:1px solid var(--g200);border-radius:6px;font-size:13px;outline:none}
+.capital-search::before{content:"🔍";position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:12px}
+.capital-filter-group{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.capital-filter-group label{font-size:12px;color:var(--g500);margin-right:4px}
+.capital-filter-btn{padding:4px 10px;border:1px solid var(--g200);border-radius:14px;background:#fff;font-size:11px;color:var(--g600);cursor:pointer;transition:all .15s}
+.capital-filter-btn:hover{border-color:var(--navy);color:var(--navy)}
+.capital-filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.capital-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.capital-stat{background:#fff;border-radius:8px;padding:12px;text-align:center;border-left:3px solid var(--g200)}
+.capital-stat.total{border-left-color:var(--navy)}
+.capital-stat.unclaimed{border-left-color:var(--coral)}
+.capital-stat.major{border-left-color:#C00000}
+.capital-stat.high{border-left-color:#F59E0B}
+.capital-stat.mv{border-left-color:#10B981}
+.capital-stat .num{font-size:22px;font-weight:700;color:var(--navy)}
+.capital-stat.unclaimed .num{color:var(--coral)}
+.capital-stat.major .num{color:#C00000}
+.capital-stat.high .num{color:#D97706}
+.capital-stat .lbl{font-size:11px;color:var(--g500)}
+.capital-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.capital-card{background:#fff;border-radius:8px;padding:10px 12px;border:1px solid var(--g200);transition:.2s;cursor:pointer;border-left:4px solid var(--g200);display:flex;flex-direction:column;gap:4px;min-height:auto}
+.capital-card:hover{border-color:var(--navy-m);box-shadow:0 2px 8px rgba(0,55,120,.08)}
+.capital-card.star-5{border-left-color:#C00000}
+.capital-card.star-4{border-left-color:#F59E0B}
+.capital-card.star-3{border-left-color:#10B981}
+.capital-card.star-2{border-left-color:var(--g200)}
+.capital-card-header{display:flex;align-items:center;gap:6px;line-height:1.3}
+.capital-card-name{font-size:14px;font-weight:700;color:var(--g800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.capital-card-code{font-size:10px;color:var(--g500);margin-left:auto;flex-shrink:0}
+.capital-card .badge{display:inline-block;padding:1px 4px;border-radius:6px;font-size:9px;font-weight:600;flex-shrink:0}
+.capital-card .badge-star{color:#fff}
+.capital-card .badge-star.s5{background:#C00000}
+.capital-card .badge-star.s4{background:#F59E0B}
+.capital-card .badge-star.s3{background:#10B981}
+.capital-card .badge-star.s2{background:var(--g300)}
+.capital-card-tags{display:flex;gap:4px;flex-wrap:wrap}
+.capital-card .tag{padding:1px 5px;border-radius:3px;font-size:9px;background:var(--navy-l);color:var(--navy)}
+.capital-card .tag.cat{background:var(--ice);color:var(--navy)}
+.capital-card-summary{font-size:11px;color:var(--g700);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.capital-card-summary .hl{color:#C00000;font-weight:600}
+.capital-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center}
+.capital-modal.show{display:flex}
+.capital-modal-box{background:#fff;border-radius:12px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.capital-modal-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--g200)}
+.capital-modal-header h3{font-size:16px;font-weight:700;color:var(--navy)}
+.capital-modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--g500);padding:4px}
+.capital-modal-body{padding:20px}
+.capital-detail-row{margin-bottom:12px}
+.capital-detail-row .lbl{font-size:11px;color:var(--g500);margin-bottom:2px}
+.capital-detail-row .val{font-size:13px;color:var(--g800)}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:24px 20px;margin-top:36px;border-top:1px solid var(--g200);color:var(--g500);font-size:12px;background:#fff}
+
+/* ── SUMMARY CARD ── */
+.summary-card{background:#fff;border-radius:10px;padding:16px 20px;border:1px solid var(--g200);box-shadow:0 1px 4px rgba(0,0,0,.03)}
+
+/* Province scroll container */
+#province-grid-section .summary-card::-webkit-scrollbar{width:4px}
+#province-grid-section .summary-card::-webkit-scrollbar-thumb{background:var(--g300);border-radius:2px}
+#province-grid-section .summary-card::-webkit-scrollbar-track{background:transparent}
+
+/* Summary metrics */
+.summary-metric{text-align:center;padding:8px 4px;background:var(--g50);border-radius:6px}
+.summary-metric .num{font-size:18px;font-weight:700;color:var(--navy)}
+.summary-metric .lbl{font-size:11px;color:var(--g500);margin-top:2px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .dashboard{grid-template-columns:repeat(2,1fr)}
+  .card-grid{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="loading-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#f5f7fa;display:flex;align-items:center;justify-content:center;z-index:9999;font-size:18px;color:var(--navy)">数据加载中（约3MB）...</div>
+
+<!-- ═══ NAV ═══ -->
+<nav class="topnav" id="topnav">
+  <a class="brand" href="#" data-page="home">机构业务看板</a>
+  <a href="#" data-page="market">行情中心</a>
+  <a href="#" data-page="news">新闻舆情</a>
+  <a href="#" data-page="executive">高管变动</a>
+  <a href="#" data-page="capital">资本动作</a>
+  <a href="#" data-page="research">机构评级</a>
+</nav>
+
+<!-- ═══ PAGE: 机构业务看板（首页） ═══ -->
+<div id="page-home">
+
+<!-- ═══ HERO ═══ -->
+<div class="hero" id="top">
+  <h1>全A股上市公司机构业务机会看板</h1>
+  <p class="sub">覆盖沪深北交易所全部 A 股上市公司</p>
+  <div class="date" id="currentDate">数据日期：加载中...</div>
+</div>
+
+<!-- ═══ PROVINCE FILTER BAR ═══ -->
+<div id="province-filter-bar" class="province-filter-bar">
+  <span>📍 当前筛选：<strong id="pv-filter-name">全部公司</strong></span>
+  <span id="pv-filter-count" style="color:var(--g500)"></span>
+  <button class="clear-btn" onclick="filterProvince('all')" style="margin-left:auto">× 清除筛选</button>
+</div>
+
+<!-- ═══ DASHBOARD STATS ═══ -->
+<div class="dashboard" id="overview">
+  <div class="stat-card">
+    <div class="icon">📊</div>
+    <div class="value" id="stat-total">--</div>
+    <div class="label">覆盖上市公司</div>
+  </div>
+  <div class="stat-card up">
+    <div class="icon">📈</div>
+    <div class="value" id="stat-up">--</div>
+    <div class="label">上涨</div>
+  </div>
+  <div class="stat-card down">
+    <div class="icon">📉</div>
+    <div class="value" id="stat-down">--</div>
+    <div class="label">下跌</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon">💡</div>
+    <div class="value" id="stat-opportunity">--</div>
+    <div class="label">业务机会</div>
+  </div>
+</div>
+
+<!-- ═══ HOMEPAGE: SUMMARY + PROVINCE ═══ -->
+<div class="section" id="summary" style="max-width:1400px">
+  <!-- 每日研判 -->
+  <div class="section-title" style="margin-bottom:10px"><span class="icon"></span>每日研判</div>
+  <div class="summary-card" style="padding:16px 20px;margin-bottom:20px">
+    <div id="summary-overview" style="font-size:13px;color:var(--g700);line-height:1.8;margin-bottom:14px"></div>
+    <div class="card-grid" style="grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:8px" id="summary-metrics"></div>
+    <div id="summary-advice" style="margin-top:12px;padding:10px 14px;background:var(--ice-l);border-radius:8px;font-size:13px;color:var(--navy);line-height:1.8;border-left:3px solid var(--navy)"></div>
+  </div>
+  <!-- 按省份筛选 -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+    <div class="section-title" style="margin-bottom:0"><span class="icon">📍</span>按省份筛选</div>
+    <button onclick="filterProvince('all')" style="padding:4px 14px;border-radius:6px;border:1px solid var(--navy);background:#fff;color:var(--navy);font-size:12px;cursor:pointer;font-family:inherit">显示全部公司</button>
+  </div>
+  <div class="summary-card" style="padding:10px;max-height:420px;overflow-y:auto">
+    <div class="province-page-grid" id="province-page-grid" style="padding:0;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:5px"></div>
+  </div>
+</div>
+
+<!-- ═══ OPPORTUNITIES & RISKS ═══ (隐藏，需要时去掉 display:none) -->
+<div class="section" style="display:none">
+  <div class="section-title"><span class="icon">💡</span>业务机会提示</div>
+
+  <!-- 看板说明 -->
+  <div style="background:#fff;border-radius:10px;padding:14px 18px;border:1px solid var(--g200);margin-bottom:14px;font-size:13px;color:var(--g700);line-height:1.9">
+    <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px">业务机会判定规则（基于公告与研报数据自动识别）：</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px">
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px;flex-shrink:0">💰</span><div><strong>融资需求：</strong>公司近期公告了股权激励、员工持股、限制性股票或股权质押/解除，存在融资或资金周转需求</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px;flex-shrink:0">📊</span><div><strong>财富管理需求：</strong>公司涉及股份回购、股东增减持、委托理财、分红派息、控制权变更等事项，股东有资产配置或变现需求</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px;flex-shrink:0">📝</span><div><strong>投研服务需求：</strong>近90天内有券商研报覆盖，机构关注度高，存在研究服务需求</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px;flex-shrink:0">👔</span><div><strong>高管变更对接：</strong>公司发生高管聘任或辞职，可进行客户关系维护与业务对接</div></div>
+    </div>
+  </div>
+
+  <div class="card-grid" id="opportunity-list"></div>
+</div>
+
+</div><!-- end page-home -->
+
+<!-- ═══ PAGE: 行情中心 ═══ -->
+<div id="page-market" style="display:none">
+<div class="section" id="market">
+  <div class="section-title"><span class="icon">📈</span>行情中心 <span class="badge" id="market-date-badge" style="font-size:11px;font-weight:400;background:var(--info);color:#fff">加载中</span><span style="font-size:11px;color:var(--g500);margin-left:8px">数据来源：腾讯财经</span><button onclick="refreshMarketData()" style="margin-left:12px;padding:3px 10px;border-radius:4px;border:1px solid var(--navy);background:#fff;color:var(--navy);font-size:11px;cursor:pointer" title="运行 python refresh_market_v3.py 刷新行情数据">🔄 刷新行情</button></div>
+  <div class="summary-card" style="margin-bottom:20px;padding:16px 20px">
+    <h4 style="font-size:15px;color:var(--navy);margin-bottom:10px">行情总结</h4>
+    <div id="market-summary-text" style="font-size:13px;color:var(--g700);line-height:1.8"></div>
+  </div>
+  <div class="card-grid" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="card">
+      <h4>🚀 涨幅榜 TOP10</h4>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>公司</th><th>代码</th><th>价格</th><th>涨跌幅</th></tr></thead>
+        <tbody id="top-gainers"></tbody></table>
+      </div>
+    </div>
+    <div class="card">
+      <h4>🔻 跌幅榜 TOP10</h4>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>公司</th><th>代码</th><th>价格</th><th>涨跌幅</th></tr></thead>
+        <tbody id="top-losers"></tbody></table>
+      </div>
+    </div>
+    <div class="card">
+      <h4>💰 成交额 TOP10</h4>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>公司</th><th>代码</th><th>成交额</th><th>换手率</th></tr></thead>
+        <tbody id="top-turnover"></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全量股票表格 + 省份筛选 -->
+  <div style="margin-top:24px;padding:16px 20px;background:#fff;border-radius:12px;border:1px solid var(--g200)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+      <span style="font-size:14px;font-weight:600;color:var(--navy)">全部股票</span>
+      <span id="market-stock-count" style="font-size:12px;color:var(--g500)">0 只</span>
+      <select id="market-province-filter" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:13px;min-width:120px">
+        <option value="all">全部省份</option>
+      </select>
+      <select id="market-sort" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:13px">
+        <option value="turnover">按成交额</option>
+        <option value="change_pct_desc">涨幅降序</option>
+        <option value="change_pct_asc">涨幅升序</option>
+        <option value="market_cap">按市值</option>
+      </select>
+      <input id="market-search" type="text" placeholder="搜索名称/代码..." style="padding:6px 12px;border-radius:6px;border:1px solid var(--g200);font-size:13px;width:200px">
+      <span id="market-showing-count" style="font-size:12px;color:var(--g500);margin-left:auto"></span>
+    </div>
+    <div id="market-legend" style="font-size:11px;color:var(--g500);margin-bottom:8px;display:flex;gap:12px">
+      <span>🔬 高新技术企业</span>
+      <span>⭐ 国家级专精特新</span>
+      <span>🏅 省级专精特新</span>
+    </div>
+    <div class="tbl-wrap" style="overflow-x:auto">
+      <table>
+        <thead><tr><th>公司</th><th>代码</th><th>省份</th><th>行业</th><th>价格</th><th>涨跌幅</th><th>成交额</th><th>市值(亿)</th><th>标签</th></tr></thead>
+        <tbody id="full-stock-table"></tbody>
+      </table>
+    </div>
+    <div id="market-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px"></div>
+  </div>
+</div>
+</div><!-- end page-market -->
+
+<!-- ═══ PAGE: 新闻舆情 ═══ -->
+<div id="page-news" style="display:none">
+<div class="section" id="news">
+  <div class="section-title"><span class="icon">📰</span>新闻舆情</div>
+  <div class="tabs" id="news-tabs">
+    <button class="tab-btn active" onclick="switchNewsTab('公司资讯')">公司资讯</button>
+    <button class="tab-btn" onclick="switchNewsTab('调研资讯')">调研资讯</button>
+  </div>
+  <div class="news-grid" id="news-list"></div>
+  <div id="news-pagination" style="margin-top:10px;display:flex;align-items:center;justify-content:center"></div>
+</div>
+</div><!-- end page-news -->
+
+<!-- ═══ PAGE: 高管变动 ═══ -->
+<div id="page-executive" style="display:none">
+<div class="section" id="executive">
+  <div class="section-title"><span class="icon"></span>高管变动 <span class="badge" id="executive-count-badge">加载中</span><span style="font-size:11px;color:var(--g500);margin-left:8px">数据来源：巨潮资讯网</span><span id="exec-date-filter-container" style="margin-left:8px"></span></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>公司</th><th>代码</th><th>变动类型</th><th>职位</th><th>公告标题</th><th>公告日期</th><th>状态</th><th>原文</th></tr></thead>
+      <tbody id="executive-table"></tbody>
+    </table>
+  </div>
+  <div id="executive-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px"></div>
+</div>
+</div><!-- end page-executive -->
+
+<!-- ═══ PAGE: 资本动作 ═══ -->
+<div id="page-capital" style="display:none">
+<div class="section" id="capital">
+  <div class="section-title"><span class="icon">💼</span>资本动作 <span class="badge" id="capital-count-badge">加载中</span><span style="font-size:11px;color:var(--g500);margin-left:8px">数据来源：巨潮资讯网</span></div>
+
+  <!-- 刷新提示 -->
+  <div style="background:var(--navy-l);border-radius:8px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
+    <span style="font-size:12px;color:var(--navy)">💡 数据更新方法：运行 <code style="background:var(--g200);padding:2px 6px;border-radius:4px">python cninfo_dashboard_updater_v2.py</code> 获取近7日最新公告，刷新页面即可</span>
+  </div>
+
+  <!-- 统计卡片 -->
+  <div class="capital-stats" id="capital-stats"></div>
+
+  <!-- 工具栏 -->
+  <div class="capital-toolbar">
+    <div class="capital-search">
+      <input type="text" id="capital-search-input" placeholder="搜索代码、名称...">
+    </div>
+    <div class="capital-filter-group">
+      <label>分类：</label>
+      <button class="capital-filter-btn active" data-filter="category" data-value="all">全部</button>
+      <button class="capital-filter-btn" data-filter="category" data-value="股权激励/员工持股">股权激励</button>
+      <button class="capital-filter-btn" data-filter="category" data-value="增减持">增减持</button>
+      <button class="capital-filter-btn" data-filter="category" data-value="股份回购">回购</button>
+      <button class="capital-filter-btn" data-filter="category" data-value="委托理财">理财</button>
+    </div>
+    <div class="capital-filter-group">
+      <label>等级：</label>
+      <button class="capital-filter-btn active" data-filter="star" data-value="all">全部</button>
+      <button class="capital-filter-btn" data-filter="star" data-value="4">★★★★</button>
+      <button class="capital-filter-btn" data-filter="star" data-value="3">★★★</button>
+      <button class="capital-filter-btn" data-filter="star" data-value="2">★★</button>
+    </div>
+    <select style="padding:4px 8px;border:1px solid var(--g200);border-radius:6px;font-size:11px" id="capital-sort">
+      <option value="star">按等级排序</option>
+      <option value="date">按日期排序</option>
+    </select>
+    <span id="capital-date-filter" style="display:none;margin-left:8px"></span>
+    <button style="padding:4px 10px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer" onclick="capitalExportCSV()">导出CSV</button>
+  </div>
+
+  <!-- 卡片网格 -->
+  <div class="capital-card-grid" id="capital-card-grid"></div>
+  <div id="capital-pagination" style="margin-top:10px;display:flex;align-items:center;justify-content:center"></div>
+  <div id="capital-empty" style="display:none;text-align:center;padding:40px;color:var(--g500)">
+    <p>没有匹配的资本动作</p>
+  </div>
+</div>
+</div><!-- end page-capital -->
+
+<!-- 详情弹窗 (global) -->
+<div class="capital-modal" id="capital-modal">
+  <div class="capital-modal-box">
+    <div class="capital-modal-header">
+      <h3 id="capital-modal-title"></h3>
+      <button class="capital-modal-close" onclick="closeCapitalModal()">&times;</button>
+    </div>
+    <div class="capital-modal-body" id="capital-modal-body"></div>
+  </div>
+</div>
+
+<!-- 股票列表弹窗 -->
+<div class="capital-modal" id="stock-list-modal">
+  <div class="capital-modal-box" style="max-width:700px">
+    <div class="capital-modal-header">
+      <h3 id="stock-list-modal-title"></h3>
+      <button class="capital-modal-close" onclick="closeStockListModal()">&times;</button>
+    </div>
+    <div class="capital-modal-body" id="stock-list-modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: 机构评级 ═══ -->
+<div id="page-research" style="display:none">
+<div class="section" id="research">
+  <div class="section-title"><span class="icon">📝</span>机构评级
+    <span id="research-count-badge" style="font-size:12px;color:var(--g500);font-weight:400;margin-left:8px"></span>
+  </div>
+  <p style="font-size:11px;color:var(--g500);margin-bottom:12px">
+    目标价及评级数据截至 2026-5-8，数据来源：万得/东方财富。
+    <span style="color:var(--navy)">带蓝色左边框的卡片 = 有目标价数据</span>。
+  </p>
+  <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    <input id="research-search" type="text" placeholder="搜索股票名称/代码..." style="padding:6px 12px;border-radius:6px;border:1px solid var(--g200);font-size:13px;width:220px">
+    <select id="research-rating" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:13px">
+      <option value="all">全部评级</option>
+      <option value="buy80">买入占比>80%</option>
+      <option value="buy50">买入占比50-80%</option>
+      <option value="buy_lt50">买入占比<50%</option>
+    </select>
+    <select id="research-sort" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:13px">
+      <option value="report_count">按评级机构数</option>
+      <option value="upside_desc">按空间↓</option>
+      <option value="upside_asc">按空间↑</option>
+    </select>
+  </div>
+  <div id="research-card-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px"></div>
+  <div id="research-pagination" style="margin-top:10px;display:flex;align-items:center;justify-content:center"></div>
+  <div id="research-empty" style="display:none;text-align:center;padding:40px;color:var(--g500)">
+    <p style="font-size:14px">暂无符合条件的研报数据</p>
+  </div>
+</div>
+</div><!-- end page-research -->
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  全A股上市公司机构业务机会看板 &copy; 2026 &nbsp;|&nbsp; 数据来源：万得（公司信息）+ 腾讯财经（实时行情）+ 巨潮资讯网（公告）+ 东方财富（新闻/研报）
+  <br><span style="font-size:11px;margin-top:4px;display:inline-block;color:var(--g500)">数据更新：<code style="background:var(--g200);padding:1px 6px;border-radius:4px">python refresh_market_v3.py</code> 刷新行情 &nbsp;|&nbsp; <code style="background:var(--g200);padding:1px 6px;border-radius:4px">python cninfo_dashboard_updater_v2.py</code> 刷新资本动作+高管变动</span>
+</div>
+
+<script>
+// ── GLOBAL DATA ──
+let gData = null;
+let gCurrentNewsTab = '公司资讯';
+const NEWS_PAGE_SIZE = 12;  // 每页约3行（每行4个卡片）
+let gNewsPage = 1;
+let gProvinceFilter = 'all';  // current province filter
+
+// ── PAGE NAVIGATION ──
+const PAGE_IDS = ['home', 'market', 'news', 'executive', 'capital', 'research'];
+
+function switchPage(pageId) {
+  PAGE_IDS.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) el.style.display = (p === pageId) ? '' : 'none';
+  });
+  // Update nav active state
+  document.querySelectorAll('#topnav a[data-page]').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === pageId);
+  });
+  window.scrollTo({top: 0, behavior: 'auto'});
+}
+
+// Nav click handlers
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('#topnav a[data-page]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchPage(this.dataset.page);
+    });
+  });
+});
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('loading-overlay').style.display = 'none';
+  try {
+    loadData();
+  } catch(e) {
+    console.error('render error:', e);
+    document.getElementById('loading-overlay').style.display = 'flex';
+    document.getElementById('loading-overlay').innerHTML =
+      '<div style="text-align:center;padding:60px"><h2>数据加载出错</h2><p style="color:var(--g500)">' + e.message + '</p><p>请打开浏览器控制台(F12)查看错误详情</p></div>';
+  }
+});
+
+function loadData() {
+  if (window.__STOCK_DATA__) {
+    gData = window.__STOCK_DATA__;
+    console.log('data.js loaded: ' + (gData.stocks ? gData.stocks.length : 0) + ' stocks');
+    // 用行情现价填充研报upside
+    fillResearchPrices();
+    // 合并外部机构评级数据（如有）
+    if (window.__RESEARCH_DATA__) {
+      mergeResearchData();
+      console.log('research_data.js merged: ' + (gData.institution_research ? gData.institution_research.length : 0) + ' research records');
+    }
+    renderAll();
+    // 后台预取巨潮公告PDF链接
+    buildCninfoCache();
+    return;
+  }
+  fetch('jiangsu_stocks_data.json?t=' + Date.now())
+  .then(res => res.json())
+  .then(data => { gData = data; renderAll(); buildCninfoCache(); })
+  .catch(err => {
+    console.error('加载数据失败:', err);
+    document.body.innerHTML = '<div style="padding:40px;text-align:center"><h2>数据加载失败</h2><p>请确认 data.js 文件与本页面在同一目录，或使用本地HTTP服务器打开。</p></div>';
+  });
+}
+
+// ── 用行情现价填充研报数据upside ──
+function fillResearchPrices() {
+  const research = gData.institution_research || [];
+  if (!research.length) return;
+  const stocks = gData.stocks || [];
+  const priceMap = {};
+  stocks.forEach(s => { priceMap[s.code] = s.price; });
+  research.forEach(r => {
+    // 代码格式统一（去掉.SZ/.SH/.BJ后缀匹配）
+    const cleanCode = String(r.stock_code).replace(/\.(SZ|SH|BJ)$/, '');
+    const curPrice = priceMap[cleanCode];
+    if (curPrice && curPrice > 0) {
+      r.current_price = curPrice;
+      const target = r.consensus_target || r.target_price;
+      if (target) {
+        r.upside = ((target - curPrice) / curPrice * 100);
+      }
+    }
+  });
+  console.log('filled research prices: ' + research.filter(r => r.current_price).length + ' / ' + research.length);
+}
+
+// ── 合并机构评级数据（用行情现价填充upside）──
+function mergeResearchData() {
+  const research = window.__RESEARCH_DATA__ || [];
+  const stocks = gData.stocks || [];
+  
+  // 构建代码->现价映射
+  const priceMap = {};
+  stocks.forEach(s => { if (s.price && s.price > 0) priceMap[s.code] = s.price; });
+  
+  // 用data.js的实时现价补充/覆盖预填值
+  research.forEach(r => {
+    const dataJsPrice = priceMap[r.stock_code];
+    // 优先用data.js的实时现价（更新），其次用预填值
+    const curPrice = dataJsPrice || r.current_price;
+    r.current_price = (curPrice && curPrice > 0) ? curPrice : null;
+    // 计算上涨空间
+    const target = r.consensus_target || r.target_price;
+    if (target && r.current_price && r.current_price > 0) {
+      r.upside = ((target - r.current_price) / r.current_price * 100);
+    } else {
+      r.upside = null;
+    }
+  });
+  
+  gData.institution_research = research;
+}
+
+function renderAll() {
+  renderDashboard();
+  renderSummary();
+  renderOpportunities();
+  renderMarket();
+  renderNews();
+  renderPerformance();
+  renderExecutive();
+  renderCapital();
+  renderResearch();
+  initResearchFilters();
+  initMarketFilters();
+  buildProvinceGrid();
+  // Restore province filter from URL hash
+  const hash = window.location.hash;
+  if (hash && hash.startsWith('#province=')) {
+    const pv = decodeURIComponent(hash.slice(10));
+    if (pv && pv !== 'all') {
+      gProvinceFilter = pv;
+    }
+  }
+  applyProvinceFilter();
+  // Default to home page
+  switchPage('home');
+}
+
+// ── PROVINCE PAGE & FILTER ──
+function buildProvinceGrid() {
+  const grid = document.getElementById('province-page-grid');
+  const stocks = gData.stocks || [];
+
+  // Count by province
+  const pvCounts = {};
+  stocks.forEach(s => { const p = s.province || '未知'; pvCounts[p] = (pvCounts[p]||0)+1; });
+
+  const sorted = Object.entries(pvCounts).sort((a,b) => b[1]-a[1]);
+  const totalEl = document.getElementById('pv-total-count');
+  if (totalEl) totalEl.textContent = stocks.length + ' 只';
+
+  // Build cards
+  sorted.forEach(([name, count]) => {
+    const card = document.createElement('div');
+    card.className = 'province-page-card';
+    card.dataset.province = name;
+    card.onclick = () => selectProvince(name);
+    card.innerHTML = `
+      <div class="pv-icon">📍</div>
+      <div class="pv-name">${name}</div>
+      <div class="pv-count">${count} 只</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openProvincePage() {
+  // 省份网格已内联在首页，直接滚动到该区域
+  document.getElementById('province-grid-section').scrollIntoView({behavior:'smooth'});
+}
+
+function closeProvincePage() {
+  // 省份网格已内联，无需关闭
+}
+
+function selectProvince(pv) {
+  gProvinceFilter = pv;
+  applyProvinceFilter();
+  // Scroll to dashboard
+  document.getElementById('overview').scrollIntoView({behavior:'smooth'});
+}
+
+function getFilteredStocks() {
+  if (!gData || !gData.stocks) return [];
+  if (gProvinceFilter === 'all') return gData.stocks;
+  return gData.stocks.filter(s => s.province === gProvinceFilter);
+}
+
+function filterProvince(pv) {
+  gProvinceFilter = pv;
+  applyProvinceFilter();
+  // Scroll to dashboard
+  document.getElementById('overview').scrollIntoView({behavior:'smooth'});
+}
+
+function applyProvinceFilter() {
+  const stocks = getFilteredStocks();
+  const total = gData.stocks ? gData.stocks.length : 0;
+
+  // Update filter bar
+  const bar = document.getElementById('province-filter-bar');
+  const nameEl = document.getElementById('pv-filter-name');
+  const countEl = document.getElementById('pv-filter-count');
+  if (gProvinceFilter === 'all') {
+    bar.classList.remove('show');
+    nameEl.textContent = '全部公司';
+    countEl.textContent = '';
+  } else {
+    bar.classList.add('show');
+    nameEl.textContent = gProvinceFilter;
+    countEl.textContent = `(${stocks.length} / ${total} 只)`;
+  }
+
+  // Update province cards active state
+  document.querySelectorAll('.province-page-card').forEach(c => {
+    const pv = c.dataset.province || 'all';
+    c.classList.toggle('active', pv === gProvinceFilter);
+  });
+
+  // Update hero button text
+  const heroCurrent = document.getElementById('hero-province-current');
+  if (heroCurrent) heroCurrent.textContent = gProvinceFilter === 'all' ? '全部公司' : gProvinceFilter;
+
+  // Update market province dropdown
+  const marketSel = document.getElementById('market-province-filter');
+  if (marketSel) {
+    if (gProvinceFilter === 'all') {
+      marketSel.value = 'all';
+    } else {
+      // Only select if in the dropdown list
+      const opts = [...marketSel.options].map(o => o.value);
+      marketSel.value = opts.includes(gProvinceFilter) ? gProvinceFilter : 'all';
+    }
+  }
+
+  // Update market filter global
+  gMarketFilters.province = gProvinceFilter;
+  gMarketFilters.page = 1;
+  gCapitalPage = 1;
+  gExecutivePage = 1;
+  gResearchPage = 1;
+  gNewsPage = 1;
+
+  // Re-render
+  renderDashboard();
+  renderOpportunities();
+  renderMarket();
+  renderNews();
+  renderExecutive();
+  renderCapital();
+  renderResearch();
+
+  // Update URL hash
+  if (gProvinceFilter === 'all') {
+    history.replaceState(null, '', window.location.pathname);
+  } else {
+    history.replaceState(null, '', window.location.pathname + '#province=' + encodeURIComponent(gProvinceFilter));
+  }
+}
+
+// ── DASHBOARD ──
+function renderDashboard() {
+  const stocks = getFilteredStocks();
+  const s = gData.daily_summary;
+
+  // If filtering by province, compute stats from filtered data
+  if (gProvinceFilter === 'all') {
+    document.getElementById('currentDate').textContent = '数据日期：' + s.date;
+    document.getElementById('stat-total').textContent = s.total_stocks;
+    document.getElementById('stat-up').textContent = s.up_count;
+    document.getElementById('stat-down').textContent = s.down_count;
+  } else {
+    document.getElementById('currentDate').textContent = '数据日期：' + s.date + ' | 筛选：' + gProvinceFilter;
+    document.getElementById('stat-total').textContent = stocks.length;
+    const up = stocks.filter(x => x.change_pct > 0).length;
+    const down = stocks.filter(x => x.change_pct < 0).length;
+    document.getElementById('stat-up').textContent = up;
+    document.getElementById('stat-down').textContent = down;
+  }
+
+  // Compute opp/risk counts dynamically
+  const opps = computeOpportunities();
+  document.getElementById('stat-opportunity').textContent = Object.values(opps).reduce((sum, arr) => sum + arr.length, 0);
+}
+
+// Compute opportunities dynamically (shared by dashboard + opportunities section)
+function computeOpportunities() {
+  const stocks = getFilteredStocks();
+  const codeSet = new Set(stocks.map(s => s.code));
+
+  const typeMap = {
+    '融资需求': [],
+    '财富管理需求': [],
+    '投研服务需求': [],
+    '高管变更对接': [],
+  };
+
+  const capitalData = gCapitalData || [];
+  capitalData.forEach(item => {
+    if (!codeSet.has(item.code)) return;
+    const cat = item.category || '';
+    const entry = { stock_code: item.code, stock_name: item.name };
+
+    // 融资需求：股权激励/员工持股 + 质押融资
+    if (cat.includes('股权激励') || cat.includes('员工持股') || cat.includes('股票期权') || cat.includes('限制性股票') || cat.includes('质押') || cat.includes('解质')) {
+      typeMap['融资需求'].push(entry);
+    // 财富管理需求：回购/增减持/分红/理财/转让/控制权
+    } else if (cat.includes('股份回购') || cat.includes('分红') || cat.includes('派息') || cat.includes('利润分配') || cat.includes('增减持') || cat.includes('协议转让') || cat.includes('控制权') || cat.includes('委托理财') || cat.includes('理财产品') || cat.includes('可转债') || cat.includes('注销股份')) {
+      typeMap['财富管理需求'].push(entry);
+    }
+  });
+
+  // 投研服务需求：研报覆盖
+  const researchData = gData.institution_research || [];
+  researchData.forEach(r => {
+    if (!codeSet.has(r.stock_code) || r.report_count <= 0) return;
+    typeMap['投研服务需求'].push({ stock_code: r.stock_code, stock_name: r.stock_name });
+  });
+
+  // 高管变更对接：高管聘任/辞职
+  let execChanges = window.__EXECUTIVE_DATA__ ? (window.__EXECUTIVE_DATA__.data || []) : (gData.executive_changes || []);
+  execChanges.forEach(c => {
+    if (!codeSet.has(c.stock_code)) return;
+    typeMap['高管变更对接'].push({ stock_code: c.stock_code, stock_name: c.stock_name });
+  });
+
+  // Deduplicate
+  for (const [type, items] of Object.entries(typeMap)) {
+    const seen = new Set();
+    typeMap[type] = items.filter(it => { if (seen.has(it.stock_code)) return false; seen.add(it.stock_code); return true; });
+  }
+
+  return typeMap;
+}
+
+// ── DAILY SUMMARY / MARKET ANALYSIS ──
+function renderSummary() {
+  const stocks = gData.stocks || [];
+  if (!stocks.length) return;
+
+  // 基本统计
+  const up = stocks.filter(s => s.change_pct > 0);
+  const down = stocks.filter(s => s.change_pct < 0);
+  const flat = stocks.filter(s => s.change_pct === 0);
+  const limitUp = stocks.filter(s => s.change_pct >= 9.9);
+  const limitDown = stocks.filter(s => s.change_pct <= -9.9);
+  const avgChange = stocks.reduce((s, x) => s + x.change_pct, 0) / stocks.length;
+  const totalTurnover = stocks.reduce((s, x) => s + (x.turnover || 0), 0);
+  const totalTurnoverYi = totalTurnover / 1e8;
+
+  // 按市值分大小盘
+  const sorted = [...stocks].sort((a, b) => (b.market_cap || 0) - (a.market_cap || 0));
+  const large = sorted.slice(0, Math.floor(sorted.length * 0.2));
+  const mid = sorted.slice(Math.floor(sorted.length * 0.2), Math.floor(sorted.length * 0.5));
+  const small = sorted.slice(Math.floor(sorted.length * 0.5));
+  const largeAvg = large.length ? large.reduce((s, x) => s + x.change_pct, 0) / large.length : 0;
+  const midAvg = mid.length ? mid.reduce((s, x) => s + x.change_pct, 0) / mid.length : 0;
+  const smallAvg = small.length ? small.reduce((s, x) => s + x.change_pct, 0) / small.length : 0;
+
+  // 头部成交额集中度
+  const top10Turnover = [...stocks].sort((a, b) => (b.turnover || 0) - (a.turnover || 0)).slice(0, 10).reduce((s, x) => s + (x.turnover || 0), 0);
+  const concentration = totalTurnover > 0 ? (top10Turnover / totalTurnover * 100) : 0;
+
+  // 行业热度
+  const industryMap = {};
+  stocks.forEach(s => {
+    const ind = s.industry || '未知';
+    if (!industryMap[ind]) industryMap[ind] = { count: 0, up: 0, totalChange: 0 };
+    industryMap[ind].count++;
+    if (s.change_pct > 0) industryMap[ind].up++;
+    industryMap[ind].totalChange += s.change_pct;
+  });
+  const industries = Object.entries(industryMap).map(([name, d]) => ({
+    name, count: d.count, upRate: d.up / d.count * 100, avgChange: d.totalChange / d.count
+  })).sort((a, b) => b.avgChange - a.avgChange);
+  const hotIndustries = industries.filter(i => i.avgChange > 0).slice(0, 3);
+  const coldIndustries = industries.filter(i => i.avgChange < 0).slice(-3).reverse();
+
+  // 生成总结文字
+  const changeColor = avgChange >= 0 ? 'var(--danger)' : 'var(--success)';
+  const changeText = avgChange >= 0 ? '偏强' : '偏弱';
+  const upPct = (up.length / stocks.length * 100).toFixed(1);
+  const downPct = (down.length / stocks.length * 100).toFixed(1);
+  const ds = gData.daily_summary || {};
+
+  // Overview
+  let overviewHtml = '';
+  overviewHtml += `<p><strong style="color:var(--navy)">市场概况：</strong>今日全A股${stocks.length}只，上涨${up.length}只（${upPct}%），下跌${down.length}只（${downPct}%），平盘${flat.length}只。涨停${limitUp.length}只，跌停${limitDown.length}只。全市场平均涨跌幅${avgChange >= 0 ? '+' : ''}${avgChange.toFixed(2)}%，整体表现${changeText}。</p>`;
+  overviewHtml += `<p><strong style="color:var(--navy)">风格分化：</strong>大盘股平均涨跌幅${largeAvg >= 0 ? '+' : ''}${largeAvg.toFixed(2)}%，中盘${midAvg >= 0 ? '+' : ''}${midAvg.toFixed(2)}%，小盘${smallAvg >= 0 ? '+' : ''}${smallAvg.toFixed(2)}%。${largeAvg > smallAvg ? '大盘股明显占优，价值风格更强。' : '小盘股活跃度更高，成长风格受青睐。'}</p>`;
+  overviewHtml += `<p><strong style="color:var(--navy)">成交分析：</strong>全市场总成交额${totalTurnoverYi.toFixed(0)}亿元，TOP10个股成交额占比${concentration.toFixed(1)}%${concentration > 15 ? '，资金高度集中，抱团现象明显' : concentration > 10 ? '，资金相对集中' : '，成交较为分散'}。</p>`;
+
+  if (hotIndustries.length > 0) {
+    overviewHtml += `<p><strong style="color:var(--navy)">行业热度：</strong>涨幅居前行业——${hotIndustries.map(h => `${h.name}（平均${h.avgChange >= 0 ? '+' : ''}${h.avgChange.toFixed(2)}%）`).join('、')}。`;
+    if (coldIndustries.length > 0) {
+      overviewHtml += `跌幅居前行业——${coldIndustries.map(c => `${c.name}（平均${c.avgChange >= 0 ? '+' : ''}${c.avgChange.toFixed(2)}%）`).join('、')}。`;
+    }
+    overviewHtml += '</p>';
+  }
+
+  document.getElementById('summary-overview').innerHTML = overviewHtml;
+
+  // Key metrics bar
+  document.getElementById('summary-metrics').innerHTML = `
+    <div class="summary-metric"><div class="num" style="color:${avgChange >= 0 ? 'var(--danger)' : 'var(--success)'}">${avgChange >= 0 ? '+' : ''}${avgChange.toFixed(2)}%</div><div class="lbl">平均涨跌幅</div></div>
+    <div class="summary-metric"><div class="num" style="color:var(--danger)">${upPct}%</div><div class="lbl">上涨占比</div></div>
+    <div class="summary-metric"><div class="num" style="color:var(--success)">${downPct}%</div><div class="lbl">下跌占比</div></div>
+    <div class="summary-metric"><div class="num">${totalTurnoverYi.toFixed(0)}亿</div><div class="lbl">总成交额</div></div>
+    <div class="summary-metric"><div class="num">${concentration.toFixed(1)}%</div><div class="lbl">头部集中度</div></div>
+  `;
+
+  // Advice based on market data
+  let advice = '';
+  if (avgChange >= 1) {
+    advice = '市场整体上涨，情绪偏乐观，建议关注强势行业和龙头标的。';
+  } else if (avgChange >= 0) {
+    advice = '市场整体平稳，结构性机会为主，建议精选个股，控制仓位。';
+  } else if (avgChange >= -1) {
+    advice = '市场整体偏弱，建议谨慎操作，关注防御性板块。';
+  } else {
+    advice = '市场大幅调整，建议控制风险，等待企稳信号。';
+  }
+  document.getElementById('summary-advice').innerHTML = `<strong>投顾建议：</strong>${advice}`;
+}
+
+// ── OPPORTUNITIES ──
+function renderOpportunities() {
+  const typeMap = computeOpportunities();
+  const totalCount = Object.values(typeMap).reduce((sum, arr) => sum + arr.length, 0);
+  const container = document.getElementById('opportunity-list');
+  if (totalCount === 0) { container.innerHTML = '<p style="color:var(--g500)">暂无业务机会提示</p>'; return; }
+
+  const typeColors = {
+    '融资需求':'#1a73e8',
+    '财富管理需求':'#0d653e',
+    '投研服务需求':'#6f42c1',
+    '高管变更对接':'#fd7e14',
+  };
+  const typeIcons = {
+    '融资需求':'💰',
+    '财富管理需求':'📊',
+    '投研服务需求':'📝',
+    '高管变更对接':'👔',
+  };
+  const typeOrder = ['融资需求', '财富管理需求', '投研服务需求', '高管变更对接'];
+
+  let html = '';
+  typeOrder.forEach(type => {
+    const items = typeMap[type];
+    if (!items || items.length === 0) return;
+    const color = typeColors[type] || 'var(--navy)';
+    const icon = typeIcons[type] || '💡';
+    const groupId = 'opp-' + type.replace(/\s/g, '-');
+
+    html += `
+      <div class="opportunity-group" style="background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--g200)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="font-size:18px">${icon}</span>
+          <span style="font-size:15px;font-weight:700;color:${color}">${type}</span>
+          <span style="font-size:12px;background:${color};color:#fff;padding:2px 8px;border-radius:10px">${items.length}家</span>
+        </div>
+        <div id="${groupId}" style="display:flex;flex-wrap:wrap;gap:8px">
+          ${items.slice(0, 20).map(o => `
+            <div style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:${color}15;border-radius:6px;font-size:12px" title="${o.description}">
+              <span style="font-weight:600;color:${color}">${o.stock_name}</span>
+              <span style="color:var(--g500)">${o.stock_code}</span>
+            </div>
+          `).join('')}
+        </div>
+        ${items.length > 20 ? `<div onclick="toggleExpand('${groupId}', ${JSON.stringify(items.map(o => ({name:o.stock_name,code:o.stock_code}))).replace(/"/g,'&quot;')}, '${color}', '${type}')" style="font-size:12px;color:${color};padding:6px 10px;cursor:pointer;font-weight:600">▶ 点击展开全部 ${items.length} 家</div>` : ''}
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function toggleExpand(groupId, fullList, color, title) {
+  // 显示弹窗而不是在页面展开
+  const modal = document.getElementById('stock-list-modal');
+  const modalTitle = document.getElementById('stock-list-modal-title');
+  const modalBody = document.getElementById('stock-list-modal-body');
+
+  modalTitle.textContent = title + ' - 共' + fullList.length + '家';
+  modalTitle.style.color = color;
+
+  modalBody.innerHTML = `
+    <div style="display:flex;flex-wrap:wrap;gap:8px;max-height:60vh;overflow-y:auto;padding:10px">
+      ${fullList.map(item => `
+        <div style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;background:${color}15;border-radius:6px;font-size:13px">
+          <span style="font-weight:600;color:${color}">${item.name}</span>
+          <span style="color:var(--g500)">${item.code}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  modal.classList.add('show');
+}
+
+// ── RISKS ──
+// ── MARKET ──
+const EXECUTIVE_PAGE_SIZE = 10;
+let gExecutivePage = 1;
+
+let gMarketFilters = {province:'all',sort:'turnover',search:'',page:1};
+const MARKET_PAGE_SIZE = 10;
+let gMarketFiltersInit = false;
+
+function renderMarket() {
+  const stocks = gData.stocks || [];
+  const filteredStocks = getFilteredStocks();
+
+  // 更新日期badge
+  const ds = gData.daily_summary || {};
+  document.getElementById('market-date-badge').textContent = ds.date || '未知日期';
+
+  // 行情总结 - 基于筛选后的股票数据动态计算
+  const calcStocks = filteredStocks.length ? filteredStocks : stocks;
+  const scopeLabel = gProvinceFilter === 'all' ? '全A股' : gProvinceFilter;
+  if (calcStocks.length) {
+    const up = calcStocks.filter(s => s.change_pct > 0);
+    const down = calcStocks.filter(s => s.change_pct < 0);
+    const avgChange = calcStocks.reduce((s, x) => s + x.change_pct, 0) / calcStocks.length;
+    const totalTurnoverYi = calcStocks.reduce((s, x) => s + (x.turnover || 0), 0) / 1e8;
+
+    const sorted = [...calcStocks].sort((a, b) => (b.market_cap || 0) - (a.market_cap || 0));
+    const large = sorted.slice(0, Math.floor(sorted.length * 0.2));
+    const mid = sorted.slice(Math.floor(sorted.length * 0.2), Math.floor(sorted.length * 0.5));
+    const small = sorted.slice(Math.floor(sorted.length * 0.5));
+    const largeAvg = large.length ? large.reduce((s, x) => s + x.change_pct, 0) / large.length : 0;
+    const midAvg = mid.length ? mid.reduce((s, x) => s + x.change_pct, 0) / mid.length : 0;
+    const smallAvg = small.length ? small.reduce((s, x) => s + x.change_pct, 0) / small.length : 0;
+
+    const top10Turnover = [...calcStocks].sort((a, b) => (b.turnover || 0) - (a.turnover || 0)).slice(0, 10).reduce((s, x) => s + (x.turnover || 0), 0);
+    const concentration = totalTurnoverYi > 0 ? (top10Turnover / (totalTurnoverYi * 1e8) * 100) : 0;
+
+    const industryMap = {};
+    calcStocks.forEach(s => {
+      const ind = s.industry || '未知';
+      if (!industryMap[ind]) industryMap[ind] = { count: 0, totalChange: 0 };
+      industryMap[ind].count++;
+      industryMap[ind].totalChange += s.change_pct;
+    });
+    const industries = Object.entries(industryMap).map(([name, d]) => ({
+      name, avgChange: d.totalChange / d.count
+    })).sort((a, b) => b.avgChange - a.avgChange);
+    const hotIndustries = industries.filter(i => i.avgChange > 0).slice(0, 3);
+    const coldIndustries = industries.filter(i => i.avgChange < 0).slice(-3).reverse();
+
+    const changeColor = avgChange >= 0 ? 'var(--danger)' : 'var(--success)';
+    const changeText = avgChange >= 0 ? '偏强' : '偏弱';
+    let summaryHtml = '';
+
+    summaryHtml += `<p style="margin:4px 0"><strong>整体${changeText}：</strong>${scopeLabel}${calcStocks.length}只，上涨${up.length}只，下跌${down.length}只，平均涨跌幅${avgChange >= 0 ? '+' : ''}${avgChange.toFixed(2)}%。</p>`;
+    summaryHtml += `<p style="margin:4px 0"><strong>风格分化：</strong>大盘${largeAvg >= 0 ? '+' : ''}${largeAvg.toFixed(2)}%，中盘${midAvg >= 0 ? '+' : ''}${midAvg.toFixed(2)}%，小盘${smallAvg >= 0 ? '+' : ''}${smallAvg.toFixed(2)}%${largeAvg > smallAvg ? '，大盘股占优，价值风格更强' : '，小盘股活跃度更高，成长风格受青睐'}。</p>`;
+    summaryHtml += `<p style="margin:4px 0"><strong>成交分析：</strong>总成交额${totalTurnoverYi.toFixed(0)}亿元，TOP10占比${concentration.toFixed(1)}%${concentration > 15 ? '，资金高度集中' : concentration > 10 ? '，资金相对集中' : '，成交较为分散'}。</p>`;
+    summaryHtml += `<p style="margin:4px 0"><strong>行业冷热：</strong>`;
+    if (hotIndustries.length) summaryHtml += `领涨——${hotIndustries.map(h => `${h.name}（${h.avgChange >= 0 ? '+' : ''}${h.avgChange.toFixed(2)}%）`).join('、')}。`;
+    if (coldIndustries.length) summaryHtml += `领跌——${coldIndustries.map(c => `${c.name}（${c.avgChange >= 0 ? '+' : ''}${c.avgChange.toFixed(2)}%）`).join('、')}。`;
+    summaryHtml += '</p>';
+    document.getElementById('market-summary-text').innerHTML = summaryHtml;
+  }
+
+  // 涨幅榜/跌幅榜/成交额榜 - 使用筛选后的股票
+  const gainers = [...filteredStocks].sort((a,b) => b.change_pct - a.change_pct).slice(0, 10);
+  document.getElementById('top-gainers').innerHTML = gainers.map(s => `
+    <tr>
+      <td style="font-weight:600">${s.name}</td>
+      <td style="font-size:11px;color:var(--g500)">${s.code}</td>
+      <td style="font-family:Arial">${s.price.toFixed(2)}</td>
+      <td class="text-up" style="font-family:Arial">${s.change_pct >= 0 ? '+' : ''}${s.change_pct.toFixed(2)}%</td>
+    </tr>
+  `).join('');
+
+  const losers = [...filteredStocks].sort((a,b) => a.change_pct - b.change_pct).slice(0, 10);
+  document.getElementById('top-losers').innerHTML = losers.map(s => `
+    <tr>
+      <td style="font-weight:600">${s.name}</td>
+      <td style="font-size:11px;color:var(--g500)">${s.code}</td>
+      <td style="font-family:Arial">${s.price.toFixed(2)}</td>
+      <td class="text-down" style="font-family:Arial">${s.change_pct >= 0 ? '+' : ''}${s.change_pct.toFixed(2)}%</td>
+    </tr>
+  `).join('');
+
+  const turnover = [...filteredStocks].sort((a,b) => b.turnover - a.turnover).slice(0, 10);
+  document.getElementById('top-turnover').innerHTML = turnover.map(s => {
+    const turnoverStr = s.turnover > 1e8 ? (s.turnover/1e8).toFixed(2) + '亿' : (s.turnover/1e4).toFixed(0) + '万';
+    const turnoverRate = (s.volume * s.price / (s.market_cap * 1e8) * 100).toFixed(2);
+    return `
+    <tr>
+      <td style="font-weight:600">${s.name}</td>
+      <td style="font-size:11px;color:var(--g500)">${s.code}</td>
+      <td style="font-family:Arial">${turnoverStr}</td>
+      <td style="font-family:Arial">${turnoverRate}%</td>
+    </tr>`;
+  }).join('');
+
+  // ── 全量股票表格 ──
+  let filtered = stocks.slice();
+
+  // 省份筛选
+  if (gMarketFilters.province !== 'all') {
+    filtered = filtered.filter(s => s.province === gMarketFilters.province);
+  }
+
+  // 搜索
+  if (gMarketFilters.search) {
+    const q = gMarketFilters.search.toLowerCase();
+    filtered = filtered.filter(s => s.name.toLowerCase().includes(q) || s.code.includes(q));
+  }
+
+  // 排序
+  if (gMarketFilters.sort === 'turnover') filtered.sort((a,b) => (b.turnover||0) - (a.turnover||0));
+  else if (gMarketFilters.sort === 'change_pct_desc') filtered.sort((a,b) => (b.change_pct||0) - (a.change_pct||0));
+  else if (gMarketFilters.sort === 'change_pct_asc') filtered.sort((a,b) => (a.change_pct||0) - (b.change_pct||0));
+  else if (gMarketFilters.sort === 'market_cap') filtered.sort((a,b) => (b.market_cap||0) - (a.market_cap||0));
+
+  // 分页
+  const total = filtered.length;
+  const totalPages = Math.ceil(total / MARKET_PAGE_SIZE);
+  if (gMarketFilters.page > totalPages) gMarketFilters.page = totalPages || 1;
+  const start = (gMarketFilters.page - 1) * MARKET_PAGE_SIZE;
+  const pageData = filtered.slice(start, start + MARKET_PAGE_SIZE);
+
+  document.getElementById('market-stock-count').textContent = gProvinceFilter === 'all' ? `${stocks.length} 只` : `${filtered.length} / ${stocks.length} 只`;
+  document.getElementById('market-showing-count').textContent = `显示 ${start+1}-${Math.min(start+MARKET_PAGE_SIZE, total)} / ${total}`;
+
+  const icons = (s) => {
+    let html = '';
+    if (s.is_high_tech) html += '<span title="高新技术企业" style="font-size:12px;cursor:default" onclick="event.stopPropagation()">🔬</span> ';
+    if (s.is_national_special) html += '<span title="国家级专精特新" style="font-size:12px;cursor:default" onclick="event.stopPropagation()">⭐</span>';
+    if (s.is_provincial_special) html += ' <span title="省级专精特新" style="font-size:12px;cursor:default" onclick="event.stopPropagation()">🏅</span>';
+    return html;
+  };
+
+  document.getElementById('full-stock-table').innerHTML = pageData.map(s => {
+    const changeColor = s.change_pct >= 0 ? 'text-up' : 'text-down';
+    const changePrefix = s.change_pct >= 0 ? '+' : '';
+    const turnoverStr = s.turnover > 1e8 ? (s.turnover/1e8).toFixed(2)+'亿' : (s.turnover/1e4).toFixed(0)+'万';
+    const mcapStr = s.market_cap > 0 ? s.market_cap.toFixed(1) : '-';
+    return `<tr>
+      <td style="font-weight:600">${s.name}</td>
+      <td style="font-size:11px;color:var(--g500);font-family:Arial">${s.code}</td>
+      <td style="font-size:12px">${s.province||'-'}</td>
+      <td style="font-size:12px">${s.industry||'-'}</td>
+      <td style="font-family:Arial">${s.price > 0 ? s.price.toFixed(2) : '-'}</td>
+      <td class="${changeColor}" style="font-family:Arial">${s.price > 0 ? changePrefix+s.change_pct.toFixed(2)+'%' : '-'}</td>
+      <td style="font-family:Arial">${s.turnover > 0 ? turnoverStr : '-'}</td>
+      <td style="font-family:Arial">${mcapStr}</td>
+      <td style="font-size:12px">${icons(s)}</td>
+    </tr>`;
+  }).join('');
+
+  // 分页控件
+  let pagHtml = '';
+  if (totalPages > 1) {
+    pagHtml += `<button onclick="marketGoPage(1)" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gMarketFilters.page===1?'disabled':''}>&laquo;</button>`;
+    pagHtml += `<button onclick="marketGoPage(${gMarketFilters.page-1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gMarketFilters.page===1?'disabled':''}>&lsaquo;</button>`;
+    // Show limited page buttons around current
+    const startP = Math.max(1, gMarketFilters.page - 2);
+    const endP = Math.min(totalPages, gMarketFilters.page + 2);
+    for (let p = startP; p <= endP; p++) {
+      const active = p === gMarketFilters.page;
+      pagHtml += `<button onclick="marketGoPage(${p})" style="padding:4px 10px;border:1px solid ${active?'var(--navy)':'var(--g200)'};border-radius:4px;background:${active?'var(--navy)':'#fff'};color:${active?'#fff':'#333'};cursor:pointer;font-size:12px;font-family:Arial">${p}</button>`;
+    }
+    pagHtml += `<button onclick="marketGoPage(${gMarketFilters.page+1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gMarketFilters.page===totalPages?'disabled':''}>&rsaquo;</button>`;
+    pagHtml += `<button onclick="marketGoPage(${totalPages})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gMarketFilters.page===totalPages?'disabled':''}>&raquo;</button>`;
+  }
+  pagHtml += `<span style="font-size:11px;color:var(--g500);margin-left:8px">共 ${totalPages} 页</span>`;
+  document.getElementById('market-pagination').innerHTML = pagHtml;
+}
+
+function marketGoPage(p) {
+  gMarketFilters.page = p;
+  renderMarket();
+}
+
+function initMarketFilters() {
+  if (gMarketFiltersInit) return;
+  gMarketFiltersInit = true;
+
+  // 填充省份下拉
+  const stocks = gData.stocks || [];
+  const provinces = new Set();
+  stocks.forEach(s => { if (s.province) provinces.add(s.province); });
+  const sortedProv = [...provinces].sort();
+  const sel = document.getElementById('market-province-filter');
+  sortedProv.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p;
+    opt.textContent = p;
+    sel.appendChild(opt);
+  });
+
+  sel.addEventListener('change', function() {
+    gMarketFilters.province = this.value;
+    gMarketFilters.page = 1;
+    renderMarket();
+  });
+
+  document.getElementById('market-sort').addEventListener('change', function() {
+    gMarketFilters.sort = this.value;
+    gMarketFilters.page = 1;
+    renderMarket();
+  });
+
+  const searchInput = document.getElementById('market-search');
+  let timer = null;
+  searchInput.addEventListener('input', function() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      gMarketFilters.search = this.value.trim();
+      gMarketFilters.page = 1;
+      renderMarket();
+    }, 300);
+  });
+}
+
+// ── NEWS ──
+function renderNews() {
+  // 优先使用 news_data.js 中的真实数据
+  let news;
+  if (window.__NEWS_DATA__) {
+    const nd = window.__NEWS_DATA__.data || [];
+    news = nd.map(n => ({
+      stock_code: n.stock_code || '',
+      stock_name: n.stock_name || '',
+      title: n.title,
+      type: n.type,
+      publish_time: n.publish_time,
+      source: n.source,
+      sentiment: n.sentiment,
+      url: n.url || ''
+    }));
+  } else {
+    news = gData.news || [];
+  }
+
+  // 资本动作相关关键词——已在下方"资本动作"板块展示，新闻中不再重复
+  const capitalKw = ['股权激励','股票期权','限制性股票','员工持股','增持','减持',
+                     '回购','注销股份','委托理财','理财产品','质押','解质',
+                     '协议转让','控制权','分红','派息','利润分配','送股','转增','可转债'];
+
+  const allowedTypes = ['公司资讯', '调研资讯'];
+  let filteredNews = news.filter(n => {
+    if (!allowedTypes.includes(n.type)) return false;
+    // 过滤资本动作关键词
+    return !capitalKw.some(kw => n.title.includes(kw));
+  });
+
+  // Province filter
+  if (gProvinceFilter !== 'all') {
+    const stocks = getFilteredStocks();
+    const provinceCodes = new Set(stocks.map(s => s.code));
+    filteredNews = filteredNews.filter(n => n.stock_code && provinceCodes.has(n.stock_code));
+  }
+
+  const filtered = gCurrentNewsTab === 'all' ? filteredNews : filteredNews.filter(n => n.type === gCurrentNewsTab);
+  const container = document.getElementById('news-list');
+  const pagContainer = document.getElementById('news-pagination');
+
+  const total = filtered.length;
+  const totalPages = Math.ceil(total / NEWS_PAGE_SIZE);
+  if (gNewsPage > totalPages) gNewsPage = totalPages || 1;
+  const start = (gNewsPage - 1) * NEWS_PAGE_SIZE;
+  const pageData = filtered.slice(start, start + NEWS_PAGE_SIZE);
+
+  container.innerHTML = pageData.map(n => {
+    const badgeClass = {'公司资讯':'tag-navy','调研资讯':'tag-gold'}[n.type] || 'tag-navy';
+    const badgeText = n.type;
+    const sentimentClass = {'positive':'tag-success','neutral':'tag-navy','negative':'tag-danger'}[n.sentiment] || 'tag-navy';
+    const sentimentText = {'positive':'利好','neutral':'中性','negative':'利空'}[n.sentiment] || '';
+
+    return `
+      <div class="news-card" onclick="${n.url ? `window.open('${n.url}','_blank')` : ''}" style="cursor:pointer">
+        <div class="meta">
+          <span class="tag ${badgeClass}">${badgeText}</span>
+          <span style="font-size:11px;color:var(--g500)">${n.source}</span>
+          <span class="time">${n.publish_time}</span>
+        </div>
+        <div class="title">${n.title}</div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="stock">${n.stock_name}</span>
+          ${sentimentText ? `<span class="tag ${sentimentClass}">${sentimentText}</span>` : ''}
+          ${n.url ? `<span style="margin-left:auto;font-size:11px;color:var(--navy-m)">原文链接 →</span>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // 分页控件
+  let pagHtml = `<span style="font-size:12px;color:var(--g500);margin-right:8px">共 ${total} 条</span>`;
+  if (totalPages > 1) {
+    pagHtml += `<button onclick="newsGoPage(1)" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gNewsPage===1?'disabled':''}>&laquo;</button>`;
+    pagHtml += `<button onclick="newsGoPage(${gNewsPage-1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gNewsPage===1?'disabled':''}>&lsaquo;</button>`;
+    for (let p = Math.max(1, gNewsPage-2); p <= Math.min(totalPages, gNewsPage+2); p++) {
+      const active = p === gNewsPage;
+      pagHtml += `<button onclick="newsGoPage(${p})" style="padding:4px 10px;border:1px solid ${active?'var(--navy)':'var(--g200)'};border-radius:4px;background:${active?'var(--navy)':'#fff'};color:${active?'#fff':'#333'};cursor:pointer;font-size:12px">${p}</button>`;
+    }
+    pagHtml += `<button onclick="newsGoPage(${gNewsPage+1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gNewsPage===totalPages?'disabled':''}>&rsaquo;</button>`;
+    pagHtml += `<button onclick="newsGoPage(${totalPages})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gNewsPage===totalPages?'disabled':''}>&raquo;</button>`;
+  }
+  pagHtml += `<span style="font-size:11px;color:var(--g500);margin-left:8px">共 ${totalPages} 页</span>`;
+  pagContainer.innerHTML = pagHtml;
+}
+
+function newsGoPage(p) {
+  gNewsPage = p;
+  renderNews();
+  document.getElementById('news').scrollIntoView({behavior:'smooth'});
+}
+
+function switchNewsTab(tab) {
+  gCurrentNewsTab = tab;
+  gNewsPage = 1;
+  document.querySelectorAll('#news-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderNews();
+}
+
+// ── PERFORMANCE ──
+function renderPerformance() {
+  if (!document.getElementById('performance-table')) return;
+  // 优先使用 news_data.js 中的真实数据
+  let news;
+  if (window.__NEWS_DATA__) {
+    const nd = window.__NEWS_DATA__.data || [];
+    news = nd.map(n => ({
+      stock_code: n.stock_code || '',
+      stock_name: n.stock_name || '',
+      title: n.title,
+      type: n.type,
+      publish_time: n.publish_time,
+      source: n.source,
+      sentiment: n.sentiment,
+      url: n.url || ''
+    }));
+  } else {
+    news = gData.news || [];
+  }
+  // 筛选业绩类公告
+  const perfKeywords = ['业绩预告', '业绩快报', '业绩公告', '年报', '半年报', '季报', '盈利', '亏损', '净利润', '营收'];
+  const perfNews = news.filter(n => {
+    if (n.type !== '公司资讯') return false;
+    const title = n.title || '';
+    return perfKeywords.some(kw => title.includes(kw));
+  });
+
+  const container = document.getElementById('performance-table');
+  if (perfNews.length === 0) {
+    container.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--g500)">暂无业绩公告</td></tr>';
+    return;
+  }
+
+  container.innerHTML = perfNews.map(n => {
+    // 判断公告类型
+    let perfType = '业绩公告';
+    const title = n.title || '';
+    if (title.includes('业绩预告')) perfType = '业绩预告';
+    else if (title.includes('业绩快报')) perfType = '业绩快报';
+    else if (title.includes('年报')) perfType = '年度报告';
+    else if (title.includes('半年报')) perfType = '半年度报告';
+    else if (title.includes('季报')) perfType = '季度报告';
+
+    // 判断增长/下降
+    let changeTag = '';
+    if (title.includes('增长') || title.includes('预增') || title.includes('盈利')) {
+      changeTag = '<span class="tag tag-success">增长</span>';
+    } else if (title.includes('下降') || title.includes('预减') || title.includes('亏损')) {
+      changeTag = '<span class="tag tag-danger">下降</span>';
+    }
+
+    return `
+      <tr>
+        <td style="font-weight:600">${n.stock_name}</td>
+        <td style="font-size:11px;color:var(--g500)">${n.stock_code}</td>
+        <td>${perfType} ${changeTag}</td>
+        <td style="font-size:12px">${n.title}</td>
+        <td style="font-size:11px">${n.publish_time || '-'}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ── EXECUTIVE ──
+let gExecDateMap = {};
+let gExecDateFilter = 'all';
+
+function renderExecDateFilter() {
+  const container = document.getElementById('exec-date-filter-container');
+  if (!container) return;
+  const dates = Object.keys(gExecDateMap).sort().reverse();
+  if (dates.length <= 1) { container.innerHTML = ''; return; }
+  let html = '';
+  for (const d of dates.slice(0, 7)) {
+    const label = d === getTodayStr() ? '今日' : (d === getYesterdayStr() ? '昨日' : d.substring(5));
+    const isActive = gExecDateFilter === d;
+    html += '<button onclick="setExecDateFilter(\'' + d + '\')" style="padding:2px 7px;border:1px solid ' + (isActive ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (isActive ? 'var(--navy)' : '#fff') + ';color:' + (isActive ? '#fff' : '#333') + ';font-size:10px;cursor:pointer;margin-left:4px">' + label + '</button>';
+  }
+  container.innerHTML = html;
+}
+
+function setExecDateFilter(d) {
+  gExecDateFilter = d;
+  gExecutivePage = 1;
+  renderExecDateFilter();
+  renderExecutive();
+}
+
+function getExecPool() {
+  if (gExecDateFilter === 'all') {
+    let all = [];
+    for (const dateKey of Object.keys(gExecDateMap).sort().reverse()) {
+      all.push(...gExecDateMap[dateKey]);
+    }
+    return all;
+  }
+  return gExecDateMap[gExecDateFilter] || [];
+}
+
+function renderExecutive() {
+  // 先检查是否有巨潮数据
+  let allChanges = [];
+  let dateStr = '未知日期';
+  if (window.__EXECUTIVE_DATA__) {
+    // 新版格式: { "2026-05-08": [...], "2026-05-07": [...] }
+    gExecDateMap = {};
+    for (const key of Object.keys(window.__EXECUTIVE_DATA__)) {
+      if (key === 'date' || typeof window.__EXECUTIVE_DATA__[key] !== 'object') continue;
+      gExecDateMap[key] = window.__EXECUTIVE_DATA__[key];
+    }
+    allChanges = getExecPool();
+    const dates = Object.keys(gExecDateMap).sort().reverse();
+    dateStr = dates[0] || '未知日期';
+    renderExecDateFilter();
+  } else {
+    allChanges = gData.executive_changes || [];
+  }
+
+  // 筛选真正的管变动公告：
+  // Apply filters + noise filtering
+  const execKw = ['聘任', '辞职', '任职', '离任', '选举', '改选', '换届', '任命', '解聘', '代行职务', '不再担任', '补选'];
+  const noiseKw = ['重组', '重大资产', '持股计划', '期权', '配股', '增发', '分红', '利润分配', '回购', '质押', '解质', '增减持', '异常波动', '理财', '可转债',
+                   '决议公告', '决议的', '保密措施', '股票价格波动', '法定程序', '监管指引', '购买出售资产', '持续监管办法', '发行注册',
+                   '限制性股票', '股票期权', '股权激励', '提名人声明', '核查意见', '公示情况'];
+  let changes = allChanges.filter(c => {
+    const title = c.title || '';
+    if (noiseKw.some(kw => title.includes(kw))) return false;
+    return execKw.some(kw => title.includes(kw));
+  });
+
+  // Province filter
+  if (gProvinceFilter !== 'all') {
+    const stocks = getFilteredStocks();
+    const provinceCodes = new Set(stocks.map(s => s.code));
+    changes = changes.filter(c => c.stock_code && provinceCodes.has(c.stock_code));
+  }
+
+  // 按公司分组
+  const grouped = {};
+  changes.forEach(c => {
+    if (!grouped[c.stock_code]) {
+      grouped[c.stock_code] = { name: c.stock_name, changes: [] };
+    }
+    grouped[c.stock_code].changes.push(c);
+  });
+
+  // 按变动数量排序
+  const companies = Object.entries(grouped)
+    .sort((a, b) => b[1].changes.length - a[1].changes.length || a[0].localeCompare(b[0]))
+    .map(([code, info]) => ({ code, ...info }));
+
+  // 分页
+  const total = companies.length;
+  const totalPages = Math.ceil(total / EXECUTIVE_PAGE_SIZE);
+  if (gExecutivePage > totalPages) gExecutivePage = totalPages || 1;
+  const start = (gExecutivePage - 1) * EXECUTIVE_PAGE_SIZE;
+  const pageData = companies.slice(start, start + EXECUTIVE_PAGE_SIZE);
+
+  // 更新badge
+  document.getElementById('executive-count-badge').textContent = companies.length + '家公司 (' + dateStr + ')';
+
+  const container = document.getElementById('executive-table');
+  if (total === 0) {
+    container.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--g500)">暂无高管变动数据</td></tr>';
+    document.getElementById('executive-pagination').innerHTML = '';
+    return;
+  }
+
+  let html = '';
+  pageData.forEach(comp => {
+    comp.changes.forEach((c, idx) => {
+      const changeTag = c.change_type === '辞职' ? 'tag-danger' : c.change_type === '聘任' ? 'tag-success' : 'tag-navy';
+      const statusTag = c.status === '已生效' ? 'tag-success' : 'tag-warning';
+      const nameCell = idx === 0 ? `<td style="font-weight:600">${comp.name}</td>` : '<td></td>';
+      const codeCell = idx === 0 ? `<td style="font-size:11px;color:var(--g500)">${comp.code}</td>` : '<td></td>';
+      html += `<tr>
+        ${nameCell}
+        ${codeCell}
+        <td><span class="tag ${changeTag}">${c.change_type || '-'}</span></td>
+        <td>${c.position || '-'}</td>
+        <td style="font-size:12px;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${c.title || ''}">${c.title || '-'}</td>
+        <td style="font-size:11px">${c.announce_date}</td>
+        <td><span class="tag ${statusTag}">${c.status || '-'}</span></td>
+        <td>${c.url ? '<a href="' + execUrlToCninfo(c.url, comp.code, c.title) + '" target="_blank" style="color:var(--navy);font-size:11px">查看</a>' : '-'}</td>
+      </tr>`;
+    });
+  });
+  container.innerHTML = html;
+
+  // 分页控件
+  let pagHtml = `<span style="font-size:12px;color:var(--g500);margin-right:8px">共 ${total} 家公司</span>`;
+  if (totalPages > 1) {
+    pagHtml += `<button onclick="execGoPage(1)" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gExecutivePage===1?'disabled':''}>&laquo;</button>`;
+    pagHtml += `<button onclick="execGoPage(${gExecutivePage-1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gExecutivePage===1?'disabled':''}>&lsaquo;</button>`;
+    for (let p = Math.max(1, gExecutivePage-2); p <= Math.min(totalPages, gExecutivePage+2); p++) {
+      const active = p === gExecutivePage;
+      pagHtml += `<button onclick="execGoPage(${p})" style="padding:4px 10px;border:1px solid ${active?'var(--navy)':'var(--g200)'};border-radius:4px;background:${active?'var(--navy)':'#fff'};color:${active?'#fff':'#333'};cursor:pointer;font-size:12px">${p}</button>`;
+    }
+    pagHtml += `<button onclick="execGoPage(${gExecutivePage+1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gExecutivePage===totalPages?'disabled':''}>&rsaquo;</button>`;
+    pagHtml += `<button onclick="execGoPage(${totalPages})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gExecutivePage===totalPages?'disabled':''}>&raquo;</button>`;
+  }
+  pagHtml += `<span style="font-size:11px;color:var(--g500);margin-left:8px">共 ${totalPages} 页</span>`;
+  document.getElementById('executive-pagination').innerHTML = pagHtml;
+}
+
+function execGoPage(p) {
+  gExecutivePage = p;
+  renderExecutive();
+  document.getElementById('executive').scrollIntoView({behavior:'smooth'});
+}
+
+// 巨潮资讯网公告链接（已改为直接使用原始链接）
+// 说明：东方财富公告链接可直接访问，巨潮资讯网需要orgId且页面需JS渲染
+function execUrlToCninfo(url, stockCode, title) {
+  // 直接返回原始URL（东方财富公告详情页）
+  return url || '#';
+}
+
+function capitalUrlToCninfo(url, stockCode, title) {
+  // 直接返回原始URL（东方财富公告详情页）
+  return url || '#';
+}
+
+// 移除不再需要的缓存函数
+function buildCninfoCache() {
+  // 不再需要预缓存，直接跳转到巨潮个股公告页
+  console.log('[CNINFO] 直接跳转模式，无需预缓存');
+}
+
+// ── CAPITAL OPERATIONS (卡片式) ──
+let gCapitalData = [];        // 全量数据（扁平化）
+let gCapitalDateMap = {};    // 按日期分组: { "2026-05-08": [...], "2026-05-07": [...] }
+let gCapitalFilters = {category:'all',star:'all', date:'all'};
+let gCapitalSort = 'star';
+let gCapitalSearch = '';
+const CAPITAL_PAGE_SIZE = 12;
+let gCapitalPage = 1;
+
+function refreshCapitalData() {
+  alert('数据更新方法：\n\n1. 打开命令行终端\n2. 进入目录：cd D:\\21210\\华泰财富研究-openclaw\\WorkBuddy\n3. 运行命令：python cninfo_dashboard_updater_v2.py\n4. 等待约1-2分钟完成（抓取近2天公告）\n5. 刷新本页面即可看到最新数据\n\n提示：可将此命令加入Windows任务计划，每日收盘后自动执行。');
+}
+
+function refreshMarketData() {
+  const cmd = 'python refresh_market_v3.py';
+  const msg = '行情数据刷新方法：\n\n1. 打开命令行终端\n2. 进入目录：cd D:\\21210\\华泰财富研究-openclaw\\js_stock_tracker\n3. 运行命令：' + cmd + '\n4. 等待约30秒完成（19批次，每批300只）\n5. 刷新本页面即可看到最新行情\n\n提示：可将此命令加入Windows任务计划，每日收盘后自动执行。';
+  alert(msg);
+}
+
+function loadCapitalData() {
+  if (window.__CAPITAL_DATA__) {
+    // 新版数据格式：{ "2026-05-08": [...], "2026-05-07": [...] }
+    const raw = window.__CAPITAL_DATA__;
+    gCapitalDateMap = {};
+    gCapitalData = [];
+    
+    // 收集所有日期
+    const dates = Object.keys(raw).sort().reverse();
+    
+    for (const dateKey of dates) {
+      if (dateKey === 'date' || typeof raw[dateKey] !== 'object') continue;
+      gCapitalDateMap[dateKey] = raw[dateKey].map(item => {
+        let summary = (item.summary || '')
+          .replace(/<em>/g, '')
+          .replace(/<\/em>/g, '')
+          .replace(/<em\b/g, '')
+          .replace(/<\/em\b/g, '')
+          .replace(/<[a-z]*$/gi, '');
+        return { ...item, summary };
+      });
+    }
+    
+    // 扁平化为全量数据
+    for (const dateKey of Object.keys(gCapitalDateMap).sort().reverse()) {
+      gCapitalData.push(...gCapitalDateMap[dateKey]);
+    }
+    
+    // 默认显示所有日期
+    if (gCapitalFilters.date === 'all') {
+      gCapitalFilters.date = Object.keys(gCapitalDateMap)[0] || 'all';
+    }
+    
+    // 渲染日期筛选按钮
+    renderCapitalDateFilter(dates.filter(d => d !== 'date'));
+    
+    const total = gCapitalData.length;
+    document.getElementById('capital-count-badge').textContent = total + '条 (最近' + Object.keys(gCapitalDateMap).length + '天)';
+    renderCapitalSection();
+    return;
+  }
+  // 无内嵌数据时显示提示
+  gCapitalData = [];
+  gCapitalDateMap = {};
+  document.getElementById('capital-count-badge').textContent = '未加载';
+  document.getElementById('capital-stats').innerHTML = '<div class="capital-stat total"><div class="num" style="color:var(--coral)">需刷新</div><div class="lbl">请运行Python脚本获取今日数据</div></div>';
+  document.getElementById('capital-card-grid').innerHTML = '';
+  document.getElementById('capital-empty').style.display = 'block';
+  document.getElementById('capital-empty').innerHTML = '<p style="font-size:14px;margin-bottom:8px;color:var(--navy)">数据尚未加载</p><p style="font-size:12px">点击上方"刷新数据"按钮获取今日巨潮公告</p>';
+}
+
+function getFilteredCapital() {
+  // 先按日期筛选
+  let pool = gCapitalData;
+  if (gCapitalFilters.date !== 'all') {
+    pool = gCapitalDateMap[gCapitalFilters.date] || [];
+  }
+  
+  let d = pool.filter(function(item) {
+    if (gCapitalFilters.category !== 'all' && item.category !== gCapitalFilters.category) return false;
+    if (gCapitalFilters.star !== 'all' && item.star !== parseInt(gCapitalFilters.star)) return false;
+    if (gCapitalSearch) {
+      var q = gCapitalSearch.toLowerCase();
+      if (item.name.toLowerCase().indexOf(q) === -1 && item.code.toLowerCase().indexOf(q) === -1) return false;
+    }
+    // Province filter
+    if (gProvinceFilter !== 'all') {
+      var stocks = getFilteredStocks();
+      var provinceCodes = new Set(stocks.map(function(s) { return s.code; }));
+      if (!provinceCodes.has(item.code)) return false;
+    }
+    return true;
+  });
+  if (gCapitalSort === 'star') d.sort((a,b) => b.star - a.star);
+  else if (gCapitalSort === 'date') d.sort((a,b) => b.date.localeCompare(a.date));
+  return d;
+}
+
+function renderCapitalDateFilter(dates) {
+  const container = document.getElementById('capital-date-filter');
+  if (!container || dates.length === 0) return;
+  let html = '<span style="font-size:11px;color:var(--g500);margin-right:4px">日期:</span>';
+  html += '<button onclick="setCapitalDateFilter(\'all\')" class="capital-filter-btn ' + (gCapitalFilters.date === 'all' ? 'active' : '') + '" style="padding:3px 8px;border:1px solid ' + (gCapitalFilters.date === 'all' ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (gCapitalFilters.date === 'all' ? 'var(--navy)' : '#fff') + ';color:' + (gCapitalFilters.date === 'all' ? '#fff' : '#333') + ';font-size:11px;cursor:pointer">全部</button>';
+  
+  // 显示最近7天
+  for (const d of dates.slice(0, 7)) {
+    const label = d === getTodayStr() ? '今日' : (d === getYesterdayStr() ? '昨日' : d.substring(5));
+    const isActive = gCapitalFilters.date === d;
+    html += '<button onclick="setCapitalDateFilter(\'' + d + '\')" class="capital-filter-btn ' + (isActive ? 'active' : '') + '" style="padding:3px 8px;border:1px solid ' + (isActive ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (isActive ? 'var(--navy)' : '#fff') + ';color:' + (isActive ? '#fff' : '#333') + ';font-size:11px;cursor:pointer;margin-left:4px">' + label + '</button>';
+  }
+  container.innerHTML = html;
+}
+
+function setCapitalDateFilter(date) {
+  gCapitalFilters.date = date;
+  gCapitalPage = 1;
+  renderCapitalDateFilter(Object.keys(gCapitalDateMap));
+  renderCapitalSection();
+}
+
+function getTodayStr() {
+  const t = new Date();
+  return t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+}
+
+function getYesterdayStr() {
+  const t = new Date();
+  t.setDate(t.getDate() - 1);
+  return t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+}
+
+function renderCapitalSection() {
+  const data = getFilteredCapital();
+  // 更新badge
+  let badge = data.length + '条';
+  if (gCapitalFilters.date !== 'all') {
+    const label = gCapitalFilters.date === getTodayStr() ? '今日' : (gCapitalFilters.date === getYesterdayStr() ? '昨日' : gCapitalFilters.date);
+    badge += ' (' + label + ')';
+  }
+  document.getElementById('capital-count-badge').textContent = badge;
+  // 渲染统计
+  renderCapitalStats(data);
+  // 渲染卡片
+  renderCapitalCards(data);
+}
+
+function renderCapitalStats(data) {
+  const total = data.length;
+  const star4 = data.filter(d => d.star === 4).length;
+  const star3 = data.filter(d => d.star === 3).length;
+  const star2 = data.filter(d => d.star === 2).length;
+  const html =
+    '<div class="capital-stat total"><div class="num">' + total + '</div><div class="lbl">总条数</div></div>' +
+    '<div class="capital-stat high"><div class="num">' + star4 + '</div><div class="lbl">4星高价值</div></div>' +
+    '<div class="capital-stat mv"><div class="num">' + star3 + '</div><div class="lbl">3星一般关注</div></div>' +
+    '<div class="capital-stat"><div class="num">' + star2 + '</div><div class="lbl">2星常规</div></div>';
+  document.getElementById('capital-stats').innerHTML = html;
+}
+
+function capitalStarBadge(s) {
+  var stars = '';
+  for (var i = 0; i < s; i++) stars += '★';
+  for (var j = s; j < 4; j++) stars += '☆';
+  var cls = s === 4 ? 's4' : s === 3 ? 's3' : 's2';
+  return '<span class="badge badge-star ' + cls + '">' + stars + '</span>';
+}
+
+function renderCapitalCards(data) {
+  const grid = document.getElementById('capital-card-grid');
+  const empty = document.getElementById('capital-empty');
+  if (!data.length) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    document.getElementById('capital-pagination').innerHTML = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // 分页
+  const total = data.length;
+  const totalPages = Math.ceil(total / CAPITAL_PAGE_SIZE);
+  if (gCapitalPage > totalPages) gCapitalPage = totalPages || 1;
+  const start = (gCapitalPage - 1) * CAPITAL_PAGE_SIZE;
+  const pageData = data.slice(start, start + CAPITAL_PAGE_SIZE);
+
+  const html = pageData.map((item, idx) => {
+    const globalIdx = start + idx;
+    return '<div class="capital-card star-' + item.star + '" onclick="showCapitalDetail(' + globalIdx + ')">' +
+      '<div class="capital-card-header">' +
+        '<span class="capital-card-name">' + item.name + '</span>' +
+        capitalStarBadge(item.star) +
+        '<span class="capital-card-code">' + item.code + '</span>' +
+      '</div>' +
+      '<div class="capital-card-tags">' +
+        '<span class="tag">' + item.date + '</span>' +
+        '<span class="tag cat">' + item.category + '</span>' +
+        '<span class="tag">' + item.subType + '</span>' +
+      '</div>' +
+      '<div class="capital-card-summary">' + item.summary + '</div>' +
+    '</div>';
+  }).join('');
+  grid.innerHTML = html;
+
+  // 分页控件
+  let pagHtml = `<span style="font-size:12px;color:var(--g500);margin-right:8px">共 ${total} 条</span>`;
+  if (totalPages > 1) {
+    pagHtml += `<button onclick="capitalGoPage(1)" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gCapitalPage===1?'disabled':''}>&laquo;</button>`;
+    pagHtml += `<button onclick="capitalGoPage(${gCapitalPage-1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gCapitalPage===1?'disabled':''}>&lsaquo;</button>`;
+    for (let p = Math.max(1, gCapitalPage-2); p <= Math.min(totalPages, gCapitalPage+2); p++) {
+      const active = p === gCapitalPage;
+      pagHtml += `<button onclick="capitalGoPage(${p})" style="padding:4px 10px;border:1px solid ${active?'var(--navy)':'var(--g200)'};border-radius:4px;background:${active?'var(--navy)':'#fff'};color:${active?'#fff':'#333'};cursor:pointer;font-size:12px">${p}</button>`;
+    }
+    pagHtml += `<button onclick="capitalGoPage(${gCapitalPage+1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gCapitalPage===totalPages?'disabled':''}>&rsaquo;</button>`;
+    pagHtml += `<button onclick="capitalGoPage(${totalPages})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gCapitalPage===totalPages?'disabled':''}>&raquo;</button>`;
+  }
+  pagHtml += `<span style="font-size:11px;color:var(--g500);margin-left:8px">共 ${totalPages} 页</span>`;
+  document.getElementById('capital-pagination').innerHTML = pagHtml;
+}
+
+function capitalGoPage(p) {
+  gCapitalPage = p;
+  renderCapitalSection();
+  document.getElementById('capital').scrollIntoView({behavior:'smooth'});
+}
+
+function showCapitalDetail(idx) {
+  const data = getFilteredCapital();
+  const item = data[idx];
+  if (!item) return;
+  document.getElementById('capital-modal-title').textContent = item.name + ' - ' + item.subType;
+  const linkHtml = item.url ? '<a href="' + capitalUrlToCninfo(item.url, item.code, item.summary) + '" target="_blank" style="color:var(--navy)">查看原文公告</a>' : '无';
+  document.getElementById('capital-modal-body').innerHTML =
+    '<div class="capital-detail-row"><div class="lbl">证券代码</div><div class="val">' + item.code + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">城市</div><div class="val">' + (item.city || '未知') + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">商机分类</div><div class="val">' + item.category + ' / ' + item.subType + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">机会等级</div><div class="val">' + capitalStarBadge(item.star) + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">公告日期</div><div class="val">' + item.date + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">事件概述</div><div class="val">' + item.summary + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">业务方向</div><div class="val">' + item.direction + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">原文链接</div><div class="val">' + linkHtml + '</div></div>';
+  document.getElementById('capital-modal').classList.add('show');
+}
+
+function closeCapitalModal() {
+  document.getElementById('capital-modal').classList.remove('show');
+}
+
+function closeStockListModal() {
+  document.getElementById('stock-list-modal').classList.remove('show');
+}
+
+function capitalExportCSV() {
+  const data = getFilteredCapital();
+  if (!data.length) { alert('没有可导出的数据'); return; }
+  let csv = '﻿证券代码,证券简称,城市,商机分类,二级类型,机会等级,公告日期,事件概述,业务方向\n';
+  data.forEach(d => {
+    const summary = d.summary.replace(/<[^>]+>/g, '').replace(/,/g, '，');
+    const stars = '★'.repeat(d.star);
+    csv += d.code + ',' + d.name + ',' + (d.city || '') + ',' + d.category + ',' + d.subType + ',' + stars + ',' + d.date + ',' + summary + ',' + d.direction + '\n';
+  });
+  const blob = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '资本动作商机_' + (new Date().toISOString().slice(0,10)) + '.csv';
+  a.click();
+}
+
+// 初始化资本动作筛选器事件
+function initCapitalFilters() {
+  document.querySelectorAll('.capital-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const filter = this.dataset.filter;
+      const value = this.dataset.value;
+      gCapitalFilters[filter] = value;
+      gCapitalPage = 1;
+      document.querySelectorAll('.capital-filter-btn[data-filter="' + filter + '"]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      renderCapitalSection();
+    });
+  });
+  document.getElementById('capital-sort').addEventListener('change', function() {
+    gCapitalSort = this.value;
+    gCapitalPage = 1;
+    renderCapitalSection();
+  });
+  document.getElementById('capital-search-input').addEventListener('input', function() {
+    gCapitalSearch = this.value.trim();
+    gCapitalPage = 1;
+    renderCapitalSection();
+  });
+  // 点击modal背景关闭
+  document.getElementById('capital-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeCapitalModal();
+  });
+  document.getElementById('stock-list-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeStockListModal();
+  });
+}
+
+function renderCapital() {
+  loadCapitalData();
+  initCapitalFilters();
+}
+
+// ── RESEARCH ──
+let gResearchFilters = {search:'',rating:'all',sort:'report_count'};
+let gResearchFiltersInit = false;
+const RESEARCH_PAGE_SIZE = 16;
+let gResearchPage = 1;
+
+function renderResearch() {
+  let data = gData.institution_research || [];
+
+  // 构建代码->现价映射表（从行情中心取收盘价）
+  const priceMap = {};
+  (gData.stocks || []).forEach(s => {
+    if (s.price > 0) priceMap[s.code] = s.price;
+  });
+
+  // Province filter
+  if (gProvinceFilter !== 'all') {
+    const stocks = getFilteredStocks();
+    const provinceCodes = new Set(stocks.map(s => s.code));
+    data = data.filter(r => provinceCodes.has(r.stock_code));
+  }
+
+  // 过滤
+  if (gResearchFilters.search) {
+    const q = gResearchFilters.search.toLowerCase();
+    data = data.filter(r => r.stock_name.toLowerCase().includes(q) || r.stock_code.includes(q));
+  }
+  if (gResearchFilters.rating === 'buy80') {
+    data = data.filter(r => r.buy_pct > 80);
+  } else if (gResearchFilters.rating === 'buy50') {
+    data = data.filter(r => r.buy_pct >= 50 && r.buy_pct <= 80);
+  } else if (gResearchFilters.rating === 'buy_lt50') {
+    data = data.filter(r => r.buy_pct < 50);
+  }
+
+  // 排序
+  if (gResearchFilters.sort === 'report_count') data.sort((a,b) => b.report_count - a.report_count);
+  else if (gResearchFilters.sort === 'upside_desc') data.sort((a,b) => (b.upside || -999) - (a.upside || -999));
+  else if (gResearchFilters.sort === 'upside_asc') data.sort((a,b) => (a.upside || 999) - (b.upside || 999));
+
+  // 计数
+  const allData = gData.institution_research || [];
+  const hasTargetCount = allData.filter(r => r.consensus_target !== null && r.consensus_target !== undefined && !isNaN(r.consensus_target)).length;
+  document.getElementById('research-count-badge').textContent = `共 ${data.length} 只（有目标价 ${hasTargetCount} 只 / 总计 ${allData.length} 只）`;
+
+  const grid = document.getElementById('research-card-grid');
+  const empty = document.getElementById('research-empty');
+
+  if (data.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    document.getElementById('research-pagination').innerHTML = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // 分页
+  const total = data.length;
+  const totalPages = Math.ceil(total / RESEARCH_PAGE_SIZE);
+  if (gResearchPage > totalPages) gResearchPage = totalPages || 1;
+  const start = (gResearchPage - 1) * RESEARCH_PAGE_SIZE;
+  const pageData = data.slice(start, start + RESEARCH_PAGE_SIZE);
+
+  grid.innerHTML = pageData.map(r => {
+    const hasTarget = r.consensus_target !== null && r.consensus_target !== undefined && !isNaN(r.consensus_target);
+
+    // 评级分布条
+    const total2 = r.buy_pct + r.overweight_pct + r.neutral_pct + r.underweight_pct + r.sell_pct;
+    const ratingBar = total2 > 0 ? `
+      <div style="height:6px;border-radius:3px;overflow:hidden;display:flex;background:var(--g100)">
+        ${r.buy_pct > 0 ? `<div style="width:${r.buy_pct}%;background:#28a745"></div>` : ''}
+        ${r.overweight_pct > 0 ? `<div style="width:${r.overweight_pct}%;background:#17a2b8"></div>` : ''}
+        ${r.neutral_pct > 0 ? `<div style="width:${r.neutral_pct}%;background:#ffc107"></div>` : ''}
+        ${r.underweight_pct > 0 ? `<div style="width:${r.underweight_pct}%;background:#fd7e14"></div>` : ''}
+        ${r.sell_pct > 0 ? `<div style="width:${r.sell_pct}%;background:#dc3545"></div>` : ''}
+      </div>
+      <div style="display:flex;gap:6px;font-size:9px;color:var(--g500);margin-top:2px;flex-wrap:wrap">
+        ${r.buy_pct > 0 ? `<span style="color:#28a745">买${r.buy_pct}%</span>` : ''}
+        ${r.overweight_pct > 0 ? `<span style="color:#17a2b8">增${r.overweight_pct}%</span>` : ''}
+        ${r.neutral_pct > 0 ? `<span style="color:#ffc107">中${r.neutral_pct}%</span>` : ''}
+        ${r.underweight_pct > 0 ? `<span style="color:#fd7e14">减${r.underweight_pct}%</span>` : ''}
+        ${r.sell_pct > 0 ? `<span style="color:#dc3545">卖${r.sell_pct}%</span>` : ''}
+      </div>
+    ` : '<div style="font-size:10px;color:var(--g500)">暂无评级</div>';
+
+    // 有目标价
+    let mainContent;
+    if (hasTarget) {
+      const upsideStr = r.upside !== null && r.upside !== undefined ? `${r.upside >= 0 ? '+' : ''}${r.upside.toFixed(1)}%` : 'N/A';
+      const upsideColor = r.upside !== null && r.upside !== undefined
+        ? (r.upside >= 0 ? 'var(--danger)' : 'var(--success)')
+        : 'var(--g500)';
+      mainContent = `
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:6px 0;padding:6px;background:var(--g100);border-radius:6px">
+          <div style="text-align:center">
+            <div style="font-size:13px;font-weight:700;color:var(--navy);font-family:Arial">${r.consensus_target.toFixed(2)}元</div>
+            <div style="font-size:9px;color:var(--g500)">目标价</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:13px;font-weight:600;font-family:Arial">${r.current_price ? r.current_price.toFixed(2) : '-'}</div>
+            <div style="font-size:9px;color:var(--g500)">现价</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:13px;font-weight:700;font-family:Arial;color:${upsideColor}">${upsideStr}</div>
+            <div style="font-size:9px;color:var(--g500)">空间</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:9px;color:var(--g500);margin-bottom:2px">评级分布</div>
+          ${ratingBar}
+        </div>`;
+    } else {
+      mainContent = `
+        <div style="margin:6px 0">
+          <div style="font-size:9px;color:var(--g500);margin-bottom:2px">评级分布</div>
+          ${ratingBar}
+        </div>
+        <div style="display:flex;justify-content:space-around;padding:5px 0;background:var(--g100);border-radius:6px;font-size:11px">
+          <div style="text-align:center">
+            <div style="font-size:12px;font-weight:600;font-family:Arial">${r.current_price ? r.current_price.toFixed(2) : '-'}</div>
+            <div style="font-size:8px;color:var(--g500)">现价</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:12px;font-weight:700;color:var(--navy);font-family:Arial">${r.report_count}</div>
+            <div style="font-size:8px;color:var(--g500)">评级机构</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:12px;font-weight:700;color:var(--g500);font-family:Arial">—</div>
+            <div style="font-size:8px;color:var(--g500)">目标价暂无</div>
+          </div>
+        </div>`;
+    }
+
+    // 详细研报 - 压缩版
+    const reportsHtml = (r.reports && r.reports.length > 0) ? `
+      <details style="margin-top:4px;font-size:10px">
+        <summary style="cursor:pointer;color:var(--navy);font-weight:600">${r.reports.length}篇</summary>
+        <div style="margin-top:4px;max-height:100px;overflow-y:auto">
+          ${r.reports.slice(0, 5).map(rp => `
+            <div style="padding:2px 0;border-bottom:1px solid var(--g100)">
+              <a href="${rp.pdf_url}" target="_blank" style="color:var(--navy);text-decoration:none" title="${rp.title}">${rp.institution} - ${rp.title.slice(0, 20)}</a>
+              ${rp.target_price ? `<span style="margin-left:auto;color:var(--navy);font-weight:600">目标${rp.target_price}元</span>` : ''}
+            </div>
+          `).join('')}
+          ${r.reports.length > 5 ? `<div style="padding:2px 0;color:var(--g500)">...还有${r.reports.length - 5}篇</div>` : ''}
+        </div>
+      </details>
+    ` : '';
+
+    return `
+      <div style="background:#fff;border-radius:8px;padding:10px;border:1px solid var(--g200);font-size:12px;${hasTarget ? 'border-left:3px solid var(--navy)' : ''}">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <div>
+            <span style="font-weight:700;font-size:13px">${r.stock_name}</span>
+            <span style="font-size:10px;color:var(--g500);margin-left:4px">${r.stock_code}</span>
+          </div>
+          <span class="tag ${r.buy_pct >= 50 ? 'tag-success' : r.neutral_pct >= 50 ? 'tag-navy' : 'tag-warning'}">${r.rating}</span>
+        </div>
+        ${mainContent}
+        ${reportsHtml}
+      </div>
+    `;
+  }).join('');
+
+  // 分页控件
+  let pagHtml = `<span style="font-size:12px;color:var(--g500);margin-right:8px">共 ${total} 只</span>`;
+  if (totalPages > 1) {
+    pagHtml += `<button onclick="researchGoPage(1)" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gResearchPage===1?'disabled':''}>&laquo;</button>`;
+    pagHtml += `<button onclick="researchGoPage(${gResearchPage-1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gResearchPage===1?'disabled':''}>&lsaquo;</button>`;
+    for (let p = Math.max(1, gResearchPage-2); p <= Math.min(totalPages, gResearchPage+2); p++) {
+      const active = p === gResearchPage;
+      pagHtml += `<button onclick="researchGoPage(${p})" style="padding:4px 10px;border:1px solid ${active?'var(--navy)':'var(--g200)'};border-radius:4px;background:${active?'var(--navy)':'#fff'};color:${active?'#fff':'#333'};cursor:pointer;font-size:12px">${p}</button>`;
+    }
+    pagHtml += `<button onclick="researchGoPage(${gResearchPage+1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gResearchPage===totalPages?'disabled':''}>&rsaquo;</button>`;
+    pagHtml += `<button onclick="researchGoPage(${totalPages})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gResearchPage===totalPages?'disabled':''}>&raquo;</button>`;
+  }
+  pagHtml += `<span style="font-size:11px;color:var(--g500);margin-left:8px">共 ${totalPages} 页</span>`;
+  document.getElementById('research-pagination').innerHTML = pagHtml;
+}
+
+function researchGoPage(p) {
+  gResearchPage = p;
+  renderResearch();
+  document.getElementById('research').scrollIntoView({behavior:'smooth'});
+}
+
+function initResearchFilters() {
+  if (gResearchFiltersInit) return;
+  gResearchFiltersInit = true;
+  const searchInput = document.getElementById('research-search');
+  let searchTimer = null;
+  searchInput.addEventListener('input', function() {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      gResearchFilters.search = this.value.trim();
+      gResearchPage = 1;
+      renderResearch();
+    }, 300);
+  });
+
+  document.getElementById('research-rating').addEventListener('change', function() {
+    gResearchFilters.rating = this.value;
+    gResearchPage = 1;
+    renderResearch();
+  });
+
+  document.getElementById('research-sort').addEventListener('change', function() {
+    gResearchFilters.sort = this.value;
+    gResearchPage = 1;
+    renderResearch();
+  });
+}
+
+// ── NAV HIGHLIGHT ──
+window.addEventListener('scroll', function(){
+  const ids = ['overview','summary','opportunities','market','news','performance','executive','capital','research'];
+  let current = '';
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(el && el.getBoundingClientRect().top < 80) current = id;
+  });
+  document.querySelectorAll('.topnav a:not(.brand)').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
