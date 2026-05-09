@@ -18,8 +18,8 @@ from pathlib import Path
 # ===== 配置 =====
 BASE_DIR = Path(__file__).parent
 EXCEL_PATH = BASE_DIR.parent / "AH上市公司基本信息.xlsx"
-OUTPUT_JS = BASE_DIR.parent / "js_stock_tracker" / "capital_data.js"
-OUTPUT_EXECUTIVE_JS = BASE_DIR.parent / "js_stock_tracker" / "executive_data.js"
+OUTPUT_JS = BASE_DIR.parent / "capital_data.js"
+OUTPUT_EXECUTIVE_JS = BASE_DIR.parent / "executive_data.js"
 HISTORY_JSON = BASE_DIR / "capital_history.json"
 EXEC_HISTORY_JSON = BASE_DIR / "executive_history.json"
 HISTORY_DAYS = 7
