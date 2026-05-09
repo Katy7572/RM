@@ -318,8 +318,12 @@ tr:hover td{background:var(--ice-l)}
   .summary-metric .lbl{font-size:10px}
   #summary-opportunities{grid-template-columns:1fr!important}
 
-  /* National overview charts */
-  #chart-opp-direction,#chart-opp-province{height:220px!important}
+  /* Summary metrics - stack to 2 columns on mobile */
+  #summary-metrics{grid-template-columns:repeat(2,1fr)!important}
+
+  /* National overview charts - stack vertically */
+  #summary>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  #chart-opp-direction,#chart-opp-province{height:280px!important}
 
   /* Province grid */
   .province-page-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr))!important;gap:6px!important}
@@ -341,7 +345,7 @@ tr:hover td{background:var(--ice-l)}
   .capital-card-grid{grid-template-columns:1fr!important}
 
   /* ECharts containers */
-  .summary-card>div[id^="chart-"]{height:220px!important}
+  .summary-card>div[id^="chart-"]{height:280px!important}
 
   /* Modal */
   .capital-modal-box{width:95%;max-width:none}
@@ -364,6 +368,8 @@ tr:hover td{background:var(--ice-l)}
   .summary-metric .num{font-size:14px}
   .summary-metric .lbl{font-size:9px}
   .province-page-grid{grid-template-columns:repeat(3,1fr)!important}
+  #chart-opp-direction,#chart-opp-province{height:250px!important}
+  .summary-card>div[id^="chart-"]{height:250px!important}
 }
 </style>
 </head>
@@ -486,10 +492,6 @@ tr:hover td{background:var(--ice-l)}
 <div class="section" id="capital">
   <div class="section-title"><span class="icon">💼</span>资本动作 <span class="badge" id="capital-count-badge">加载中</span><span style="font-size:12px;color:var(--g500);margin-left:8px">数据来源：巨潮资讯网</span></div>
 
-  <!-- 刷新提示 -->
-  <div style="background:var(--navy-l);border-radius:8px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
-    <span style="font-size:13px;color:var(--navy)">💡 数据更新方法：运行 <code style="background:var(--g200);padding:2px 6px;border-radius:4px">python cninfo_dashboard_updater_v2.py</code> 获取近7日最新公告，刷新页面即可</span>
-  </div>
 
   <!-- 统计卡片 -->
   <div class="capital-stats" id="capital-stats"></div>
@@ -1356,6 +1358,10 @@ function _drawNationalCharts(dirEntries, dirColors, categoryNames, provSorted, p
   });
   setTimeout(function() { chartDir.resize(); chartProv.resize(); }, 50);
   window._nationCharts = [chartDir, chartProv];
+  // Mobile: auto-resize charts on orientation change / resize
+  window.addEventListener('resize', function() {
+    if (window._nationCharts) window._nationCharts.forEach(function(c) { c.resize(); });
+  });
 }
 
 // ── OPPORTUNITIES ──
