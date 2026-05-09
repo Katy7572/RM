@@ -37,14 +37,14 @@ body{
 }
 .topnav::-webkit-scrollbar{display:none}
 .topnav a{
-  font-size:13px;color:rgba(255,255,255,.8);text-decoration:none;
+  font-size:15px;color:rgba(255,255,255,.8);text-decoration:none;
   padding:14px 12px;white-space:nowrap;border-bottom:2.5px solid transparent;
   transition:.2s;font-family:"KaiTi","STKaiti","楷体","SimSun",serif;
 }
 .topnav a:hover,.topnav a.active{color:#fff;border-bottom-color:var(--coral)}
 .topnav .brand{
   font-weight:700;color:#fff;padding:6px 14px;border-radius:6px;margin-right:12px;
-  font-size:13px;border:none;background:var(--coral);
+  font-size:15px;border:none;background:var(--coral);
 }
 .topnav .brand.active{border:none;border-bottom:2.5px solid #fff}
 
@@ -57,19 +57,19 @@ body{
   content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;
   background:radial-gradient(circle,rgba(255,100,100,.08) 0%,transparent 70%);border-radius:50%;
 }
-.hero h1{font-size:clamp(20px,3vw,30px);letter-spacing:3px;font-weight:700;margin-bottom:8px}
-.hero .sub{color:var(--ice);font-size:14px;opacity:.85}
-.hero .date{display:inline-block;margin-top:12px;padding:4px 16px;background:rgba(255,255,255,.15);border-radius:20px;font-size:13px;color:var(--ice)}
+.hero h1{font-size:clamp(24px,3.5vw,34px);letter-spacing:3px;font-weight:700;margin-bottom:8px}
+.hero .sub{color:var(--ice);font-size:16px;opacity:.85}
+.hero .date{display:inline-block;margin-top:12px;padding:4px 16px;background:rgba(255,255,255,.15);border-radius:20px;font-size:14px;color:var(--ice)}
 .hero-province-btn{
   margin-top:24px;display:flex;align-items:center;gap:12px;padding:14px 28px;
   background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;
-  cursor:pointer;color:#fff;font-size:14px;transition:all .2s;
+  cursor:pointer;color:#fff;font-size:16px;transition:all .2s;
 }
 .hero-province-btn:hover{background:rgba(255,255,255,.25);border-color:var(--coral);transform:translateY(-2px)}
 .hero-province-icon{font-size:24px}
 .hero-province-text{font-weight:700}
 .hero-province-current{
-  font-size:11px;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:10px;
+  font-size:12px;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:10px;
   color:rgba(255,255,255,.8);
 }
 .province-page-grid{
@@ -82,9 +82,9 @@ body{
 }
 .province-page-card:hover{background:#eaf2fb;border-color:var(--navy-m);transform:translateY(-1px)}
 .province-page-card.active{border-color:var(--coral);background:#fff2f2}
-.province-page-card .pv-icon{font-size:18px;margin-bottom:2px}
-.province-page-card .pv-name{font-size:12px;font-weight:600;color:var(--g800);margin-bottom:1px}
-.province-page-card .pv-count{font-size:10px;color:var(--g500)}
+.province-page-card .pv-icon{font-size:22px;margin-bottom:2px}
+.province-page-card .pv-name{font-size:14px;font-weight:600;color:var(--g800);margin-bottom:1px}
+.province-page-card .pv-count{font-size:12px;color:var(--g500)}
 .province-all-card{grid-column:1/-1;max-width:200px;justify-self:center}
 .province-all-card .pv-icon{font-size:24px}
 .province-all-card .pv-name{font-size:14px}
@@ -92,12 +92,12 @@ body{
 .province-filter-bar{
   display:none;align-items:center;gap:8px;padding:8px 16px;
   background:var(--coral-l);border-radius:8px;margin-bottom:12px;
-  font-size:13px;color:var(--coral);
+  font-size:14px;color:var(--coral);
 }
 .province-filter-bar.show{display:flex}
 .province-filter-bar .clear-btn{
   padding:2px 10px;background:var(--coral);color:#fff;border:none;
-  border-radius:4px;cursor:pointer;font-size:12px;font-family:inherit;
+  border-radius:4px;cursor:pointer;font-size:13px;font-family:inherit;
 }
 
 /* ── DASHBOARD CARDS ── */
@@ -110,9 +110,9 @@ body{
   box-shadow:0 2px 8px rgba(0,0,0,.06);transition:.2s;
 }
 .stat-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.1)}
-.stat-card .icon{font-size:24px;margin-bottom:4px}
-.stat-card .value{font-size:24px;font-weight:700;color:var(--navy)}
-.stat-card .label{font-size:12px;color:var(--g500);margin-top:2px}
+.stat-card .icon{font-size:28px;margin-bottom:4px}
+.stat-card .value{font-size:28px;font-weight:700;color:var(--navy)}
+.stat-card .label{font-size:14px;color:var(--g500);margin-top:2px}
 .stat-card.up .value{color:var(--danger)}  /* 红涨 */
 .stat-card.down .value{color:var(--success)}  /* 绿跌 */
 .stat-card.gold .value{color:var(--gold)}
@@ -121,13 +121,13 @@ body{
 .section{max-width:1400px;margin:24px auto;padding:0 16px}
 .section-anchor{display:block;position:relative;top:-56px;visibility:hidden}
 .section-title{
-  font-size:18px;color:var(--navy);font-weight:700;margin-bottom:14px;
+  font-size:20px;color:var(--navy);font-weight:700;margin-bottom:14px;
   padding-left:12px;border-left:4px solid var(--coral);letter-spacing:2px;
   display:flex;align-items:center;gap:8px;
 }
-.section-title .icon{font-size:20px}
+.section-title .icon{font-size:22px}
 .section-title .badge{
-  font-size:11px;background:var(--coral);color:#fff;padding:2px 8px;
+  font-size:12px;background:var(--coral);color:#fff;padding:2px 8px;
   border-radius:10px;font-weight:400;
 }
 
@@ -138,14 +138,14 @@ body{
   box-shadow:0 1px 4px rgba(0,0,0,.03);transition:.2s;
 }
 .card:hover{border-color:var(--navy-m);box-shadow:0 2px 8px rgba(0,55,120,.06)}
-.card h4{font-size:15px;color:var(--navy);margin-bottom:8px;letter-spacing:1px}
-.card p{font-size:13px;color:var(--g700);line-height:1.6}
-.card .meta{font-size:12px;color:var(--g500);margin-top:6px;padding-top:6px;border-top:1px solid var(--g100)}
+.card h4{font-size:17px;color:var(--navy);margin-bottom:8px;letter-spacing:1px}
+.card p{font-size:14px;color:var(--g700);line-height:1.6}
+.card .meta{font-size:13px;color:var(--g500);margin-top:6px;padding-top:6px;border-top:1px solid var(--g100)}
 
 /* ── TABLE ── */
 .tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--g200);background:#fff;margin:12px 0}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:var(--navy);color:#fff;padding:10px 12px;text-align:left;font-weight:600;white-space:nowrap;font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--navy);color:#fff;padding:10px 12px;text-align:left;font-weight:600;white-space:nowrap;font-size:13px}
 td{padding:9px 12px;border-bottom:1px solid var(--g200);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--ice-l)}
@@ -153,7 +153,7 @@ tr:hover td{background:var(--ice-l)}
 .text-down{color:var(--success);font-weight:600}  /* 绿跌 */
 
 /* ── TAGS ── */
-.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;margin:1px}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;margin:1px}
 .tag-navy{background:var(--navy-l);color:var(--navy)}
 .tag-coral{background:var(--coral-l);color:var(--crimson)}
 .tag-ice{background:var(--ice);color:var(--navy)}
@@ -191,14 +191,14 @@ tr:hover td{background:var(--ice-l)}
 .summary-card{background:#fff;padding:20px 24px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .summary-metric{text-align:center;padding:12px;border-radius:8px;background:var(--g50)}
 .summary-metric .num{font-size:24px;font-weight:700;color:var(--navy);font-family:Arial}
-.summary-metric .lbl{font-size:12px;color:var(--g500);margin-top:4px}
+.summary-metric .lbl{font-size:13px;color:var(--g500);margin-top:4px}
 
 /* ── LAYER CARDS ── */
 .layer-card{padding:18px;border-radius:12px;margin:12px 0;border:2px solid}
 .layer-card.strategic{background:linear-gradient(135deg,#fff8e1,#fff3cd);border-color:var(--gold)}
 .layer-card.potential{background:linear-gradient(135deg,var(--navy-l),var(--ice-l));border-color:var(--navy-m)}
 .layer-card.maintenance{background:linear-gradient(135deg,var(--g50),#f0f0f0);border-color:var(--g300)}
-.layer-card h4{font-size:16px;margin-bottom:6px}
+.layer-card h4{font-size:18px;margin-bottom:6px}
 
 /* ── NEWS CARDS ── */
 .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
@@ -208,19 +208,19 @@ tr:hover td{background:var(--ice-l)}
 }
 .news-card:hover{border-color:var(--navy-m);box-shadow:0 2px 8px rgba(0,55,120,.06)}
 .news-card .meta{display:flex;align-items:center;gap:6px;margin-bottom:8px}
-.news-card .title{font-size:14px;color:var(--g800);line-height:1.5;margin-bottom:6px;
+.news-card .title{font-size:15px;color:var(--g800);line-height:1.5;margin-bottom:6px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.news-card .stock{font-size:12px;color:var(--navy-m);font-weight:600}
-.news-card .time{font-size:11px;color:var(--g500);margin-left:auto}
+.news-card .stock{font-size:13px;color:var(--navy-m);font-weight:600}
+.news-card .time{font-size:12px;color:var(--g500);margin-left:auto}
 
 /* ── CAPITAL CARDS (新增) ── */
 .capital-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding:12px;background:var(--g50);border-radius:8px}
 .capital-search{position:relative;flex:0 0 200px}
-.capital-search input{width:100%;padding:6px 10px 6px 28px;border:1px solid var(--g200);border-radius:6px;font-size:13px;outline:none}
+.capital-search input{width:100%;padding:6px 10px 6px 28px;border:1px solid var(--g200);border-radius:6px;font-size:14px;outline:none}
 .capital-search::before{content:"🔍";position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:12px}
 .capital-filter-group{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.capital-filter-group label{font-size:12px;color:var(--g500);margin-right:4px}
-.capital-filter-btn{padding:4px 10px;border:1px solid var(--g200);border-radius:14px;background:#fff;font-size:11px;color:var(--g600);cursor:pointer;transition:all .15s}
+.capital-filter-group label{font-size:13px;color:var(--g500);margin-right:4px}
+.capital-filter-btn{padding:5px 12px;border:1px solid var(--g200);border-radius:14px;background:#fff;font-size:12px;color:var(--g600);cursor:pointer;transition:all .15s}
 .capital-filter-btn:hover{border-color:var(--navy);color:var(--navy)}
 .capital-filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .capital-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
@@ -230,11 +230,11 @@ tr:hover td{background:var(--ice-l)}
 .capital-stat.major{border-left-color:#C00000}
 .capital-stat.high{border-left-color:#F59E0B}
 .capital-stat.mv{border-left-color:#10B981}
-.capital-stat .num{font-size:22px;font-weight:700;color:var(--navy)}
+.capital-stat .num{font-size:24px;font-weight:700;color:var(--navy)}
 .capital-stat.unclaimed .num{color:var(--coral)}
 .capital-stat.major .num{color:#C00000}
 .capital-stat.high .num{color:#D97706}
-.capital-stat .lbl{font-size:11px;color:var(--g500)}
+.capital-stat .lbl{font-size:12px;color:var(--g500)}
 .capital-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
 .capital-card{background:#fff;border-radius:8px;padding:10px 12px;border:1px solid var(--g200);transition:.2s;cursor:pointer;border-left:4px solid var(--g200);display:flex;flex-direction:column;gap:4px;min-height:auto}
 .capital-card:hover{border-color:var(--navy-m);box-shadow:0 2px 8px rgba(0,55,120,.08)}
@@ -243,32 +243,32 @@ tr:hover td{background:var(--ice-l)}
 .capital-card.star-3{border-left-color:#10B981}
 .capital-card.star-2{border-left-color:var(--g200)}
 .capital-card-header{display:flex;align-items:center;gap:6px;line-height:1.3}
-.capital-card-name{font-size:14px;font-weight:700;color:var(--g800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.capital-card-code{font-size:10px;color:var(--g500);margin-left:auto;flex-shrink:0}
-.capital-card .badge{display:inline-block;padding:1px 4px;border-radius:6px;font-size:9px;font-weight:600;flex-shrink:0}
+.capital-card-name{font-size:15px;font-weight:700;color:var(--g800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.capital-card-code{font-size:11px;color:var(--g500);margin-left:auto;flex-shrink:0}
+.capital-card .badge{display:inline-block;padding:1px 4px;border-radius:6px;font-size:10px;font-weight:600;flex-shrink:0}
 .capital-card .badge-star{color:#fff}
 .capital-card .badge-star.s5{background:#C00000}
 .capital-card .badge-star.s4{background:#F59E0B}
 .capital-card .badge-star.s3{background:#10B981}
 .capital-card .badge-star.s2{background:var(--g300)}
 .capital-card-tags{display:flex;gap:4px;flex-wrap:wrap}
-.capital-card .tag{padding:1px 5px;border-radius:3px;font-size:9px;background:var(--navy-l);color:var(--navy)}
+.capital-card .tag{padding:1px 5px;border-radius:3px;font-size:10px;background:var(--navy-l);color:var(--navy)}
 .capital-card .tag.cat{background:var(--ice);color:var(--navy)}
-.capital-card-summary{font-size:11px;color:var(--g700);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.capital-card-summary{font-size:12px;color:var(--g700);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .capital-card-summary .hl{color:#C00000;font-weight:600}
 .capital-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center}
 .capital-modal.show{display:flex}
 .capital-modal-box{background:#fff;border-radius:12px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,.2)}
 .capital-modal-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--g200)}
-.capital-modal-header h3{font-size:16px;font-weight:700;color:var(--navy)}
-.capital-modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--g500);padding:4px}
+.capital-modal-header h3{font-size:18px;font-weight:700;color:var(--navy)}
+.capital-modal-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--g500);padding:4px}
 .capital-modal-body{padding:20px}
 .capital-detail-row{margin-bottom:12px}
-.capital-detail-row .lbl{font-size:11px;color:var(--g500);margin-bottom:2px}
-.capital-detail-row .val{font-size:13px;color:var(--g800)}
+.capital-detail-row .lbl{font-size:12px;color:var(--g500);margin-bottom:2px}
+.capital-detail-row .val{font-size:14px;color:var(--g800)}
 
 /* ── FOOTER ── */
-.footer{text-align:center;padding:24px 20px;margin-top:36px;border-top:1px solid var(--g200);color:var(--g500);font-size:12px;background:#fff}
+.footer{text-align:center;padding:24px 20px;margin-top:36px;border-top:1px solid var(--g200);color:var(--g500);font-size:13px;background:#fff}
 
 /* ── SUMMARY CARD ── */
 .summary-card{background:#fff;border-radius:10px;padding:16px 20px;border:1px solid var(--g200);box-shadow:0 1px 4px rgba(0,0,0,.03)}
@@ -280,28 +280,104 @@ tr:hover td{background:var(--ice-l)}
 
 /* Summary metrics */
 .summary-metric{text-align:center;padding:8px 4px;background:var(--g50);border-radius:6px}
-.summary-metric .num{font-size:18px;font-weight:700;color:var(--navy)}
-.summary-metric .lbl{font-size:11px;color:var(--g500);margin-top:2px}
+.summary-metric .num{font-size:20px;font-weight:700;color:var(--navy)}
+.summary-metric .lbl{font-size:12px;color:var(--g500);margin-top:2px}
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
-  .dashboard{grid-template-columns:repeat(2,1fr)}
-  .card-grid{grid-template-columns:1fr}
+  /* Nav */
+  .topnav{height:48px;padding:0 8px}
+  .topnav a{font-size:14px;padding:12px 10px}
+  .topnav .brand{font-size:14px;padding:4px 10px;margin-right:8px}
+
+  /* Hero */
+  .hero{padding:28px 16px 20px}
+  .hero h1{font-size:clamp(18px,5vw,28px)}
+  .hero .sub{font-size:13px}
+  .hero .date{font-size:12px}
+  .hero-province-btn{padding:10px 18px;font-size:13px}
+  .hero-province-icon{font-size:20px}
+
+  /* Dashboard stats */
+  .dashboard{grid-template-columns:repeat(2,1fr);gap:8px;padding:0 12px}
+  .stat-card{padding:12px}
+  .stat-card .icon{font-size:22px}
+  .stat-card .value{font-size:22px}
+  .stat-card .label{font-size:12px}
+
+  /* Sections */
+  .section{padding:0 12px;margin:16px auto}
+  .section-title{font-size:17px}
+
+  /* Province filter bar */
+  .province-filter-bar{padding:6px 12px;font-size:12px;flex-wrap:wrap}
+
+  /* Summary card */
+  .summary-card{padding:12px}
+  .summary-metric .num{font-size:16px}
+  .summary-metric .lbl{font-size:10px}
+  #summary-opportunities{grid-template-columns:1fr!important}
+
+  /* National overview charts */
+  #chart-opp-direction,#chart-opp-province{height:220px!important}
+
+  /* Province grid */
+  .province-page-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr))!important;gap:6px!important}
+  .province-page-card .pv-name{font-size:12px}
+  .province-page-card .pv-count{font-size:10px}
+
+  /* Tables */
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  /* Market */
+  .card-grid{grid-template-columns:1fr!important;gap:12px}
   .news-grid{grid-template-columns:1fr}
+
+  /* Capital */
+  .capital-toolbar{flex-direction:column;align-items:stretch;gap:8px}
+  .capital-search{flex:1}
+  .capital-filter-group{flex-wrap:wrap}
+  .capital-stats{grid-template-columns:repeat(2,1fr);gap:8px}
+  .capital-card-grid{grid-template-columns:1fr!important}
+
+  /* ECharts containers */
+  .summary-card>div[id^="chart-"]{height:220px!important}
+
+  /* Modal */
+  .capital-modal-box{width:95%;max-width:none}
+
+  /* Research */
+  #research-card-grid{grid-template-columns:1fr!important}
+
+  /* Footer */
+  .footer{font-size:12px;padding:16px}
+}
+
+@media(max-width:480px){
+  .dashboard{grid-template-columns:repeat(2,1fr);gap:6px;padding:0 8px}
+  .stat-card .icon{font-size:18px}
+  .stat-card .value{font-size:20px}
+  .stat-card .label{font-size:10px}
+  .section{padding:0 8px;margin:12px auto}
+  .hero{padding:20px 12px 16px}
+  .hero h1{font-size:18px}
+  .summary-metric .num{font-size:14px}
+  .summary-metric .lbl{font-size:9px}
+  .province-page-grid{grid-template-columns:repeat(3,1fr)!important}
 }
 </style>
 </head>
 <body>
 
-<div id="loading-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#f5f7fa;display:flex;align-items:center;justify-content:center;z-index:9999;font-size:18px;color:var(--navy)">数据加载中（约3MB）...</div>
+<div id="loading-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#f5f7fa;display:flex;align-items:center;justify-content:center;z-index:9999;font-size:20px;color:var(--navy)">数据加载中...</div>
 
 <!-- ═══ NAV ═══ -->
 <nav class="topnav" id="topnav">
   <a class="brand" href="#" data-page="home">机构业务看板</a>
+  <a href="#" data-page="capital">资本动作</a>
+  <a href="#" data-page="executive">高管变动</a>
   <a href="#" data-page="market">行情中心</a>
   <a href="#" data-page="news">新闻舆情</a>
-  <a href="#" data-page="executive">高管变动</a>
-  <a href="#" data-page="capital">资本动作</a>
   <a href="#" data-page="research">机构评级</a>
 </nav>
 
@@ -351,14 +427,32 @@ tr:hover td{background:var(--ice-l)}
   <!-- 每日研判 -->
   <div class="section-title" style="margin-bottom:10px"><span class="icon"></span>每日研判</div>
   <div class="summary-card" style="padding:16px 20px;margin-bottom:20px">
-    <div id="summary-overview" style="font-size:13px;color:var(--g700);line-height:1.8;margin-bottom:14px"></div>
+    <div id="summary-overview" style="font-size:14px;color:var(--g700);line-height:1.8;margin-bottom:14px"></div>
     <div class="card-grid" style="grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:8px" id="summary-metrics"></div>
-    <div id="summary-advice" style="margin-top:12px;padding:10px 14px;background:var(--ice-l);border-radius:8px;font-size:13px;color:var(--navy);line-height:1.8;border-left:3px solid var(--navy)"></div>
+  </div>
+  <!-- 重点关注业务机会 -->
+  <div class="section-title" style="margin-bottom:10px;margin-top:20px"><span class="icon">💡</span>重点关注业务机会 <span class="badge" id="summary-opp-badge">--</span></div>
+  <div class="summary-card" style="padding:16px 20px;margin-bottom:20px">
+    <div id="summary-opportunities" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
+  </div>
+  <!-- 全国业务机会总览 -->
+  <div class="section-title" style="margin-bottom:10px;margin-top:20px"><span class="icon">🗺️</span>业务机会总览 <span class="badge" id="nation-opp-badge">--</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+    <!-- 左侧：业务机会按方向分布 -->
+    <div class="summary-card" style="padding:16px">
+      <div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px">📊 机会方向分布</div>
+      <div id="chart-opp-direction" style="width:100%;height:260px"></div>
+    </div>
+    <!-- 右侧：业务机会按省份分布 TOP10（堆叠条形图） -->
+    <div class="summary-card" style="padding:16px">
+      <div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px">📍 省份机会 TOP10</div>
+      <div id="chart-opp-province" style="width:100%;height:260px"></div>
+    </div>
   </div>
   <!-- 按省份筛选 -->
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
     <div class="section-title" style="margin-bottom:0"><span class="icon">📍</span>按省份筛选</div>
-    <button onclick="filterProvince('all')" style="padding:4px 14px;border-radius:6px;border:1px solid var(--navy);background:#fff;color:var(--navy);font-size:12px;cursor:pointer;font-family:inherit">显示全部公司</button>
+    <button onclick="filterProvince('all')" style="padding:4px 14px;border-radius:6px;border:1px solid var(--navy);background:#fff;color:var(--navy);font-size:13px;cursor:pointer;font-family:inherit">显示全部公司</button>
   </div>
   <div class="summary-card" style="padding:10px;max-height:420px;overflow-y:auto">
     <div class="province-page-grid" id="province-page-grid" style="padding:0;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:5px"></div>
@@ -370,13 +464,15 @@ tr:hover td{background:var(--ice-l)}
   <div class="section-title"><span class="icon">💡</span>业务机会提示</div>
 
   <!-- 看板说明 -->
-  <div style="background:#fff;border-radius:10px;padding:14px 18px;border:1px solid var(--g200);margin-bottom:14px;font-size:13px;color:var(--g700);line-height:1.9">
-    <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px">业务机会判定规则（基于公告与研报数据自动识别）：</div>
+  <div style="background:#fff;border-radius:10px;padding:14px 18px;border:1px solid var(--g200);margin-bottom:14px;font-size:14px;color:var(--g700);line-height:1.9">
+    <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px">业务机会判定规则（基于公告与研报数据自动识别）：</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px">
-      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px;flex-shrink:0">💰</span><div><strong>融资需求：</strong>公司近期公告了股权激励、员工持股、限制性股票或股权质押/解除，存在融资或资金周转需求</div></div>
-      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px;flex-shrink:0">📊</span><div><strong>财富管理需求：</strong>公司涉及股份回购、股东增减持、委托理财、分红派息、控制权变更等事项，股东有资产配置或变现需求</div></div>
-      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px;flex-shrink:0">📝</span><div><strong>投研服务需求：</strong>近90天内有券商研报覆盖，机构关注度高，存在研究服务需求</div></div>
-      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px;flex-shrink:0">👔</span><div><strong>高管变更对接：</strong>公司发生高管聘任或辞职，可进行客户关系维护与业务对接</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:18px;flex-shrink:0">💰</span><div><strong>揽存线索：</strong>股份回购 → 回购专户；股权激励/员工持股 → 行权资金归集户</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:18px;flex-shrink:0">📊</span><div><strong>理财线索：</strong>公司近期公告委托理财、购买理财产品，存在闲置资金配置需求</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:18px;flex-shrink:0">💼</span><div><strong>股权激励综合服务：</strong>股权激励草案、员工持股计划、限制性股票授予/归属/回购注销</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:18px;flex-shrink:0">📈</span><div><strong>股东增持线索：</strong>大股东增持公告（可能需配资），说明股东对公司前景有信心且资金实力强</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:18px;flex-shrink:0">📉</span><div><strong>股东减持/变现：</strong>减持预披露、减持实施、协议转让、控制权变更，股东有资产配置或变现需求</div></div>
+      <div style="display:flex;align-items:flex-start;gap:6px"><span style="font-size:18px;flex-shrink:0">👔</span><div><strong>客户关系预警：</strong>公司发生董监高变动，关键人变化需客户关系维护</div></div>
     </div>
   </div>
 
@@ -385,106 +481,14 @@ tr:hover td{background:var(--ice-l)}
 
 </div><!-- end page-home -->
 
-<!-- ═══ PAGE: 行情中心 ═══ -->
-<div id="page-market" style="display:none">
-<div class="section" id="market">
-  <div class="section-title"><span class="icon">📈</span>行情中心 <span class="badge" id="market-date-badge" style="font-size:11px;font-weight:400;background:var(--info);color:#fff">加载中</span><span style="font-size:11px;color:var(--g500);margin-left:8px">数据来源：腾讯财经</span><button onclick="refreshMarketData()" style="margin-left:12px;padding:3px 10px;border-radius:4px;border:1px solid var(--navy);background:#fff;color:var(--navy);font-size:11px;cursor:pointer" title="运行 python refresh_market_v3.py 刷新行情数据">🔄 刷新行情</button></div>
-  <div class="summary-card" style="margin-bottom:20px;padding:16px 20px">
-    <h4 style="font-size:15px;color:var(--navy);margin-bottom:10px">行情总结</h4>
-    <div id="market-summary-text" style="font-size:13px;color:var(--g700);line-height:1.8"></div>
-  </div>
-  <div class="card-grid" style="grid-template-columns:1fr 1fr 1fr">
-    <div class="card">
-      <h4>🚀 涨幅榜 TOP10</h4>
-      <div class="tbl-wrap">
-        <table><thead><tr><th>公司</th><th>代码</th><th>价格</th><th>涨跌幅</th></tr></thead>
-        <tbody id="top-gainers"></tbody></table>
-      </div>
-    </div>
-    <div class="card">
-      <h4>🔻 跌幅榜 TOP10</h4>
-      <div class="tbl-wrap">
-        <table><thead><tr><th>公司</th><th>代码</th><th>价格</th><th>涨跌幅</th></tr></thead>
-        <tbody id="top-losers"></tbody></table>
-      </div>
-    </div>
-    <div class="card">
-      <h4>💰 成交额 TOP10</h4>
-      <div class="tbl-wrap">
-        <table><thead><tr><th>公司</th><th>代码</th><th>成交额</th><th>换手率</th></tr></thead>
-        <tbody id="top-turnover"></tbody></table>
-      </div>
-    </div>
-  </div>
-
-  <!-- 全量股票表格 + 省份筛选 -->
-  <div style="margin-top:24px;padding:16px 20px;background:#fff;border-radius:12px;border:1px solid var(--g200)">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
-      <span style="font-size:14px;font-weight:600;color:var(--navy)">全部股票</span>
-      <span id="market-stock-count" style="font-size:12px;color:var(--g500)">0 只</span>
-      <select id="market-province-filter" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:13px;min-width:120px">
-        <option value="all">全部省份</option>
-      </select>
-      <select id="market-sort" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:13px">
-        <option value="turnover">按成交额</option>
-        <option value="change_pct_desc">涨幅降序</option>
-        <option value="change_pct_asc">涨幅升序</option>
-        <option value="market_cap">按市值</option>
-      </select>
-      <input id="market-search" type="text" placeholder="搜索名称/代码..." style="padding:6px 12px;border-radius:6px;border:1px solid var(--g200);font-size:13px;width:200px">
-      <span id="market-showing-count" style="font-size:12px;color:var(--g500);margin-left:auto"></span>
-    </div>
-    <div id="market-legend" style="font-size:11px;color:var(--g500);margin-bottom:8px;display:flex;gap:12px">
-      <span>🔬 高新技术企业</span>
-      <span>⭐ 国家级专精特新</span>
-      <span>🏅 省级专精特新</span>
-    </div>
-    <div class="tbl-wrap" style="overflow-x:auto">
-      <table>
-        <thead><tr><th>公司</th><th>代码</th><th>省份</th><th>行业</th><th>价格</th><th>涨跌幅</th><th>成交额</th><th>市值(亿)</th><th>标签</th></tr></thead>
-        <tbody id="full-stock-table"></tbody>
-      </table>
-    </div>
-    <div id="market-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px"></div>
-  </div>
-</div>
-</div><!-- end page-market -->
-
-<!-- ═══ PAGE: 新闻舆情 ═══ -->
-<div id="page-news" style="display:none">
-<div class="section" id="news">
-  <div class="section-title"><span class="icon">📰</span>新闻舆情</div>
-  <div class="tabs" id="news-tabs">
-    <button class="tab-btn active" onclick="switchNewsTab('公司资讯')">公司资讯</button>
-    <button class="tab-btn" onclick="switchNewsTab('调研资讯')">调研资讯</button>
-  </div>
-  <div class="news-grid" id="news-list"></div>
-  <div id="news-pagination" style="margin-top:10px;display:flex;align-items:center;justify-content:center"></div>
-</div>
-</div><!-- end page-news -->
-
-<!-- ═══ PAGE: 高管变动 ═══ -->
-<div id="page-executive" style="display:none">
-<div class="section" id="executive">
-  <div class="section-title"><span class="icon"></span>高管变动 <span class="badge" id="executive-count-badge">加载中</span><span style="font-size:11px;color:var(--g500);margin-left:8px">数据来源：巨潮资讯网</span><span id="exec-date-filter-container" style="margin-left:8px"></span></div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>公司</th><th>代码</th><th>变动类型</th><th>职位</th><th>公告标题</th><th>公告日期</th><th>状态</th><th>原文</th></tr></thead>
-      <tbody id="executive-table"></tbody>
-    </table>
-  </div>
-  <div id="executive-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px"></div>
-</div>
-</div><!-- end page-executive -->
-
 <!-- ═══ PAGE: 资本动作 ═══ -->
 <div id="page-capital" style="display:none">
 <div class="section" id="capital">
-  <div class="section-title"><span class="icon">💼</span>资本动作 <span class="badge" id="capital-count-badge">加载中</span><span style="font-size:11px;color:var(--g500);margin-left:8px">数据来源：巨潮资讯网</span></div>
+  <div class="section-title"><span class="icon">💼</span>资本动作 <span class="badge" id="capital-count-badge">加载中</span><span style="font-size:12px;color:var(--g500);margin-left:8px">数据来源：巨潮资讯网</span></div>
 
   <!-- 刷新提示 -->
   <div style="background:var(--navy-l);border-radius:8px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
-    <span style="font-size:12px;color:var(--navy)">💡 数据更新方法：运行 <code style="background:var(--g200);padding:2px 6px;border-radius:4px">python cninfo_dashboard_updater_v2.py</code> 获取近7日最新公告，刷新页面即可</span>
+    <span style="font-size:13px;color:var(--navy)">💡 数据更新方法：运行 <code style="background:var(--g200);padding:2px 6px;border-radius:4px">python cninfo_dashboard_updater_v2.py</code> 获取近7日最新公告，刷新页面即可</span>
   </div>
 
   <!-- 统计卡片 -->
@@ -500,6 +504,8 @@ tr:hover td{background:var(--ice-l)}
       <button class="capital-filter-btn active" data-filter="category" data-value="all">全部</button>
       <button class="capital-filter-btn" data-filter="category" data-value="股权激励/员工持股">股权激励</button>
       <button class="capital-filter-btn" data-filter="category" data-value="增减持">增减持</button>
+      <button class="capital-filter-btn" data-filter="subType" data-value="增持">增持</button>
+      <button class="capital-filter-btn" data-filter="subType" data-value="减持">减持</button>
       <button class="capital-filter-btn" data-filter="category" data-value="股份回购">回购</button>
       <button class="capital-filter-btn" data-filter="category" data-value="委托理财">理财</button>
     </div>
@@ -549,25 +555,115 @@ tr:hover td{background:var(--ice-l)}
   </div>
 </div>
 
+<!-- ═══ PAGE: 高管变动 ═══ -->
+<div id="page-executive" style="display:none">
+<div class="section" id="executive">
+  <div class="section-title"><span class="icon"></span>高管变动 <span class="badge" id="executive-count-badge">加载中</span><span style="font-size:12px;color:var(--g500);margin-left:8px">数据来源：巨潮资讯网</span><span id="exec-date-filter-container" style="margin-left:8px"></span><button onclick="executiveExportCSV()" style="margin-left:12px;padding:4px 10px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer">导出CSV</button></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>公司</th><th>代码</th><th>变动类型</th><th>职位</th><th>公告标题</th><th>公告日期</th><th>状态</th><th>原文</th></tr></thead>
+      <tbody id="executive-table"></tbody>
+    </table>
+  </div>
+  <div id="executive-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px"></div>
+</div>
+</div><!-- end page-executive -->
+
+<!-- ═══ PAGE: 行情中心 ═══ -->
+<div id="page-market" style="display:none">
+<div class="section" id="market">
+  <div class="section-title"><span class="icon">📈</span>行情中心 <span class="badge" id="market-date-badge" style="font-size:12px;font-weight:400;background:var(--info);color:#fff">加载中</span><span style="font-size:12px;color:var(--g500);margin-left:8px">数据来源：腾讯财经</span><button onclick="refreshMarketData()" style="margin-left:12px;padding:3px 10px;border-radius:4px;border:1px solid var(--navy);background:#fff;color:var(--navy);font-size:12px;cursor:pointer" title="运行 python refresh_market_v3.py 刷新行情数据">🔄 刷新行情</button></div>
+  <div class="summary-card" style="margin-bottom:20px;padding:16px 20px">
+    <h4 style="font-size:16px;color:var(--navy);margin-bottom:10px">行情总结</h4>
+    <div id="market-summary-text" style="font-size:14px;color:var(--g700);line-height:1.8"></div>
+  </div>
+  <div class="card-grid" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="card">
+      <h4>🚀 涨幅榜 TOP10</h4>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>公司</th><th>代码</th><th>价格</th><th>涨跌幅</th></tr></thead>
+        <tbody id="top-gainers"></tbody></table>
+      </div>
+    </div>
+    <div class="card">
+      <h4>🔻 跌幅榜 TOP10</h4>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>公司</th><th>代码</th><th>价格</th><th>涨跌幅</th></tr></thead>
+        <tbody id="top-losers"></tbody></table>
+      </div>
+    </div>
+    <div class="card">
+      <h4>💰 成交额 TOP10</h4>
+      <div class="tbl-wrap">
+        <table><thead><tr><th>公司</th><th>代码</th><th>成交额</th><th>换手率</th></tr></thead>
+        <tbody id="top-turnover"></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全量股票表格 + 省份筛选 -->
+  <div style="margin-top:24px;padding:16px 20px;background:#fff;border-radius:12px;border:1px solid var(--g200)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+      <span style="font-size:15px;font-weight:600;color:var(--navy)">全部股票</span>
+      <span id="market-stock-count" style="font-size:13px;color:var(--g500)">0 只</span>
+      <select id="market-province-filter" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:14px;min-width:120px">
+        <option value="all">全部省份</option>
+      </select>
+      <select id="market-sort" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:14px">
+        <option value="turnover">按成交额</option>
+        <option value="change_pct_desc">涨幅降序</option>
+        <option value="change_pct_asc">涨幅升序</option>
+        <option value="market_cap">按市值</option>
+      </select>
+      <input id="market-search" type="text" placeholder="搜索名称/代码..." style="padding:6px 12px;border-radius:6px;border:1px solid var(--g200);font-size:14px;width:200px">
+      <span id="market-showing-count" style="font-size:13px;color:var(--g500);margin-left:auto"></span>
+    </div>
+    <div id="market-legend" style="font-size:12px;color:var(--g500);margin-bottom:8px;display:flex;gap:12px">
+      <span>🔬 高新技术企业</span>
+      <span>⭐ 国家级专精特新</span>
+      <span>🏅 省级专精特新</span>
+    </div>
+    <div class="tbl-wrap" style="overflow-x:auto">
+      <table>
+        <thead><tr><th>公司</th><th>代码</th><th>省份</th><th>行业</th><th>价格</th><th>涨跌幅</th><th>成交额</th><th>市值(亿)</th><th>标签</th></tr></thead>
+        <tbody id="full-stock-table"></tbody>
+      </table>
+    </div>
+    <div id="market-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px"></div>
+  </div>
+</div>
+</div><!-- end page-market -->
+
+<!-- ═══ PAGE: 新闻舆情 ═══ -->
+<div id="page-news" style="display:none">
+<div class="section" id="news">
+  <div class="section-title"><span class="icon">📰</span>新闻舆情</div>
+  <div class="tabs" id="news-tabs">
+    <button class="tab-btn active" onclick="switchNewsTab('公司资讯')">公司资讯</button>
+    <button class="tab-btn" onclick="switchNewsTab('调研资讯')">调研资讯</button>
+  </div>
+  <div class="news-grid" id="news-list"></div>
+  <div id="news-pagination" style="margin-top:10px;display:flex;align-items:center;justify-content:center"></div>
+</div>
+</div><!-- end page-news -->
+
 <!-- ═══ PAGE: 机构评级 ═══ -->
 <div id="page-research" style="display:none">
 <div class="section" id="research">
-  <div class="section-title"><span class="icon">📝</span>机构评级
-    <span id="research-count-badge" style="font-size:12px;color:var(--g500);font-weight:400;margin-left:8px"></span>
-  </div>
-  <p style="font-size:11px;color:var(--g500);margin-bottom:12px">
+  <div class="section-title"><span class="icon">📝</span>机构评级</div>
+  <p style="font-size:12px;color:var(--g500);margin-bottom:12px">
     目标价及评级数据截至 2026-5-8，数据来源：万得/东方财富。
     <span style="color:var(--navy)">带蓝色左边框的卡片 = 有目标价数据</span>。
   </p>
   <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-    <input id="research-search" type="text" placeholder="搜索股票名称/代码..." style="padding:6px 12px;border-radius:6px;border:1px solid var(--g200);font-size:13px;width:220px">
-    <select id="research-rating" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:13px">
+    <input id="research-search" type="text" placeholder="搜索股票名称/代码..." style="padding:6px 12px;border-radius:6px;border:1px solid var(--g200);font-size:14px;width:220px">
+    <select id="research-rating" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:14px">
       <option value="all">全部评级</option>
       <option value="buy80">买入占比>80%</option>
       <option value="buy50">买入占比50-80%</option>
       <option value="buy_lt50">买入占比<50%</option>
     </select>
-    <select id="research-sort" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:13px">
+    <select id="research-sort" style="padding:6px 8px;border-radius:6px;border:1px solid var(--g200);font-size:14px">
       <option value="report_count">按评级机构数</option>
       <option value="upside_desc">按空间↓</option>
       <option value="upside_asc">按空间↑</option>
@@ -596,7 +692,7 @@ let gNewsPage = 1;
 let gProvinceFilter = 'all';  // current province filter
 
 // ── PAGE NAVIGATION ──
-const PAGE_IDS = ['home', 'market', 'news', 'executive', 'capital', 'research'];
+const PAGE_IDS = ['home', 'capital', 'executive', 'market', 'news', 'research'];
 
 function switchPage(pageId) {
   PAGE_IDS.forEach(p => {
@@ -710,12 +806,14 @@ function mergeResearchData() {
 function renderAll() {
   renderDashboard();
   renderSummary();
+  renderSummaryOpportunities();
   renderOpportunities();
   renderMarket();
   renderNews();
   renderPerformance();
   renderExecutive();
   renderCapital();
+  renderNationalSummary();
   renderResearch();
   initResearchFilters();
   initMarketFilters();
@@ -840,11 +938,14 @@ function applyProvinceFilter() {
 
   // Re-render
   renderDashboard();
+  renderSummary();
+  renderSummaryOpportunities();
   renderOpportunities();
   renderMarket();
   renderNews();
   renderExecutive();
   renderCapital();
+  renderNationalSummary();
   renderResearch();
 
   // Update URL hash
@@ -886,39 +987,58 @@ function computeOpportunities() {
   const codeSet = new Set(stocks.map(s => s.code));
 
   const typeMap = {
-    '融资需求': [],
-    '财富管理需求': [],
-    '投研服务需求': [],
-    '高管变更对接': [],
+    '股权激励综合服务': [],
+    '揽存线索': [],
+    '理财线索': [],
+    '股东减持/变现': [],
+    '股东增持线索': [],
+    '客户关系预警': [],
   };
 
   const capitalData = gCapitalData || [];
   capitalData.forEach(item => {
     if (!codeSet.has(item.code)) return;
     const cat = item.category || '';
+    const sub = item.subType || '';
     const entry = { stock_code: item.code, stock_name: item.name };
 
-    // 融资需求：股权激励/员工持股 + 质押融资
-    if (cat.includes('股权激励') || cat.includes('员工持股') || cat.includes('股票期权') || cat.includes('限制性股票') || cat.includes('质押') || cat.includes('解质')) {
-      typeMap['融资需求'].push(entry);
-    // 财富管理需求：回购/增减持/分红/理财/转让/控制权
-    } else if (cat.includes('股份回购') || cat.includes('分红') || cat.includes('派息') || cat.includes('利润分配') || cat.includes('增减持') || cat.includes('协议转让') || cat.includes('控制权') || cat.includes('委托理财') || cat.includes('理财产品') || cat.includes('可转债') || cat.includes('注销股份')) {
-      typeMap['财富管理需求'].push(entry);
+    // D 股权激励综合服务：股权激励/员工持股
+    if (cat.includes('股权激励') || cat.includes('员工持股')) {
+      typeMap['股权激励综合服务'].push(entry);
+    }
+    // A 揽存线索：股份回购 → 回购专户
+    else if (cat.includes('股份回购')) {
+      typeMap['揽存线索'].push(entry);
+    }
+    // B 理财线索：委托理财
+    else if (cat.includes('委托理财')) {
+      typeMap['理财线索'].push(entry);
+    }
+    // E 股东减持/变现：减持/减持计划/协议转让/控制权变更
+    else if ((cat.includes('增减持') && (sub.includes('减持') || sub.includes('减持计划'))) ||
+             cat.includes('协议转让') || cat.includes('控制权变更')) {
+      typeMap['股东减持/变现'].push(entry);
+    }
+    // C 股东增持线索：大股东增持（可能需配资）
+    else if (cat.includes('增减持') && sub.includes('增持')) {
+      typeMap['股东增持线索'].push(entry);
     }
   });
 
-  // 投研服务需求：研报覆盖
-  const researchData = gData.institution_research || [];
-  researchData.forEach(r => {
-    if (!codeSet.has(r.stock_code) || r.report_count <= 0) return;
-    typeMap['投研服务需求'].push({ stock_code: r.stock_code, stock_name: r.stock_name });
-  });
-
-  // 高管变更对接：高管聘任/辞职
-  let execChanges = window.__EXECUTIVE_DATA__ ? (window.__EXECUTIVE_DATA__.data || []) : (gData.executive_changes || []);
+  // F 客户关系预警：董监高变动（聘任/辞职/换届等）
+  let execChanges = [];
+  if (window.__EXECUTIVE_DATA__ && typeof window.__EXECUTIVE_DATA__ === 'object' && !Array.isArray(window.__EXECUTIVE_DATA__)) {
+    for (const key of Object.keys(window.__EXECUTIVE_DATA__)) {
+      if (key === 'date') continue;
+      const items = window.__EXECUTIVE_DATA__[key];
+      if (Array.isArray(items)) execChanges.push(...items);
+    }
+  } else {
+    execChanges = gData.executive_changes || [];
+  }
   execChanges.forEach(c => {
     if (!codeSet.has(c.stock_code)) return;
-    typeMap['高管变更对接'].push({ stock_code: c.stock_code, stock_name: c.stock_name });
+    typeMap['客户关系预警'].push({ stock_code: c.stock_code, stock_name: c.stock_name });
   });
 
   // Deduplicate
@@ -1004,19 +1124,238 @@ function renderSummary() {
     <div class="summary-metric"><div class="num">${totalTurnoverYi.toFixed(0)}亿</div><div class="lbl">总成交额</div></div>
     <div class="summary-metric"><div class="num">${concentration.toFixed(1)}%</div><div class="lbl">头部集中度</div></div>
   `;
+}
 
-  // Advice based on market data
-  let advice = '';
-  if (avgChange >= 1) {
-    advice = '市场整体上涨，情绪偏乐观，建议关注强势行业和龙头标的。';
-  } else if (avgChange >= 0) {
-    advice = '市场整体平稳，结构性机会为主，建议精选个股，控制仓位。';
-  } else if (avgChange >= -1) {
-    advice = '市场整体偏弱，建议谨慎操作，关注防御性板块。';
+// ── SUMMARY OPPORTUNITIES (首页重点关注) ──
+let _summaryOppLists = {};
+
+function renderSummaryOpportunities() {
+  const typeMap = computeOpportunities();
+  const totalCount = Object.values(typeMap).reduce((sum, arr) => sum + arr.length, 0);
+  document.getElementById('summary-opp-badge').textContent = totalCount + '家';
+
+  const typeColors = {
+    '股权激励综合服务':'#6f42c1',
+    '揽存线索':'#1a73e8',
+    '理财线索':'#0d653e',
+    '股东减持/变现':'#dc3545',
+    '股东增持线索':'#28a745',
+    '客户关系预警':'#fd7e14',
+  };
+  const typeIcons = {
+    '股权激励综合服务':'💼',
+    '揽存线索':'💰',
+    '理财线索':'📊',
+    '股东减持/变现':'📉',
+    '股东增持线索':'📈',
+    '客户关系预警':'👔',
+  };
+  const typeDescriptions = {
+    '股权激励综合服务': '股权激励草案、员工持股计划、限制性股票授予/归属/回购注销 — 行权资金归集户 + 综合服务',
+    '揽存线索': '股份回购 → 回购专户；股权激励/员工持股 → 行权资金归集户 — 募集资金/专户资金揽存',
+    '理财线索': '公司近期公告委托理财、购买理财产品 — 闲置资金配置收益凭证/理财',
+    '股东减持/变现': '减持预披露、减持实施、协议转让、控制权变更 — 股东变现需求，可推财富管理/大宗业务',
+    '股东增持线索': '大股东增持公告 — 股东对公司前景有信心且资金实力强，可能有配资需求',
+    '客户关系预警': '公司发生董监高变动 — 关键人变化需客户关系维护，防范客户流失',
+  };
+  const typeOrder = ['股权激励综合服务', '揽存线索', '理财线索', '股东减持/变现', '股东增持线索', '客户关系预警'];
+  const SHOW_COUNT = 8;
+
+  // 缓存完整列表供弹窗使用
+  _summaryOppLists = {};
+  typeOrder.forEach(type => { _summaryOppLists[type] = typeMap[type] || []; });
+
+  let html = '';
+  typeOrder.forEach(type => {
+    const items = typeMap[type] || [];
+    if (items.length === 0) return;
+    const color = typeColors[type] || 'var(--navy)';
+    const icon = typeIcons[type] || '💡';
+
+    html += `<div style="background:${color}0a;border:1px solid ${color}30;border-radius:10px;padding:14px">`;
+    html += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">`;
+    html += `<span style="font-size:16px">${icon}</span>`;
+    html += `<span style="font-size:14px;font-weight:700;color:${color}">${type}</span>`;
+    html += `<span style="font-size:11px;background:${color};color:#fff;padding:1px 6px;border-radius:8px">${items.length}家</span>`;
+    html += `</div>`;
+    html += `<div style="font-size:11px;color:var(--g500);margin-bottom:8px;padding-left:24px">${typeDescriptions[type] || ''}</div>`;
+    html += `<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    items.slice(0, SHOW_COUNT).forEach(o => {
+      html += `<span style="display:inline-flex;align-items:center;gap:3px;padding:3px 8px;background:${color}15;border-radius:5px;font-size:12px">`;
+      html += `<span style="font-weight:600;color:${color}">${o.stock_name}</span>`;
+      html += `<span style="color:var(--g500);font-size:10px">${o.stock_code}</span>`;
+      html += `</span>`;
+    });
+    if (items.length > SHOW_COUNT) {
+      html += `<span onclick="showSummaryOppList('${type}')" style="font-size:11px;color:${color};padding:3px 6px;cursor:pointer;font-weight:600" title="查看全部">+${items.length - SHOW_COUNT}家…</span>`;
+    }
+    html += `</div></div>`;
+  });
+
+  if (!html) html = '<p style="color:var(--g500);grid-column:1/-1;text-align:center">暂无重点关注机会</p>';
+  document.getElementById('summary-opportunities').innerHTML = html;
+}
+
+function showSummaryOppList(type) {
+  const fullList = _summaryOppLists[type] || [];
+  const typeColors = {
+    '股权激励综合服务':'#6f42c1', '揽存线索':'#1a73e8',
+    '理财线索':'#0d653e', '股东减持/变现':'#dc3545',
+    '股东增持线索':'#28a745', '客户关系预警':'#fd7e14',
+  };
+  const color = typeColors[type] || 'var(--navy)';
+
+  const modal = document.getElementById('stock-list-modal');
+  const modalTitle = document.getElementById('stock-list-modal-title');
+  const modalBody = document.getElementById('stock-list-modal-body');
+
+  modalTitle.textContent = type + ' - 共' + fullList.length + '家';
+  modalTitle.style.color = color;
+
+  modalBody.innerHTML = `
+    <div style="display:flex;flex-wrap:wrap;gap:8px;max-height:60vh;overflow-y:auto;padding:10px">
+      ${fullList.map(item => `
+        <div style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;background:${color}15;border-radius:6px;font-size:13px">
+          <span style="font-weight:600;color:${color}">${item.stock_name}</span>
+          <span style="color:var(--g500)">${item.stock_code}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  modal.classList.add('show');
+}
+
+// ── NATIONAL OPPORTUNITY SUMMARY (全国总览 ECharts) ──
+function renderNationalSummary() {
+  const stocks = getFilteredStocks();
+  const stockCodes = new Set(stocks.map(s => s.code));
+
+  // Build stock->province map
+  const provinceMap = {};
+  stocks.forEach(s => { provinceMap[s.code] = s.province || '未知'; });
+
+  // ── 1. 方向分布数据 ──
+  const directionCounts = {
+    '股权激励': 0, '增减持': 0, '股份回购': 0, '委托理财': 0,
+    '高管变动': 0, '股东增持': 0,
+  };
+
+  // 资本动作按子类型计数
+  const capitalData = gCapitalData || [];
+  capitalData.forEach(item => {
+    if (!stockCodes.has(item.code)) return;
+    const sub = item.subType || '';
+    if (item.category && item.category.includes('股权激励')) directionCounts['股权激励']++;
+    else if (item.category && item.category.includes('增减持') && sub.includes('增持')) directionCounts['股东增持']++;
+    else if (item.category && item.category.includes('增减持')) directionCounts['增减持']++;
+    else if (item.category && item.category.includes('股份回购')) directionCounts['股份回购']++;
+    else if (item.category && item.category.includes('委托理财')) directionCounts['委托理财']++;
+  });
+
+  // 高管变动计数
+  let execChanges = [];
+  if (window.__EXECUTIVE_DATA__ && typeof window.__EXECUTIVE_DATA__ === 'object' && !Array.isArray(window.__EXECUTIVE_DATA__)) {
+    for (const key of Object.keys(window.__EXECUTIVE_DATA__)) {
+      if (key === 'date') continue;
+      const items = window.__EXECUTIVE_DATA__[key];
+      if (Array.isArray(items)) execChanges.push(...items);
+    }
   } else {
-    advice = '市场大幅调整，建议控制风险，等待企稳信号。';
+    execChanges = gData.executive_changes || [];
   }
-  document.getElementById('summary-advice').innerHTML = `<strong>投顾建议：</strong>${advice}`;
+  execChanges.forEach(c => { if (stockCodes.has(c.stock_code)) directionCounts['高管变动']++; });
+
+  const dirEntries = Object.entries(directionCounts).filter(([_, v]) => v > 0);
+  const totalCount = dirEntries.reduce((s, [_, v]) => s + v, 0);
+  document.getElementById('nation-opp-badge').textContent = totalCount + '项';
+
+  const dirColors = {
+    '股权激励':'#6f42c1', '增减持':'#dc3545', '股份回购':'#1a73e8',
+    '委托理财':'#0d653e', '高管变动':'#fd7e14',
+  };
+  const categoryNames = Object.keys(dirColors);
+
+  // 省份×类型交叉数据（堆叠条形图）
+  const provCatData = {}; // { province: { 股权激励: n, 增减持: n, ... } }
+  const addProvItem = (prov, cat) => {
+    if (!provCatData[prov]) provCatData[prov] = {};
+    provCatData[prov][cat] = (provCatData[prov][cat] || 0) + 1;
+  };
+  capitalData.forEach(item => {
+    if (!stockCodes.has(item.code)) return;
+    const prov = provinceMap[item.code] || '未知';
+    const sub = item.subType || '';
+    if (item.category && item.category.includes('股权激励')) addProvItem(prov, '股权激励');
+    else if (item.category && item.category.includes('增减持') && sub.includes('增持')) addProvItem(prov, '股东增持');
+    else if (item.category && item.category.includes('增减持')) addProvItem(prov, '增减持');
+    else if (item.category && item.category.includes('股份回购')) addProvItem(prov, '股份回购');
+    else if (item.category && item.category.includes('委托理财')) addProvItem(prov, '委托理财');
+  });
+  execChanges.forEach(c => {
+    if (!stockCodes.has(c.stock_code)) return;
+    const prov = provinceMap[c.stock_code] || '未知';
+    addProvItem(prov, '高管变动');
+  });
+
+  // 按总数取TOP10
+  const provTotal = Object.entries(provCatData).map(([prov, cats]) => [prov, Object.values(cats).reduce((s,v) => s+v, 0)]);
+  const provSorted = provTotal.sort((a, b) => b[1] - a[1]).slice(0, 10).map(([prov]) => prov);
+
+  // 延迟绘制确保DOM布局完成
+  setTimeout(function() {
+    _drawNationalCharts(dirEntries, dirColors, categoryNames, provSorted, provCatData);
+  }, 100);
+}
+
+function _drawNationalCharts(dirEntries, dirColors, categoryNames, provSorted, provCatData) {
+  if (typeof echarts === 'undefined') return;
+  if (window._nationCharts) {
+    window._nationCharts.forEach(c => { try { c.dispose(); } catch(e){} });
+  }
+  // 图表1: 方向分布(环形图)
+  const chartDir = echarts.init(document.getElementById('chart-opp-direction'));
+  chartDir.setOption({
+    tooltip: { trigger: 'item', formatter: '{b}: {c}项 ({d}%)' },
+    legend: { orient: 'vertical', left: 'left', top: 'center', textStyle: { fontSize: 11 } },
+    series: [{
+      type: 'pie', radius: ['40%', '70%'], center: ['62%', '50%'],
+      label: { show: true, formatter: '{b}\n{d}%', fontSize: 10 },
+      data: dirEntries.length > 0 ? dirEntries.map(([name, value]) => ({
+        name, value, itemStyle: { color: dirColors[name] || '#999' }
+      })) : [{name:'暂无数据', value:1, itemStyle:{color:'#ddd'}}],
+    }]
+  });
+  // 图表2: 省份TOP10（堆叠条形图，按类型拆分）
+  const chartProv = echarts.init(document.getElementById('chart-opp-province'));
+  const seriesData = categoryNames.filter(cat => dirEntries.some(([n]) => n === cat)).map(cat => ({
+    name: cat,
+    type: 'bar',
+    stack: 'total',
+    barWidth: 16,
+    data: provSorted.slice().reverse().map(prov => (provCatData[prov] && provCatData[prov][cat]) || 0),
+    itemStyle: { color: dirColors[cat] }
+  }));
+  chartProv.setOption({
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+      formatter: function(params) {
+        let s = params[0].axisValueLabel + '<br/>';
+        params.forEach(p => { if (p.value > 0) s += p.marker + p.seriesName + ': ' + p.value + '项<br/>'; });
+        return s;
+      }
+    },
+    legend: { top: 0, textStyle: { fontSize: 10 }, itemWidth: 12, itemHeight: 8 },
+    grid: { left: 80, right: 15, top: 40, bottom: 20 },
+    xAxis: { type: 'value', splitLine: { show: false } },
+    yAxis: {
+      type: 'category',
+      data: provSorted.length > 0 ? provSorted.slice().reverse() : ['暂无数据'],
+      axisLabel: { fontSize: 11 }
+    },
+    series: seriesData.length > 0 ? seriesData : [{name:'无数据', type:'bar', stack:'total', barWidth:16, data:[0]}]
+  });
+  setTimeout(function() { chartDir.resize(); chartProv.resize(); }, 50);
+  window._nationCharts = [chartDir, chartProv];
 }
 
 // ── OPPORTUNITIES ──
@@ -1027,18 +1366,22 @@ function renderOpportunities() {
   if (totalCount === 0) { container.innerHTML = '<p style="color:var(--g500)">暂无业务机会提示</p>'; return; }
 
   const typeColors = {
-    '融资需求':'#1a73e8',
-    '财富管理需求':'#0d653e',
-    '投研服务需求':'#6f42c1',
-    '高管变更对接':'#fd7e14',
+    '股权激励综合服务':'#6f42c1',
+    '揽存线索':'#1a73e8',
+    '理财线索':'#0d653e',
+    '股东减持/变现':'#dc3545',
+    '股东增持线索':'#28a745',
+    '客户关系预警':'#fd7e14',
   };
   const typeIcons = {
-    '融资需求':'💰',
-    '财富管理需求':'📊',
-    '投研服务需求':'📝',
-    '高管变更对接':'👔',
+    '股权激励综合服务':'💼',
+    '揽存线索':'💰',
+    '理财线索':'📊',
+    '股东减持/变现':'📉',
+    '股东增持线索':'📈',
+    '客户关系预警':'👔',
   };
-  const typeOrder = ['融资需求', '财富管理需求', '投研服务需求', '高管变更对接'];
+  const typeOrder = ['股权激励综合服务', '揽存线索', '理财线索', '股东减持/变现', '股东增持线索', '客户关系预警'];
 
   let html = '';
   typeOrder.forEach(type => {
@@ -1639,6 +1982,35 @@ function capitalUrlToCninfo(url, stockCode, title) {
   return url || '#';
 }
 
+function executiveExportCSV() {
+  const items = getExecPool();
+  const noiseKw = ['重组', '重大资产', '持股计划', '期权', '配股', '增发', '分红', '利润分配', '回购', '质押', '解质', '增减持', '异常波动', '理财', '可转债',
+                   '决议公告', '决议的', '保密措施', '股票价格波动', '法定程序', '监管指引', '购买出售资产', '持续监管办法', '发行注册',
+                   '限制性股票', '股票期权', '股权激励', '提名人声明', '核查意见', '公示情况'];
+  const execKw = ['聘任', '辞职', '任职', '离任', '选举', '改选', '换届', '任命', '解聘', '代行职务', '不再担任', '补选'];
+  const filtered = items.filter(c => {
+    const title = c.title || '';
+    if (noiseKw.some(kw => title.includes(kw))) return false;
+    return execKw.some(kw => title.includes(kw));
+  });
+
+  const BOM = '﻿';
+  const headers = ['股票代码', '公司名称', '变动类型', '职位', '人员姓名', '变动原因', '公告标题', '公告日期', '状态', '原文链接'];
+  let csv = BOM + headers.join(',') + '\n';
+  filtered.forEach(c => {
+    csv += headers.map((_, i) => {
+      const fields = [c.stock_code, c.stock_name, c.change_type, c.position, c.person_name || '', c.change_reason || '', c.title || '', c.announce_date || '', c.status || '', c.url || ''];
+      let val = String(fields[i]).replace(/"/g, '""');
+      return `"${val}"`;
+    }).join(',') + '\n';
+  });
+  const blob = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '高管变动_' + (new Date().toISOString().slice(0,10)) + '.csv';
+  a.click();
+}
+
 // 移除不再需要的缓存函数
 function buildCninfoCache() {
   // 不再需要预缓存，直接跳转到巨潮个股公告页
@@ -1648,7 +2020,7 @@ function buildCninfoCache() {
 // ── CAPITAL OPERATIONS (卡片式) ──
 let gCapitalData = [];        // 全量数据（扁平化）
 let gCapitalDateMap = {};    // 按日期分组: { "2026-05-08": [...], "2026-05-07": [...] }
-let gCapitalFilters = {category:'all',star:'all', date:'all'};
+let gCapitalFilters = {category:'all', subType:'all', star:'all', date:'all'};
 let gCapitalSort = 'star';
 let gCapitalSearch = '';
 const CAPITAL_PAGE_SIZE = 12;
@@ -1724,6 +2096,13 @@ function getFilteredCapital() {
   
   let d = pool.filter(function(item) {
     if (gCapitalFilters.category !== 'all' && item.category !== gCapitalFilters.category) return false;
+    if (gCapitalFilters.subType) {
+      if (gCapitalFilters.subType !== 'all') {
+        var st = item.subType || '';
+        if (gCapitalFilters.subType === '增持' && !st.includes('增持')) return false;
+        if (gCapitalFilters.subType === '减持' && !st.includes('减持')) return false;
+      }
+    }
     if (gCapitalFilters.star !== 'all' && item.star !== parseInt(gCapitalFilters.star)) return false;
     if (gCapitalSearch) {
       var q = gCapitalSearch.toLowerCase();
@@ -1918,9 +2297,24 @@ function initCapitalFilters() {
       const filter = this.dataset.filter;
       const value = this.dataset.value;
       gCapitalFilters[filter] = value;
+      // Reset complementary filter when switching category/subType
+      if (filter === 'subType') gCapitalFilters.category = 'all';
+      if (filter === 'category') gCapitalFilters.subType = 'all';
       gCapitalPage = 1;
+      // Reset active state for all related filter groups
       document.querySelectorAll('.capital-filter-btn[data-filter="' + filter + '"]').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
+      // Also reset active for the complementary group
+      if (filter === 'subType') {
+        document.querySelectorAll('.capital-filter-btn[data-filter="category"]').forEach(b => b.classList.remove('active'));
+        const catAll = document.querySelector('.capital-filter-btn[data-filter="category"][data-value="all"]');
+        if (catAll) catAll.classList.add('active');
+      }
+      if (filter === 'category') {
+        document.querySelectorAll('.capital-filter-btn[data-filter="subType"]').forEach(b => b.classList.remove('active'));
+        const subAll = document.querySelector('.capital-filter-btn[data-filter="subType"][data-value="all"]');
+        if (subAll) subAll.classList.add('active');
+      }
       renderCapitalSection();
     });
   });
@@ -1989,10 +2383,6 @@ function renderResearch() {
   else if (gResearchFilters.sort === 'upside_asc') data.sort((a,b) => (a.upside || 999) - (b.upside || 999));
 
   // 计数
-  const allData = gData.institution_research || [];
-  const hasTargetCount = allData.filter(r => r.consensus_target !== null && r.consensus_target !== undefined && !isNaN(r.consensus_target)).length;
-  document.getElementById('research-count-badge').textContent = `共 ${data.length} 只（有目标价 ${hasTargetCount} 只 / 总计 ${allData.length} 只）`;
-
   const grid = document.getElementById('research-card-grid');
   const empty = document.getElementById('research-empty');
 
