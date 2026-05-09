@@ -370,7 +370,32 @@ tr:hover td{background:var(--ice-l)}
   .province-page-grid{grid-template-columns:repeat(3,1fr)!important}
   #chart-opp-direction,#chart-opp-province{height:250px!important}
   .summary-card>div[id^="chart-"]{height:250px!important}
-}
+
+  /* ─ Mobile: hide desktop tables, show card layouts ── */
+  .exec-tbl-desktop, .market-tbl-desktop { display: none !important; }
+
+  /* Executive mobile cards */
+  .exec-mobile-cards { display: flex; flex-direction: column; gap: 8px; }
+  .exec-card { background: #fff; border-radius: 8px; padding: 10px 12px; border: 1px solid var(--g200); box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .exec-card-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px; }
+  .exec-card-name { font-weight: 600; font-size: 14px; color: var(--navy); }
+  .exec-card-code { font-size: 11px; color: var(--g500); }
+  .exec-card-row { display: flex; align-items: flex-start; gap: 6px; font-size: 12px; color: var(--g700); line-height: 1.6; }
+  .exec-card-row .lbl { color: var(--g500); white-space: nowrap; min-width: 48px; }
+  .exec-card-row .val { flex: 1; }
+  .exec-card-url { text-align: right; margin-top: 4px; }
+  .exec-card-url a { font-size: 11px; color: var(--navy); text-decoration: none; }
+
+  /* Market mobile cards */
+  .market-mobile-cards { display: flex; flex-direction: column; gap: 6px; }
+  .mkt-card { background: #fff; border-radius: 8px; padding: 10px 12px; border: 1px solid var(--g200); box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .mkt-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .mkt-card-name { font-weight: 600; font-size: 14px; color: var(--navy); }
+  .mkt-card-code { font-size: 11px; color: var(--g500); }
+  .mkt-card-price { font-size: 18px; font-weight: 700; }
+  .mkt-card-chg { font-size: 14px; font-weight: 600; }
+  .mkt-card-meta { display: flex; gap: 12px; font-size: 12px; color: var(--g500); }
+  .mkt-card-tags { margin-top: 4px; font-size: 11px; color: var(--g500); }
 </style>
 </head>
 <body>
@@ -561,12 +586,13 @@ tr:hover td{background:var(--ice-l)}
 <div id="page-executive" style="display:none">
 <div class="section" id="executive">
   <div class="section-title"><span class="icon"></span>高管变动 <span class="badge" id="executive-count-badge">加载中</span><span style="font-size:12px;color:var(--g500);margin-left:8px">数据来源：巨潮资讯网</span><span id="exec-date-filter-container" style="margin-left:8px"></span><button onclick="executiveExportCSV()" style="margin-left:12px;padding:4px 10px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer">导出CSV</button></div>
-  <div class="tbl-wrap">
+  <div class="tbl-wrap exec-tbl-desktop">
     <table>
       <thead><tr><th>公司</th><th>代码</th><th>变动类型</th><th>职位</th><th>公告标题</th><th>公告日期</th><th>状态</th><th>原文</th></tr></thead>
       <tbody id="executive-table"></tbody>
     </table>
   </div>
+  <div id="executive-mobile-cards" class="exec-mobile-cards"></div>
   <div id="executive-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px"></div>
 </div>
 </div><!-- end page-executive -->
@@ -625,12 +651,13 @@ tr:hover td{background:var(--ice-l)}
       <span>⭐ 国家级专精特新</span>
       <span>🏅 省级专精特新</span>
     </div>
-    <div class="tbl-wrap" style="overflow-x:auto">
+    <div class="tbl-wrap market-tbl-desktop" style="overflow-x:auto">
       <table>
         <thead><tr><th>公司</th><th>代码</th><th>省份</th><th>行业</th><th>价格</th><th>涨跌幅</th><th>成交额</th><th>市值(亿)</th><th>标签</th></tr></thead>
         <tbody id="full-stock-table"></tbody>
       </table>
     </div>
+    <div id="market-mobile-cards" class="market-mobile-cards"></div>
     <div id="market-pagination" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px"></div>
   </div>
 </div>
@@ -1315,14 +1342,26 @@ function _drawNationalCharts(dirEntries, dirColors, categoryNames, provSorted, p
   if (window._nationCharts) {
     window._nationCharts.forEach(c => { try { c.dispose(); } catch(e){} });
   }
+  // 检测是否为移动设备
+  const isMobile = window.innerWidth <= 768;
   // 图表1: 方向分布(环形图)
   const chartDir = echarts.init(document.getElementById('chart-opp-direction'));
   chartDir.setOption({
     tooltip: { trigger: 'item', formatter: '{b}: {c}项 ({d}%)' },
-    legend: { orient: 'vertical', left: 'left', top: 'center', textStyle: { fontSize: 11 } },
+    legend: {
+      orient: isMobile ? 'horizontal' : 'vertical',
+      left: isMobile ? 'center' : 'left',
+      bottom: isMobile ? 0 : 'auto',
+      top: isMobile ? 'auto' : 'center',
+      textStyle: { fontSize: isMobile ? 10 : 11 }
+    },
     series: [{
-      type: 'pie', radius: ['40%', '70%'], center: ['62%', '50%'],
-      label: { show: true, formatter: '{b}\n{d}%', fontSize: 10 },
+      type: 'pie', radius: ['40%', '70%'], center: isMobile ? ['50%', '45%'] : ['62%', '50%'],
+      label: {
+        show: !isMobile,
+        formatter: '{b}\n{d}%',
+        fontSize: 10
+      },
       data: dirEntries.length > 0 ? dirEntries.map(([name, value]) => ({
         name, value, itemStyle: { color: dirColors[name] || '#999' }
       })) : [{name:'暂无数据', value:1, itemStyle:{color:'#ddd'}}],
@@ -1358,9 +1397,23 @@ function _drawNationalCharts(dirEntries, dirColors, categoryNames, provSorted, p
   });
   setTimeout(function() { chartDir.resize(); chartProv.resize(); }, 50);
   window._nationCharts = [chartDir, chartProv];
-  // Mobile: auto-resize charts on orientation change / resize
+  // Mobile: auto-resize charts and re-configure on orientation change
   window.addEventListener('resize', function() {
-    if (window._nationCharts) window._nationCharts.forEach(function(c) { c.resize(); });
+    if (!window._nationCharts) return;
+    const isMob = window.innerWidth <= 768;
+    chartDir.setOption({
+      legend: {
+        orient: isMob ? 'horizontal' : 'vertical',
+        left: isMob ? 'center' : 'left',
+        bottom: isMob ? 0 : 'auto',
+        top: isMob ? 'auto' : 'center'
+      },
+      series: [{
+        center: isMob ? ['50%', '45%'] : ['62%', '50%'],
+        label: { show: !isMob }
+      }]
+    });
+    window._nationCharts.forEach(function(c) { c.resize(); });
   });
 }
 
@@ -1596,6 +1649,32 @@ function renderMarket() {
       <td style="font-size:12px">${icons(s)}</td>
     </tr>`;
   }).join('');
+
+  // Mobile cards
+  const mktCardHtml = pageData.map(s => {
+    const changeColor = s.change_pct >= 0 ? 'text-up' : 'text-down';
+    const changePrefix = s.change_pct >= 0 ? '+' : '';
+    return `<div class="mkt-card">
+      <div class="mkt-card-top">
+        <div>
+          <span class="mkt-card-name">${s.name}</span>
+          <span class="mkt-card-code">${s.code}</span>
+        </div>
+        <div style="text-align:right">
+          <div class="mkt-card-price" style="font-family:Arial">${s.price > 0 ? s.price.toFixed(2) : '-'}</div>
+          <div class="mkt-card-chg ${changeColor}" style="font-family:Arial">${s.price > 0 ? changePrefix+s.change_pct.toFixed(2)+'%' : '-'}</div>
+        </div>
+      </div>
+      <div class="mkt-card-meta">
+        <span>${s.province||'-'}</span>
+        <span>${s.industry||'-'}</span>
+        <span>成交额 ${(s.turnover > 1e8 ? (s.turnover/1e8).toFixed(2)+'亿' : (s.turnover/1e4).toFixed(0)+'万')}</span>
+        <span>市值 ${s.market_cap > 0 ? s.market_cap.toFixed(1)+'亿' : '-'}</span>
+      </div>
+      ${icons(s) ? '<div class="mkt-card-tags">' + icons(s) + '</div>' : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('market-mobile-cards').innerHTML = mktCardHtml;
 
   // 分页控件
   let pagHtml = '';
@@ -1929,6 +2008,7 @@ function renderExecutive() {
   const container = document.getElementById('executive-table');
   if (total === 0) {
     container.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--g500)">暂无高管变动数据</td></tr>';
+    document.getElementById('executive-mobile-cards').innerHTML = '<p style="text-align:center;color:var(--g500);padding:20px">暂无高管变动数据</p>';
     document.getElementById('executive-pagination').innerHTML = '';
     return;
   }
@@ -1953,6 +2033,26 @@ function renderExecutive() {
     });
   });
   container.innerHTML = html;
+
+  // Mobile cards
+  let cardHtml = '';
+  pageData.forEach(comp => {
+    comp.changes.forEach(c => {
+      const changeTag = c.change_type === '辞职' ? 'tag-danger' : c.change_type === '聘任' ? 'tag-success' : 'tag-navy';
+      cardHtml += `<div class="exec-card">
+        <div class="exec-card-head">
+          <span class="exec-card-name">${comp.name}</span>
+          <span class="exec-card-code">${comp.code}</span>
+          <span class="tag ${changeTag}" style="margin-left:auto">${c.change_type || '-'}</span>
+        </div>
+        <div class="exec-card-row"><span class="lbl">职位</span><span class="val">${c.position || '-'}</span></div>
+        <div class="exec-card-row"><span class="lbl">公告</span><span class="val" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${c.title||''}">${c.title || '-'}</span></div>
+        <div class="exec-card-row"><span class="lbl">日期</span><span class="val">${c.announce_date}</span></div>
+        ${c.url ? '<div class="exec-card-url"><a href="' + execUrlToCninfo(c.url, comp.code, c.title) + '" target="_blank">查看原文 &rarr;</a></div>' : ''}
+      </div>`;
+    });
+  });
+  document.getElementById('executive-mobile-cards').innerHTML = cardHtml;
 
   // 分页控件
   let pagHtml = `<span style="font-size:12px;color:var(--g500);margin-right:8px">共 ${total} 家公司</span>`;
