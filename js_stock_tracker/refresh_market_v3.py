@@ -5,8 +5,9 @@
 """
 import json, requests, time
 from datetime import datetime
+from pathlib import Path
 
-DATA_JS_PATH = r"D:\21210\华泰财富研究-openclaw\js_stock_tracker\data.js"
+DATA_JS_PATH = Path(__file__).parent.parent / "data.js"
 
 def load():
     with open(DATA_JS_PATH, 'r', encoding='utf-8') as f:
