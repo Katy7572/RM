@@ -357,6 +357,9 @@ tr:hover td{background:var(--ice-l)}
   .footer{font-size:12px;padding:16px}
 }
 
+/* ─ Mobile cards: hidden on desktop ── */
+.exec-mobile-cards, .market-mobile-cards { display: none; }
+
 @media(max-width:480px){
   .dashboard{grid-template-columns:repeat(2,1fr);gap:6px;padding:0 8px}
   .stat-card .icon{font-size:18px}
@@ -373,9 +376,8 @@ tr:hover td{background:var(--ice-l)}
 
   /* ─ Mobile: hide desktop tables, show card layouts ── */
   .exec-tbl-desktop, .market-tbl-desktop { display: none !important; }
-
-  /* Executive mobile cards */
   .exec-mobile-cards { display: flex; flex-direction: column; gap: 8px; }
+  .market-mobile-cards { display: flex; flex-direction: column; gap: 6px; }
   .exec-card { background: #fff; border-radius: 8px; padding: 10px 12px; border: 1px solid var(--g200); box-shadow: 0 1px 3px rgba(0,0,0,.04); }
   .exec-card-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px; }
   .exec-card-name { font-weight: 600; font-size: 14px; color: var(--navy); }
@@ -387,7 +389,6 @@ tr:hover td{background:var(--ice-l)}
   .exec-card-url a { font-size: 11px; color: var(--navy); text-decoration: none; }
 
   /* Market mobile cards */
-  .market-mobile-cards { display: flex; flex-direction: column; gap: 6px; }
   .mkt-card { background: #fff; border-radius: 8px; padding: 10px 12px; border: 1px solid var(--g200); box-shadow: 0 1px 3px rgba(0,0,0,.04); }
   .mkt-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
   .mkt-card-name { font-weight: 600; font-size: 14px; color: var(--navy); }
