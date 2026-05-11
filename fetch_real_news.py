@@ -14,6 +14,13 @@ import akshare as ak
 from datetime import datetime
 from typing import Dict, List
 
+from pathlib import Path
+
+# data.js / news_data.js 路径：优先脚本同级目录，不存在则用上一级（适配本地和 GitHub Actions）
+_script_dir = Path(__file__).resolve().parent
+DATA_JS_PATH = _script_dir / "data.js" if (_script_dir / "data.js").exists() else _script_dir.parent / "data.js"
+NEWS_JS_PATH = _script_dir / "news_data.js" if (_script_dir / "news_data.js").exists() else _script_dir.parent / "news_data.js"
+
 
 # ============================================================
 # 配置区：需要跟踪的江苏上市公司代码列表（6位纯数字）
@@ -233,7 +240,7 @@ def main():
     print('=' * 50)
 
     # 优先从 data.js 提取股票代码
-    codes = load_existing_codes('data.js')
+    codes = load_existing_codes(str(DATA_JS_PATH))
     if not codes:
         print('  未提取到股票代码，使用默认列表')
         codes = JIANGSU_CODES
@@ -289,7 +296,7 @@ def main():
     js_content = f'// 新闻舆情真实数据 - 自动生成于 {datetime.now().strftime("%Y-%m-%d %H:%M")}\n'
     js_content += f'window.__NEWS_DATA__ = {json.dumps(output, ensure_ascii=False, indent=2)};\n'
 
-    output_file = 'news_data.js'
+    output_file = str(NEWS_JS_PATH)
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(js_content)
 
@@ -299,7 +306,7 @@ def main():
     # 同时更新 data.js 中的 news 部分
     print('\n[可选] 更新 data.js 中的 news 数据...')
     try:
-        with open('data.js', 'r', encoding='utf-8') as f:
+        with open(str(DATA_JS_PATH), 'r', encoding='utf-8') as f:
             content = f.read()
         m = re.search(r'window\.__STOCK_DATA__\s*=\s*(\{.*\})\s*;', content, re.DOTALL)
         if m:
@@ -308,7 +315,7 @@ def main():
             data['timestamp'] = datetime.now().isoformat()
 
             new_content = f'window.__STOCK_DATA__ = {json.dumps(data, ensure_ascii=False)};\n'
-            with open('data.js', 'w', encoding='utf-8') as f:
+            with open(str(DATA_JS_PATH), 'w', encoding='utf-8') as f:
                 f.write(new_content)
             print('[OK] 已更新 data.js 中的 news 部分')
         else:
