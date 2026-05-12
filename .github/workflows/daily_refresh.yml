@@ -37,6 +37,7 @@ jobs:
         working-directory: js_stock_tracker
 
       - name: 刷新新闻舆情
+        continue-on-error: true
         run: python fetch_real_news.py
         working-directory: js_stock_tracker
 
