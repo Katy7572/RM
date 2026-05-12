@@ -36,6 +36,10 @@ jobs:
         run: python refresh_market_v3.py
         working-directory: js_stock_tracker
 
+      - name: 刷新新闻舆情
+        run: python fetch_real_news.py
+        working-directory: js_stock_tracker
+
       - name: 检查变更
         id: diff
         run: |
