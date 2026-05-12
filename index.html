@@ -1784,7 +1784,7 @@ function renderNews() {
                      '回购','注销股份','委托理财','理财产品','质押','解质',
                      '协议转让','控制权','分红','派息','利润分配','送股','转增','可转债'];
 
-  const allowedTypes = ['公司资讯', '调研资讯'];
+  const allowedTypes = ['公司资讯', '调研信息', '研报资讯', '市场快讯', '政策信息'];
   let filteredNews = news.filter(n => {
     if (!allowedTypes.includes(n.type)) return false;
     // 过滤资本动作关键词
@@ -1809,7 +1809,7 @@ function renderNews() {
   const pageData = filtered.slice(start, start + NEWS_PAGE_SIZE);
 
   container.innerHTML = pageData.map(n => {
-    const badgeClass = {'公司资讯':'tag-navy','调研资讯':'tag-gold'}[n.type] || 'tag-navy';
+    const badgeClass = {'公司资讯':'tag-navy','调研信息':'tag-gold','研报资讯':'tag-gold','市场快讯':'tag-navy','政策信息':'tag-navy'}[n.type] || 'tag-navy';
     const badgeText = n.type;
     const sentimentClass = {'positive':'tag-success','neutral':'tag-navy','negative':'tag-danger'}[n.sentiment] || 'tag-navy';
     const sentimentText = {'positive':'利好','neutral':'中性','negative':'利空'}[n.sentiment] || '';
@@ -2293,13 +2293,35 @@ function renderCapitalSection() {
   renderCapitalCards(data);
 }
 
+function groupByCapitalCompany(data) {
+  const groups = {};
+  const order = [];
+  data.forEach(item => {
+    const key = item.code + '|' + item.category;
+    if (!groups[key]) { groups[key] = []; order.push(key); }
+    groups[key].push(item);
+  });
+  return order.map(k => {
+    const g = groups[k];
+    let maxStar = 0, latestDate = '', count = g.length, code = g[0].code, name = g[0].name;
+    let anyClaimed = false, claimDept = '';
+    g.forEach(it => {
+      if (it.star > maxStar) maxStar = it.star;
+      if (it.date > latestDate) latestDate = it.date;
+      if (it.claimed) { anyClaimed = true; claimDept = it.claimDept; }
+    });
+    return { code, name, star: maxStar, date: latestDate, count, items: g, claimed: anyClaimed, claimDept };
+  });
+}
+
 function renderCapitalStats(data) {
-  const total = data.length;
-  const star4 = data.filter(d => d.star === 4).length;
-  const star3 = data.filter(d => d.star === 3).length;
-  const star2 = data.filter(d => d.star === 2).length;
+  const groups = groupByCapitalCompany(data);
+  const total = groups.length;
+  const star4 = groups.filter(d => d.star === 4).length;
+  const star3 = groups.filter(d => d.star === 3).length;
+  const star2 = groups.filter(d => d.star === 2).length;
   const html =
-    '<div class="capital-stat total"><div class="num">' + total + '</div><div class="lbl">总条数</div></div>' +
+    '<div class="capital-stat total"><div class="num">' + total + '</div><div class="lbl">总家数</div></div>' +
     '<div class="capital-stat high"><div class="num">' + star4 + '</div><div class="lbl">4星高价值</div></div>' +
     '<div class="capital-stat mv"><div class="num">' + star3 + '</div><div class="lbl">3星一般关注</div></div>' +
     '<div class="capital-stat"><div class="num">' + star2 + '</div><div class="lbl">2星常规</div></div>';
@@ -2325,33 +2347,40 @@ function renderCapitalCards(data) {
   }
   empty.style.display = 'none';
 
-  // 分页
-  const total = data.length;
+  // 先按公司+分类聚合
+  const groups = groupByCapitalCompany(data);
+  const total = groups.length;
   const totalPages = Math.ceil(total / CAPITAL_PAGE_SIZE);
   if (gCapitalPage > totalPages) gCapitalPage = totalPages || 1;
   const start = (gCapitalPage - 1) * CAPITAL_PAGE_SIZE;
-  const pageData = data.slice(start, start + CAPITAL_PAGE_SIZE);
+  const pageGroups = groups.slice(start, start + CAPITAL_PAGE_SIZE);
 
-  const html = pageData.map((item, idx) => {
-    const globalIdx = start + idx;
-    return '<div class="capital-card star-' + item.star + '" onclick="showCapitalDetail(' + globalIdx + ')">' +
+  const html = pageGroups.map(g => {
+    const itemsHtml = g.items.map(it =>
+      '<div class="capital-card-summary">' + it.summary + '</div>'
+    ).join('');
+    const badgeHtml = g.count > 1
+      ? '<span class="badge" style="background:var(--ice);color:var(--navy);margin-left:8px;font-size:11px;padding:2px 6px;border-radius:8px">' + g.count + ' 条公告</span>'
+      : '';
+    return '<div class="capital-card star-' + g.star + '" onclick="showCapitalDetailGroup(\'' + g.code + '\',\'' + g.items[0].category + '\')">' +
       '<div class="capital-card-header">' +
-        '<span class="capital-card-name">' + item.name + '</span>' +
-        capitalStarBadge(item.star) +
-        '<span class="capital-card-code">' + item.code + '</span>' +
+        '<span class="capital-card-name">' + g.name + '</span>' +
+        capitalStarBadge(g.star) +
+        badgeHtml +
+        '<span class="capital-card-code">' + g.code + '</span>' +
       '</div>' +
       '<div class="capital-card-tags">' +
-        '<span class="tag">' + item.date + '</span>' +
-        '<span class="tag cat">' + item.category + '</span>' +
-        '<span class="tag">' + item.subType + '</span>' +
+        '<span class="tag">' + g.date + '</span>' +
+        '<span class="tag cat">' + g.items[0].category + '</span>' +
+        '<span class="tag">' + g.items[0].subType + '</span>' +
       '</div>' +
-      '<div class="capital-card-summary">' + item.summary + '</div>' +
+      itemsHtml +
     '</div>';
   }).join('');
   grid.innerHTML = html;
 
   // 分页控件
-  let pagHtml = `<span style="font-size:12px;color:var(--g500);margin-right:8px">共 ${total} 条</span>`;
+  let pagHtml = `<span style="font-size:12px;color:var(--g500);margin-right:8px">共 ${total} 家</span>`;
   if (totalPages > 1) {
     pagHtml += `<button onclick="capitalGoPage(1)" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gCapitalPage===1?'disabled':''}>&laquo;</button>`;
     pagHtml += `<button onclick="capitalGoPage(${gCapitalPage-1})" style="padding:4px 10px;border:1px solid var(--g200);border-radius:4px;background:#fff;cursor:pointer;font-size:12px" ${gCapitalPage===1?'disabled':''}>&lsaquo;</button>`;
@@ -2372,23 +2401,32 @@ function capitalGoPage(p) {
   document.getElementById('capital').scrollIntoView({behavior:'smooth'});
 }
 
-function showCapitalDetail(idx) {
+function showCapitalDetailGroup(code, category) {
   const data = getFilteredCapital();
-  const item = data[idx];
-  if (!item) return;
-  document.getElementById('capital-modal-title').textContent = item.name + ' - ' + item.subType;
-  const linkHtml = item.url ? '<a href="' + capitalUrlToCninfo(item.url, item.code, item.summary) + '" target="_blank" style="color:var(--navy)">查看原文公告</a>' : '无';
-  document.getElementById('capital-modal-body').innerHTML =
-    '<div class="capital-detail-row"><div class="lbl">证券代码</div><div class="val">' + item.code + '</div></div>' +
-    '<div class="capital-detail-row"><div class="lbl">城市</div><div class="val">' + (item.city || '未知') + '</div></div>' +
-    '<div class="capital-detail-row"><div class="lbl">商机分类</div><div class="val">' + item.category + ' / ' + item.subType + '</div></div>' +
-    '<div class="capital-detail-row"><div class="lbl">机会等级</div><div class="val">' + capitalStarBadge(item.star) + '</div></div>' +
-    '<div class="capital-detail-row"><div class="lbl">公告日期</div><div class="val">' + item.date + '</div></div>' +
-    '<div class="capital-detail-row"><div class="lbl">事件概述</div><div class="val">' + item.summary + '</div></div>' +
-    '<div class="capital-detail-row"><div class="lbl">业务方向</div><div class="val">' + item.direction + '</div></div>' +
-    '<div class="capital-detail-row"><div class="lbl">原文链接</div><div class="val">' + linkHtml + '</div></div>';
+  const groups = groupByCapitalCompany(data);
+  const g = groups.find(gr => gr.code === code && gr.items[0].category === category);
+  if (!g) return;
+  document.getElementById('capital-modal-title').textContent = g.name + ' (' + g.code + ')';
+  const firstItem = g.items[0];
+  let html = '<div class="capital-detail-row"><div class="lbl">证券代码</div><div class="val">' + g.code + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">城市</div><div class="val">' + (firstItem.city || '未知') + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">商机分类</div><div class="val">' + firstItem.category + ' / ' + firstItem.subType + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">机会等级</div><div class="val">' + capitalStarBadge(g.star) + '</div></div>' +
+    '<div class="capital-detail-row"><div class="lbl">关联公告</div><div class="val">' + g.count + ' 条</div></div>' +
+    '<hr style="border:none;border-top:1px dashed var(--g200);margin:10px 0">';
+  g.items.forEach((it, i) => {
+    const linkHtml = it.url ? '<a href="' + capitalUrlToCninfo(it.url, it.code, it.summary) + '" target="_blank" style="color:var(--navy)">查看原文</a>' : '';
+    html += '<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed var(--g200)">' +
+      '<div class="lbl" style="font-size:11px;margin-bottom:2px">' + it.date + ' | ' + it.subType + '</div>' +
+      '<div class="val">' + it.summary.replace(/<[^>]+>/g, '') + '</div>' +
+      (linkHtml ? '<div style="margin-top:3px;font-size:12px">' + linkHtml + '</div>' : '') +
+      '</div>';
+  });
+  html += '<div class="capital-detail-row"><div class="lbl">业务方向</div><div class="val">' + firstItem.direction + '</div></div>';
+  document.getElementById('capital-modal-body').innerHTML = html;
   document.getElementById('capital-modal').classList.add('show');
 }
+function showCapitalDetail(idx) { const data = getFilteredCapital(); showCapitalDetailGroup(data[idx].code, data[idx].category); }
 
 function closeCapitalModal() {
   document.getElementById('capital-modal').classList.remove('show');
