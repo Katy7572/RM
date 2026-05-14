@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
 """
-腾讯财经行情刷新 v3 - 字段映射已验证
-[3]=最新价, [32]=涨跌幅%, [6]=成交量(手), [37]=成交额(万元), [44]=总市值(亿元)
+全A股行情刷新 - 使用 akshare (东方财富数据源)
+替换原腾讯财经API，解决GitHub Actions上网络不稳定的问题
 """
-import json, requests, time
+import json, sys, time
 from datetime import datetime
 from pathlib import Path
 
-DATA_JS_PATH = Path(__file__).parent.parent / "data.js"
+try:
+    import akshare as ak
+except ImportError:
+    print("请先安装 akshare: pip install akshare")
+    sys.exit(1)
+
+_script_dir = Path(__file__).resolve().parent
+DATA_JS_PATH = _script_dir / "data.js" if (_script_dir / "data.js").exists() else _script_dir.parent / "data.js"
+
 
 def load():
     with open(DATA_JS_PATH, 'r', encoding='utf-8') as f:
@@ -18,35 +26,38 @@ def load():
         if content[i] == ';': e = i; break
     return json.loads(content[s:e])
 
-def fetch(codes):
-    prefixed = ','.join([(f"sh{c}" if c[0] in '69' else f"sz{c}") for c in codes])
+
+def fetch_all_quotes():
+    """从东方财富拉取全A股实时行情"""
+    print("  正在拉取全A股行情数据...")
     try:
-        resp = requests.get(f"https://qt.gtimg.cn/q={prefixed}", timeout=30)
-        resp.encoding = 'gbk'
+        df = ak.stock_zh_a_spot_em()
+        if df is None or df.empty:
+            print("  ERROR: akshare 返回空数据")
+            return {}
+        print(f"  拉取到 {len(df)} 条行情")
         quotes = {}
-        for line in resp.text.strip().split(';'):
-            line = line.strip()
-            if 'v_' not in line: continue
-            parts = line.split('="')
-            if len(parts) != 2: continue
-            code = parts[0].replace('v_','').replace('sh','').replace('sz','')
-            f = parts[1].rstrip('"').split('~')
-            if len(f) < 46:
+        for _, row in df.iterrows():
+            code = str(row.get('代码', '')).strip()
+            if not code:
                 continue
+            # 统一去除 .SH/.SZ/.BJ 后缀
+            clean_code = code.replace('.SH', '').replace('.SZ', '').replace('.BJ', '')
             try:
-                quotes[code] = {
-                    'price': float(f[3]) or 0,
-                    'change_pct': float(f[32]) or 0,
-                    'volume': float(f[6]) * 100 if f[6] else 0,
-                    'turnover': float(f[37]) * 10000 if f[37] else 0,  # 万元->元
-                    'market_cap': float(f[44]) if f[44] else 0,  # 亿元
+                quotes[clean_code] = {
+                    'price': float(row.get('最新价', 0)) or 0,
+                    'change_pct': float(row.get('涨跌幅', 0)) or 0,
+                    'volume': float(row.get('成交量', 0)) or 0,  # 手
+                    'turnover': float(row.get('成交额', 0)) or 0,  # 元
+                    'market_cap': float(row.get('总市值', 0)) or 0,  # 亿元
                 }
-            except (ValueError, IndexError):
+            except (ValueError, TypeError):
                 continue
         return quotes
     except Exception as e:
-        print(f'Error: {e}')
+        print(f"  ERROR: {e}")
         return {}
+
 
 def save(data, count):
     today = datetime.now()
@@ -56,7 +67,6 @@ def save(data, count):
     data['date'] = date_str
     if 'daily_summary' in data:
         data['daily_summary']['date'] = date_str
-        # 重新计算涨跌统计
         stocks = data.get('stocks', [])
         data['daily_summary']['total_stocks'] = len(stocks)
         data['daily_summary']['up_count'] = sum(1 for s in stocks if s.get('change_pct', 0) > 0)
@@ -67,23 +77,18 @@ def save(data, count):
         f.write(f"window.__STOCK_DATA__ = {json.dumps(data, ensure_ascii=False)};\n")
     return count
 
+
 def main():
-    print("腾讯财经行情刷新 v3")
+    print("全A股行情刷新 (akshare/东方财富)")
     data = load()
     stocks = data.get('stocks', [])
-    codes = [s['code'] for s in stocks if s.get('code')]
-    print(f"共 {len(codes)} 只股票")
+    print(f"共 {len(stocks)} 只股票")
 
-    all_q = {}
-    bs = 300
-    for i in range(0, len(codes), bs):
-        batch = codes[i:i+bs]
-        n = i//bs + 1
-        total = (len(codes)-1)//bs + 1
-        print(f"  批次 {n}/{total}: {len(batch)} 只", flush=True)
-        q = fetch(batch)
-        all_q.update(q)
-        if i + bs < len(codes): time.sleep(0.3)
+    # 拉取全A股行情
+    all_q = fetch_all_quotes()
+    if not all_q:
+        print("行情数据拉取失败，保持原有数据不变")
+        sys.exit(1)
 
     upd = 0
     for s in stocks:
@@ -98,6 +103,7 @@ def main():
 
     save(data, upd)
     print(f"\n完成! 更新 {upd}/{len(stocks)} 只, 日期 {data['date']}")
+
 
 if __name__ == '__main__':
     main()
