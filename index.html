@@ -256,6 +256,7 @@ tr:hover td{background:var(--ice-l)}
 .capital-card .tag.cat{background:var(--ice);color:var(--navy)}
 .capital-card-summary{font-size:12px;color:var(--g700);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .capital-card-summary .hl{color:#C00000;font-weight:600}
+.capital-card-summaries{max-height:3.2em;overflow:hidden}
 .capital-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center}
 .capital-modal.show{display:flex}
 .capital-modal-box{background:#fff;border-radius:12px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,.2)}
@@ -430,37 +431,13 @@ tr:hover td{background:var(--ice-l)}
   <button class="clear-btn" onclick="filterProvince('all')" style="margin-left:auto">× 清除筛选</button>
 </div>
 
-<!-- ═══ DASHBOARD STATS ═══ -->
-<div class="dashboard" id="overview">
-  <div class="stat-card">
-    <div class="icon">📊</div>
-    <div class="value" id="stat-total">--</div>
-    <div class="label">覆盖上市公司</div>
-  </div>
-  <div class="stat-card up">
-    <div class="icon">📈</div>
-    <div class="value" id="stat-up">--</div>
-    <div class="label">上涨</div>
-  </div>
-  <div class="stat-card down">
-    <div class="icon">📉</div>
-    <div class="value" id="stat-down">--</div>
-    <div class="label">下跌</div>
-  </div>
-  <div class="stat-card">
-    <div class="icon">💡</div>
-    <div class="value" id="stat-opportunity">--</div>
-    <div class="label">业务机会</div>
-  </div>
-</div>
 
 <!-- ═══ HOMEPAGE: SUMMARY + PROVINCE ═══ -->
 <div class="section" id="summary" style="max-width:1400px">
   <!-- 每日研判 -->
   <div class="section-title" style="margin-bottom:10px"><span class="icon"></span>每日研判</div>
   <div class="summary-card" style="padding:16px 20px;margin-bottom:20px">
-    <div id="summary-overview" style="font-size:14px;color:var(--g700);line-height:1.8;margin-bottom:14px"></div>
-    <div class="card-grid" style="grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:8px" id="summary-metrics"></div>
+    <div id="summary-overview" style="font-size:14px;color:var(--g700);line-height:1.8"></div>
   </div>
   <!-- 重点关注业务机会 -->
   <div class="section-title" style="margin-bottom:10px;margin-top:20px"><span class="icon">💡</span>重点关注业务机会 <span class="badge" id="summary-opp-badge">--</span></div>
@@ -669,8 +646,9 @@ tr:hover td{background:var(--ice-l)}
 <div class="section" id="news">
   <div class="section-title"><span class="icon">📰</span>新闻舆情</div>
   <div class="tabs" id="news-tabs">
-    <button class="tab-btn active" onclick="switchNewsTab('公司资讯')">公司资讯</button>
-    <button class="tab-btn" onclick="switchNewsTab('调研资讯')">调研资讯</button>
+    <button class="tab-btn active" onclick="switchNewsTab('all')">全部</button>
+    <button class="tab-btn" onclick="switchNewsTab('调研信息')">调研信息</button>
+    <button class="tab-btn" onclick="switchNewsTab('市场快讯')">市场快讯</button>
   </div>
   <div class="news-grid" id="news-list"></div>
   <div id="news-pagination" style="margin-top:10px;display:flex;align-items:center;justify-content:center"></div>
@@ -716,7 +694,7 @@ tr:hover td{background:var(--ice-l)}
 <script>
 // ── GLOBAL DATA ──
 let gData = null;
-let gCurrentNewsTab = '公司资讯';
+let gCurrentNewsTab = 'all';
 const NEWS_PAGE_SIZE = 12;  // 每页约3行（每行4个卡片）
 let gNewsPage = 1;
 let gProvinceFilter = 'all';  // current province filter
@@ -988,27 +966,8 @@ function applyProvinceFilter() {
 
 // ── DASHBOARD ──
 function renderDashboard() {
-  const stocks = getFilteredStocks();
   const s = gData.daily_summary;
-
-  // If filtering by province, compute stats from filtered data
-  if (gProvinceFilter === 'all') {
-    document.getElementById('currentDate').textContent = '数据日期：' + s.date;
-    document.getElementById('stat-total').textContent = s.total_stocks;
-    document.getElementById('stat-up').textContent = s.up_count;
-    document.getElementById('stat-down').textContent = s.down_count;
-  } else {
-    document.getElementById('currentDate').textContent = '数据日期：' + s.date + ' | 筛选：' + gProvinceFilter;
-    document.getElementById('stat-total').textContent = stocks.length;
-    const up = stocks.filter(x => x.change_pct > 0).length;
-    const down = stocks.filter(x => x.change_pct < 0).length;
-    document.getElementById('stat-up').textContent = up;
-    document.getElementById('stat-down').textContent = down;
-  }
-
-  // Compute opp/risk counts dynamically
-  const opps = computeOpportunities();
-  document.getElementById('stat-opportunity').textContent = Object.values(opps).reduce((sum, arr) => sum + arr.length, 0);
+  document.getElementById('currentDate').textContent = '数据日期：' + (s ? s.date : '--');
 }
 
 // Compute opportunities dynamically (shared by dashboard + opportunities section)
@@ -1120,40 +1079,77 @@ function renderSummary() {
   const industries = Object.entries(industryMap).map(([name, d]) => ({
     name, count: d.count, upRate: d.up / d.count * 100, avgChange: d.totalChange / d.count
   })).sort((a, b) => b.avgChange - a.avgChange);
-  const hotIndustries = industries.filter(i => i.avgChange > 0).slice(0, 3);
-  const coldIndustries = industries.filter(i => i.avgChange < 0).slice(-3).reverse();
+  const hotIndustries = industries.filter(i => i.avgChange > 0).slice(0, 5);
+  const coldIndustries = industries.filter(i => i.avgChange < 0).slice(-5).reverse();
 
-  // 生成总结文字
-  const changeColor = avgChange >= 0 ? 'var(--danger)' : 'var(--success)';
-  const changeText = avgChange >= 0 ? '偏强' : '偏弱';
-  const upPct = (up.length / stocks.length * 100).toFixed(1);
-  const downPct = (down.length / stocks.length * 100).toFixed(1);
-  const ds = gData.daily_summary || {};
+  // 生成行情点评描述
+  // 上涨家数范围描述
+  let upDesc, downDesc;
+  const upN = up.length, downN = down.length;
+  if (upN > 4000) upDesc = '超4000家上涨';
+  else if (upN > 3000) upDesc = '超3000家上涨';
+  else if (upN > 2000) upDesc = '超2000家上涨';
+  else if (upN > 1000) upDesc = '超1000家上涨';
+  else if (upN > 500) upDesc = '超500家上涨';
+  else upDesc = '不足500家上涨';
+
+  if (downN > 4000) downDesc = '超4000家下跌';
+  else if (downN > 3000) downDesc = '超3000家下跌';
+  else if (downN > 2000) downDesc = '超2000家下跌';
+  else if (downN > 1000) downDesc = '超1000家下跌';
+  else if (downN > 500) downDesc = '超500家下跌';
+  else downDesc = '不足500家下跌';
+
+  // 涨跌停范围描述
+  let limitDesc = '';
+  if (limitUp.length > 50) limitDesc += '涨停超50家，赚钱效应较好';
+  else if (limitUp.length > 20) limitDesc += '涨停超20家';
+  else if (limitUp.length > 5) limitDesc += '涨停不足10家';
+  else limitDesc += '涨停不足5家';
+  if (limitDown.length > 20) limitDesc += '，跌停超20家，分化明显';
+  else if (limitDown.length > 5) limitDesc += '，跌停不足10家';
+
+  // 平均涨跌幅定性
+  let avgDesc;
+  if (avgChange >= 0.5) avgDesc = '整体偏强';
+  else if (avgChange >= 0.1) avgDesc = '小幅偏强';
+  else if (avgChange >= -0.1) avgDesc = '基本持平';
+  else if (avgChange >= -0.5) avgDesc = '小幅偏弱';
+  else avgDesc = '整体偏弱';
+
+  // 风格分化定性
+  let styleDesc;
+  if (Math.abs(largeAvg - smallAvg) < 0.3) styleDesc = '大小盘表现较为一致';
+  else if (largeAvg > smallAvg) styleDesc = '大盘股表现优于小盘股，价值风格占优';
+  else styleDesc = '小盘股表现优于大盘股，成长风格活跃';
+
+  // 成交集中度定性
+  let concDesc;
+  if (concentration > 15) concDesc = '头部个股成交集中，资金抱团迹象明显';
+  else if (concentration > 10) concDesc = '头部个股成交相对集中';
+  else concDesc = '成交分布较为分散';
+
+  // 行业热度定性
+  let industryDesc = '';
+  if (hotIndustries.length > 0) {
+    industryDesc = `涨幅居前行业——${hotIndustries.map(h => h.name).join('、')}。`;
+    if (coldIndustries.length > 0) {
+      industryDesc += `跌幅居前行业——${coldIndustries.map(c => c.name).join('、')}。`;
+    }
+    industryDesc += '行业分化较为明显。';
+  }
 
   // Overview
   let overviewHtml = '';
-  overviewHtml += `<p><strong style="color:var(--navy)">市场概况：</strong>今日全A股${stocks.length}只，上涨${up.length}只（${upPct}%），下跌${down.length}只（${downPct}%），平盘${flat.length}只。涨停${limitUp.length}只，跌停${limitDown.length}只。全市场平均涨跌幅${avgChange >= 0 ? '+' : ''}${avgChange.toFixed(2)}%，整体表现${changeText}。</p>`;
-  overviewHtml += `<p><strong style="color:var(--navy)">风格分化：</strong>大盘股平均涨跌幅${largeAvg >= 0 ? '+' : ''}${largeAvg.toFixed(2)}%，中盘${midAvg >= 0 ? '+' : ''}${midAvg.toFixed(2)}%，小盘${smallAvg >= 0 ? '+' : ''}${smallAvg.toFixed(2)}%。${largeAvg > smallAvg ? '大盘股明显占优，价值风格更强。' : '小盘股活跃度更高，成长风格受青睐。'}</p>`;
-  overviewHtml += `<p><strong style="color:var(--navy)">成交分析：</strong>全市场总成交额${totalTurnoverYi.toFixed(0)}亿元，TOP10个股成交额占比${concentration.toFixed(1)}%${concentration > 15 ? '，资金高度集中，抱团现象明显' : concentration > 10 ? '，资金相对集中' : '，成交较为分散'}。</p>`;
+  overviewHtml += `<p><strong style="color:var(--navy)">市场概况：</strong>${upDesc}，${downDesc}。${limitDesc}，整体表现${avgDesc}。</p>`;
+  overviewHtml += `<p><strong style="color:var(--navy)">风格分化：</strong>${styleDesc}。</p>`;
+  overviewHtml += `<p><strong style="color:var(--navy)">成交分析：</strong>${concDesc}。</p>`;
 
-  if (hotIndustries.length > 0) {
-    overviewHtml += `<p><strong style="color:var(--navy)">行业热度：</strong>涨幅居前行业——${hotIndustries.map(h => `${h.name}（平均${h.avgChange >= 0 ? '+' : ''}${h.avgChange.toFixed(2)}%）`).join('、')}。`;
-    if (coldIndustries.length > 0) {
-      overviewHtml += `跌幅居前行业——${coldIndustries.map(c => `${c.name}（平均${c.avgChange >= 0 ? '+' : ''}${c.avgChange.toFixed(2)}%）`).join('、')}。`;
-    }
-    overviewHtml += '</p>';
+  if (industryDesc) {
+    overviewHtml += `<p><strong style="color:var(--navy)">行业热度：</strong>${industryDesc}</p>`;
   }
 
   document.getElementById('summary-overview').innerHTML = overviewHtml;
-
-  // Key metrics bar
-  document.getElementById('summary-metrics').innerHTML = `
-    <div class="summary-metric"><div class="num" style="color:${avgChange >= 0 ? 'var(--danger)' : 'var(--success)'}">${avgChange >= 0 ? '+' : ''}${avgChange.toFixed(2)}%</div><div class="lbl">平均涨跌幅</div></div>
-    <div class="summary-metric"><div class="num" style="color:var(--danger)">${upPct}%</div><div class="lbl">上涨占比</div></div>
-    <div class="summary-metric"><div class="num" style="color:var(--success)">${downPct}%</div><div class="lbl">下跌占比</div></div>
-    <div class="summary-metric"><div class="num">${totalTurnoverYi.toFixed(0)}亿</div><div class="lbl">总成交额</div></div>
-    <div class="summary-metric"><div class="num">${concentration.toFixed(1)}%</div><div class="lbl">头部集中度</div></div>
-  `;
 }
 
 // ── SUMMARY OPPORTUNITIES (首页重点关注) ──
@@ -1791,6 +1787,16 @@ function renderNews() {
     return !capitalKw.some(kw => n.title.includes(kw));
   });
 
+  // 只保留最近2日的新闻
+  const now = new Date();
+  const cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
+  const parseNewsDate = (s) => {
+    if (!s) return new Date(0);
+    const d = s.replace(/(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');
+    return new Date(d);
+  };
+  filteredNews = filteredNews.filter(n => parseNewsDate(n.publish_time) >= cutoff);
+
   // Province filter
   if (gProvinceFilter !== 'all') {
     const stocks = getFilteredStocks();
@@ -2356,9 +2362,11 @@ function renderCapitalCards(data) {
   const pageGroups = groups.slice(start, start + CAPITAL_PAGE_SIZE);
 
   const html = pageGroups.map(g => {
-    const itemsHtml = g.items.map(it =>
-      '<div class="capital-card-summary">' + it.summary + '</div>'
-    ).join('');
+    const itemsHtml = g.items.length > 1
+      ? '<div class="capital-card-summaries">' + g.items.map(it =>
+          '<div class="capital-card-summary">' + it.summary + '</div>'
+        ).join('') + '</div>'
+      : '<div class="capital-card-summary">' + g.items[0].summary + '</div>';
     const badgeHtml = g.count > 1
       ? '<span class="badge" style="background:var(--ice);color:var(--navy);margin-left:8px;font-size:11px;padding:2px 6px;border-radius:8px">' + g.count + ' 条公告</span>'
       : '';
