@@ -1,4 +1,4 @@
-// L1 市场级新闻舆情 - 自动生成于 2026-05-14 05:11
+// L1 市场级新闻舆情 - 自动生成于 2026-05-14 05:35
 window.__NEWS_DATA__ = {
   "date": "2026-05-14",
   "total": 158,
@@ -12,6 +12,16 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202605143737211731.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "券商“考公潮”退去？监管拟录人数大降超30%",
+      "type": "研报资讯",
+      "publish_time": "2026-05-14 12:17:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202605143737216647.html"
     },
     {
       "stock_code": "",
@@ -102,6 +112,26 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202605143737177798.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "ETF融资榜 | 上证50ETF华夏510050融资净买入1.87亿元，居可比基金首位-20260513",
+      "type": "市场快讯",
+      "publish_time": "2026-05-14 09:46:30",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202605143737242342.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "成交额超7亿元，科创50ETF华夏588000冲击4连涨",
+      "type": "市场快讯",
+      "publish_time": "2026-05-14 09:46:04",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202605143737244556.html"
     },
     {
       "stock_code": "",
@@ -576,16 +606,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "券商股拉升 长城证券涨停",
-      "type": "研报资讯",
-      "publish_time": "2026-05-12 11:14:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202605123734247469.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "券商板块异动拉升",
       "type": "研报资讯",
       "publish_time": "2026-05-12 11:13:03",
@@ -762,16 +782,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202605083731877231.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "商业航天板块领涨；证券相关ETF近期逆势“吸金”丨ETF晚报",
-      "type": "市场快讯",
-      "publish_time": "2026-05-08 18:54:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202605083731859377.html"
     },
     {
       "stock_code": "",
@@ -1392,16 +1402,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202604093699302868.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "20cm速递丨海外涨价+业绩高增，科创50ETF华夏（588000）站上20日均线",
-      "type": "市场快讯",
-      "publish_time": "2026-04-09 10:26:17",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202604093699380871.html"
     },
     {
       "stock_code": "",
