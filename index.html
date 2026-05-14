@@ -578,7 +578,7 @@ tr:hover td{background:var(--ice-l)}
 <!-- ═══ PAGE: 行情中心 ═══ -->
 <div id="page-market" style="display:none">
 <div class="section" id="market">
-  <div class="section-title"><span class="icon">📈</span>行情中心 <span class="badge" id="market-date-badge" style="font-size:12px;font-weight:400;background:var(--info);color:#fff">加载中</span><span style="font-size:12px;color:var(--g500);margin-left:8px">数据来源：腾讯财经</span><button onclick="refreshMarketData()" style="margin-left:12px;padding:3px 10px;border-radius:4px;border:1px solid var(--navy);background:#fff;color:var(--navy);font-size:12px;cursor:pointer" title="运行 python refresh_market_v3.py 刷新行情数据">🔄 刷新行情</button></div>
+  <div class="section-title"><span class="icon">📈</span>行情中心 <span class="badge" id="market-date-badge" style="font-size:12px;font-weight:400;background:var(--info);color:#fff">加载中</span><span style="font-size:12px;color:var(--g500);margin-left:8px">数据来源：腾讯财经</span></div>
   <div class="summary-card" style="margin-bottom:20px;padding:16px 20px">
     <h4 style="font-size:16px;color:var(--navy);margin-bottom:10px">行情总结</h4>
     <div id="market-summary-text" style="font-size:14px;color:var(--g700);line-height:1.8"></div>
@@ -688,7 +688,6 @@ tr:hover td{background:var(--ice-l)}
 <!-- ═══ FOOTER ═══ -->
 <div class="footer">
   全A股上市公司机构业务机会看板 &copy; 2026 &nbsp;|&nbsp; 数据来源：万得（公司信息）+ 腾讯财经（实时行情）+ 巨潮资讯网（公告）+ 东方财富（新闻/研报）
-  <br><span style="font-size:11px;margin-top:4px;display:inline-block;color:var(--g500)">数据更新：<code style="background:var(--g200);padding:1px 6px;border-radius:4px">python refresh_market_v3.py</code> 刷新行情 &nbsp;|&nbsp; <code style="background:var(--g200);padding:1px 6px;border-radius:4px">python cninfo_dashboard_updater_v2.py</code> 刷新资本动作+高管变动</span>
 </div>
 
 <script>
@@ -1102,7 +1101,7 @@ function renderSummary() {
 
   // 涨跌停范围描述
   let limitDesc = '';
-  if (limitUp.length > 50) limitDesc += '涨停超50家，赚钱效应较好';
+  if (limitUp.length > 50) limitDesc += '涨停超50家，个股活跃度较高';
   else if (limitUp.length > 20) limitDesc += '涨停超20家';
   else if (limitUp.length > 5) limitDesc += '涨停不足10家';
   else limitDesc += '涨停不足5家';
@@ -2194,11 +2193,11 @@ function loadCapitalData() {
       gCapitalData.push(...gCapitalDateMap[dateKey]);
     }
     
-    // 默认显示所有日期
+    // 默认只显示最新、昨日、前天
     if (gCapitalFilters.date === 'all') {
-      gCapitalFilters.date = Object.keys(gCapitalDateMap)[0] || 'all';
+      gCapitalFilters.date = 'latest';
     }
-    
+
     // 渲染日期筛选按钮
     renderCapitalDateFilter(dates.filter(d => d !== 'date'));
     
@@ -2220,7 +2219,12 @@ function loadCapitalData() {
 function getFilteredCapital() {
   // 先按日期筛选
   let pool = gCapitalData;
-  if (gCapitalFilters.date !== 'all') {
+  if (gCapitalFilters.date === 'latest') {
+    // 最新 = 最近3天
+    const recent = Object.keys(gCapitalDateMap).sort().reverse().slice(0, 3);
+    pool = [];
+    for (const d of recent) pool.push(...(gCapitalDateMap[d] || []));
+  } else if (gCapitalFilters.date !== 'all') {
     pool = gCapitalDateMap[gCapitalFilters.date] || [];
   }
   
@@ -2254,11 +2258,11 @@ function getFilteredCapital() {
 function renderCapitalDateFilter(dates) {
   const container = document.getElementById('capital-date-filter');
   if (!container || dates.length === 0) return;
+  const sorted = dates.sort().reverse();
+  const show = sorted.slice(0, 7);
   let html = '<span style="font-size:11px;color:var(--g500);margin-right:4px">日期:</span>';
-  html += '<button onclick="setCapitalDateFilter(\'all\')" class="capital-filter-btn ' + (gCapitalFilters.date === 'all' ? 'active' : '') + '" style="padding:3px 8px;border:1px solid ' + (gCapitalFilters.date === 'all' ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (gCapitalFilters.date === 'all' ? 'var(--navy)' : '#fff') + ';color:' + (gCapitalFilters.date === 'all' ? '#fff' : '#333') + ';font-size:11px;cursor:pointer">全部</button>';
-  
-  // 显示最近7天
-  for (const d of dates.slice(0, 7)) {
+  html += '<button onclick="setCapitalDateFilter(\'latest\')" class="capital-filter-btn ' + (gCapitalFilters.date === 'latest' ? 'active' : '') + '" style="padding:3px 8px;border:1px solid ' + (gCapitalFilters.date === 'latest' ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (gCapitalFilters.date === 'latest' ? 'var(--navy)' : '#fff') + ';color:' + (gCapitalFilters.date === 'latest' ? '#fff' : '#333') + ';font-size:11px;cursor:pointer">最新</button>';
+  for (const d of show) {
     const label = d === getTodayStr() ? '今日' : (d === getYesterdayStr() ? '昨日' : d.substring(5));
     const isActive = gCapitalFilters.date === d;
     html += '<button onclick="setCapitalDateFilter(\'' + d + '\')" class="capital-filter-btn ' + (isActive ? 'active' : '') + '" style="padding:3px 8px;border:1px solid ' + (isActive ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (isActive ? 'var(--navy)' : '#fff') + ';color:' + (isActive ? '#fff' : '#333') + ';font-size:11px;cursor:pointer;margin-left:4px">' + label + '</button>';
@@ -2288,7 +2292,9 @@ function renderCapitalSection() {
   const data = getFilteredCapital();
   // 更新badge
   let badge = data.length + '条';
-  if (gCapitalFilters.date !== 'all') {
+  if (gCapitalFilters.date === 'latest') {
+    badge += ' (最新)';
+  } else if (gCapitalFilters.date !== 'all') {
     const label = gCapitalFilters.date === getTodayStr() ? '今日' : (gCapitalFilters.date === getYesterdayStr() ? '昨日' : gCapitalFilters.date);
     badge += ' (' + label + ')';
   }
