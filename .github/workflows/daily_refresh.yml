@@ -33,6 +33,7 @@ jobs:
         working-directory: WorkBuddy
 
       - name: 刷新行情数据
+        continue-on-error: true
         run: python refresh_market_v3.py
         working-directory: js_stock_tracker
 
