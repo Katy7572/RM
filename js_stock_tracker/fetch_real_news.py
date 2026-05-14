@@ -37,16 +37,28 @@ _script_dir = Path(__file__).resolve().parent
 DATA_JS_PATH = _script_dir / "data.js" if (_script_dir / "data.js").exists() else _script_dir.parent / "data.js"
 NEWS_JS_PATH = _script_dir / "news_data.js" if (_script_dir / "news_data.js").exists() else _script_dir.parent / "news_data.js"
 
-# 市场代表性 ETF 代码
-MARKET_CODES = ['510300', '510500', '510050']  # 沪深300 / 中证500 / 上证50
-NEWS_PER_CODE = 5
+# 市场代表性 ETF 代码（覆盖宽基/创业板/科创/北证/红利/行业）
+MARKET_CODES = [
+    '510300', '510500', '510050',  # 沪深300 / 中证500 / 上证50
+    '159919',  # 创业板ETF
+    '588000',  # 科创50ETF
+    '560010',  # 北证50ETF
+    '510880',  # 红利ETF
+    '512880',  # 证券ETF
+    '512660',  # 军工ETF
+]
+NEWS_PER_CODE = 10
 
-# 调研/研报关键词（覆盖研报、券商动态、机构调研）
-RESEARCH_KEYWORDS = ['券商', '调研', '研报']
-NEWS_PER_KEYWORD = 5
+# 调研/研报关键词（覆盖研报、券商动态、机构调研、评级）
+RESEARCH_KEYWORDS = [
+    '券商', '调研', '研报',
+    '机构评级', '投资评级', '分析师',
+    '投资者调研', '接待调研', '实地调研',
+]
+NEWS_PER_KEYWORD = 10
 
 # 央视新闻条数
-CCTV_NEWS_COUNT = 10
+CCTV_NEWS_COUNT = 20
 
 
 def fetch_market_news() -> List[Dict]:
