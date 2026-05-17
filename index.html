@@ -525,7 +525,7 @@ tr:hover td{background:var(--ice-l)}
       <option value="star">按等级排序</option>
       <option value="date">按日期排序</option>
     </select>
-    <span id="capital-date-filter" style="display:none;margin-left:8px"></span>
+    <span id="capital-date-filter" style="margin-left:8px"></span>
     <button style="padding:4px 10px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer" onclick="capitalExportCSV()">导出CSV</button>
   </div>
 
@@ -2261,7 +2261,8 @@ function renderCapitalDateFilter(dates) {
   const sorted = dates.sort().reverse();
   const show = sorted.slice(0, 7);
   let html = '<span style="font-size:11px;color:var(--g500);margin-right:4px">日期:</span>';
-  html += '<button onclick="setCapitalDateFilter(\'latest\')" class="capital-filter-btn ' + (gCapitalFilters.date === 'latest' ? 'active' : '') + '" style="padding:3px 8px;border:1px solid ' + (gCapitalFilters.date === 'latest' ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (gCapitalFilters.date === 'latest' ? 'var(--navy)' : '#fff') + ';color:' + (gCapitalFilters.date === 'latest' ? '#fff' : '#333') + ';font-size:11px;cursor:pointer">最新</button>';
+  html += '<button onclick="setCapitalDateFilter(\'all\')" class="capital-filter-btn ' + (gCapitalFilters.date === 'all' ? 'active' : '') + '" style="padding:3px 8px;border:1px solid ' + (gCapitalFilters.date === 'all' ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (gCapitalFilters.date === 'all' ? 'var(--navy)' : '#fff') + ';color:' + (gCapitalFilters.date === 'all' ? '#fff' : '#333') + ';font-size:11px;cursor:pointer">全部</button>';
+  html += '<button onclick="setCapitalDateFilter(\'latest\')" class="capital-filter-btn ' + (gCapitalFilters.date === 'latest' ? 'active' : '') + '" style="padding:3px 8px;border:1px solid ' + (gCapitalFilters.date === 'latest' ? 'var(--navy)' : 'var(--g200)') + ';border-radius:4px;background:' + (gCapitalFilters.date === 'latest' ? 'var(--navy)' : '#fff') + ';color:' + (gCapitalFilters.date === 'latest' ? '#fff' : '#333') + ';font-size:11px;cursor:pointer;margin-left:4px">最新</button>';
   for (const d of show) {
     const label = d === getTodayStr() ? '今日' : (d === getYesterdayStr() ? '昨日' : d.substring(5));
     const isActive = gCapitalFilters.date === d;
@@ -2311,7 +2312,13 @@ function groupByCapitalCompany(data) {
   data.forEach(item => {
     const key = item.code + '|' + item.category;
     if (!groups[key]) { groups[key] = []; order.push(key); }
-    groups[key].push(item);
+    // 按 summary 去重，避免同一公告重复出现
+    const summary = (item.summary || '').replace(/<[^>]+>/g, '').trim();
+    const dup = groups[key].some(it => {
+      const existing = (it.summary || '').replace(/<[^>]+>/g, '').trim();
+      return existing && existing === summary;
+    });
+    if (!dup) groups[key].push(item);
   });
   return order.map(k => {
     const g = groups[k];
@@ -2471,6 +2478,7 @@ function initCapitalFilters() {
   document.querySelectorAll('.capital-filter-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       const filter = this.dataset.filter;
+      if (!filter) return; // 日期按钮用onclick处理，跳过
       const value = this.dataset.value;
       gCapitalFilters[filter] = value;
       // Reset complementary filter when switching category/subType
