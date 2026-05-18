@@ -810,7 +810,136 @@ function mergeResearchData() {
   gData.institution_research = research;
 }
 
+// ── 自动纳入新上市公司（不在Excel中但有公告/高管变动的公司）──
+function autoIncludeNewCompanies() {
+  if (!gData || !gData.stocks) return;
+  const existingCodes = new Set(gData.stocks.map(s => s.code));
+  let added = 0;
+  const newStockCodes = [];
+
+  function addStock(code, name, province) {
+    if (existingCodes.has(code)) return;
+    gData.stocks.push({
+      code: code,
+      name: name,
+      province: province || '未知',
+      city: province || '',
+      industry: '未知',
+      price: 0,
+      change_pct: 0,
+      turnover: 0,
+      market_cap: 0,
+      _autoIncluded: true
+    });
+    existingCodes.add(code);
+    added++;
+    newStockCodes.push(code);
+    console.log('自动纳入新公司: ' + name + ' (' + code + ')');
+  }
+
+  // 从资本动作数据中扫描
+  (gCapitalData || []).forEach(item => {
+    if (!item.code || !item.name) return;
+    addStock(item.code, item.name, item.city || null);
+  });
+
+  // 从高管变动数据中扫描
+  let execItems = [];
+  if (window.__EXECUTIVE_DATA__) {
+    for (const key of Object.keys(window.__EXECUTIVE_DATA__)) {
+      if (key === 'date') continue;
+      const items = window.__EXECUTIVE_DATA__[key];
+      if (Array.isArray(items)) execItems.push(...items);
+    }
+  } else {
+    execItems = gData.executive_changes || [];
+  }
+  execItems.forEach(c => {
+    if (!c.stock_code || !c.stock_name) return;
+    addStock(c.stock_code, c.stock_name, null);
+  });
+
+  if (added > 0) {
+    console.log('共自动纳入 ' + added + ' 家新上市公司');
+    // 异步查询东方财富API获取注册地址，提取省份
+    fetchNewCompanyProvinces(newStockCodes);
+  }
+}
+
+// ── 从地址字符串中提取省份 ──
+function extractProvince(address) {
+  if (!address) return null;
+  // 直辖市
+  const municipalities = { '北京市': '北京', '天津市': '天津', '上海市': '上海', '重庆市': '重庆' };
+  for (const [full, short] of Object.entries(municipalities)) {
+    if (address.includes(full)) return short;
+  }
+  // 省/自治区
+  const provinces = [
+    '内蒙古自治区', '广西壮族自治区', '西藏自治区', '宁夏回族自治区', '新疆维吾尔自治区',
+    '黑龙江省', '吉林省', '辽宁省', '河北省', '河南省', '山东省', '山西省',
+    '江苏省', '浙江省', '安徽省', '福建省', '江西省', '湖北省', '湖南省',
+    '广东省', '海南省', '四川省', '贵州省', '云南省', '陕西省', '甘肃省', '青海省', '台湾省'
+  ];
+  for (const prov of provinces) {
+    if (address.includes(prov)) return prov.replace(/省$|自治区$/, '');
+  }
+  return null;
+}
+
+// ── 异步查询东方财富API获取新公司注册地址 ──
+async function fetchNewCompanyProvinces(codes) {
+  if (!codes || codes.length === 0) return;
+  console.log('开始查询东方财富API获取 ' + codes.length + ' 家新公司注册地址...');
+  const promises = codes.map(async (code) => {
+    try {
+      // 确保代码有交易所后缀
+      let emCode = String(code);
+      if (!/\.(SZ|SH|BJ)$/.test(emCode)) {
+        if (/^68\d{4}$/.test(emCode) || /^60\d{4}$/.test(emCode)) emCode += '.SH';
+        else if (/^8\d{5}$/.test(emCode) || /^4\d{5}$/.test(emCode)) emCode += '.BJ';
+        else emCode += '.SZ';
+      }
+      const url = 'https://data.eastmoney.com/api/data/get?type=RPT_DMSK_TS_STOCKNEWERASEARCH' +
+        '&sty=ALL&filter=(SECURITY_CODE="' + emCode.replace(/\./g, '') + '")&p=1&ps=1&sr=-1&st=REPORT_DATE&source=EMW';
+      const resp = await fetch(url);
+      const json = await resp.json();
+      if (json && json.result && json.result.data && json.result.data.length > 0) {
+        const info = json.result.data[0];
+        const address = info.REGIST_ADDRESS || info.REG_ADDRESS || info.ADDRESS || info.OFFICE_ADDRESS || '';
+        const province = extractProvince(address);
+        if (province) {
+          // 更新股票列表中的省份信息
+          const stock = gData.stocks.find(s => s.code === code);
+          if (stock && stock._autoIncluded) {
+            stock.province = province;
+            stock.city = province;
+            console.log(code + ' 省份更新: ' + province + ' (地址: ' + address.substring(0, 40) + '...)');
+          }
+        }
+      }
+    } catch (e) {
+      console.log('查询 ' + code + ' 地址失败: ' + e.message);
+    }
+  });
+  // 等待所有查询完成（不阻塞UI）
+  Promise.allSettled(promises).then(() => {
+    // 重新构建省份网格（因为新公司可能已分配到具体省份）
+    const grid = document.getElementById('province-page-grid');
+    if (grid) {
+      grid.innerHTML = '';
+      buildProvinceGrid();
+    }
+    console.log('新公司省份查询完成');
+  });
+}
+
 function renderAll() {
+  // 先加载资本数据，否则 gCapitalData 为空
+  loadCapitalData();
+  // 自动纳入新上市公司（不在Excel中但有公告/高管变动的公司）
+  autoIncludeNewCompanies();
+  initCapitalFilters();
   renderDashboard();
   renderSummary();
   renderSummaryOpportunities();
@@ -819,7 +948,8 @@ function renderAll() {
   renderNews();
   renderPerformance();
   renderExecutive();
-  renderCapital();
+  // renderCapital 已经不需要再次调用 loadCapitalData，只渲染UI
+  renderCapitalUI();
   renderNationalSummary();
   renderResearch();
   initResearchFilters();
@@ -951,7 +1081,7 @@ function applyProvinceFilter() {
   renderMarket();
   renderNews();
   renderExecutive();
-  renderCapital();
+  renderCapitalUI();
   renderNationalSummary();
   renderResearch();
 
@@ -2521,9 +2651,11 @@ function initCapitalFilters() {
   });
 }
 
-function renderCapital() {
-  loadCapitalData();
-  initCapitalFilters();
+function renderCapitalUI() {
+  // 只渲染UI，数据已由 renderAll() 中的 loadCapitalData() 加载
+  if (gCapitalData.length > 0) {
+    renderCapitalSection();
+  }
 }
 
 // ── RESEARCH ──
