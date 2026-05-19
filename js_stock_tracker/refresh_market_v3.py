@@ -73,10 +73,12 @@ def fetch_via_tencent(codes):
         # sh/sz/bj 前缀
         symbol_list = []
         for c in batch:
-            if c.startswith('6') or c.startswith('9'):
+            if c.startswith('6') or c.startswith('900'):
                 symbol_list.append(f'sh{c}')
             elif c.startswith('3') or c.startswith('0') or c.startswith('2'):
                 symbol_list.append(f'sz{c}')
+            elif c.startswith('8') or c.startswith('4') or c.startswith('92'):
+                symbol_list.append(f'bj{c}')
             else:
                 symbol_list.append(f'sh{c}')
         url = f"https://qt.gtimg.cn/q={','.join(symbol_list)}"
