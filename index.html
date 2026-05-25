@@ -1916,9 +1916,9 @@ function renderNews() {
     return !capitalKw.some(kw => n.title.includes(kw));
   });
 
-  // 只保留最近2日的新闻
+  // 只保留最近3日的新闻
   const now = new Date();
-  const cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
+  const cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 3);
   const parseNewsDate = (s) => {
     if (!s) return new Date(0);
     const d = s.replace(/(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');
