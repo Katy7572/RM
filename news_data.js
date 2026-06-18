@@ -1,57 +1,427 @@
-// L1 市场级新闻舆情 - 自动生成于 2026-06-17 16:50
+// L1 市场级新闻舆情 - 自动生成于 2026-06-18 16:50
 window.__NEWS_DATA__ = {
-  "date": "2026-06-17",
-  "total": 169,
+  "date": "2026-06-18",
+  "total": 166,
   "data": [
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【调研快报】鹏翎股份接待弈和资本等33家机构调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-18 00:07:12",
+      "title": "券商银证转账时间分化加剧：有人7点多就能转钱，有人却要等到9点，券商入金服务差距拉大",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 23:15:34",
       "source": "东方财富",
       "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606183774980553.html"
+      "url": "http://finance.eastmoney.com/a/202606183776526471.html"
     },
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【调研快报】劲拓股份接待天弘基金等23家机构调研",
+      "title": "美联储超预期鹰派！知名分析师：科技股调整风险加大，要谨慎",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 19:50:38",
+      "source": "东方财富",
+      "sentiment": "negative",
+      "url": "http://finance.eastmoney.com/a/202606183776348360.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】汽轮科技接待道明资管等40家机构调研",
       "type": "调研信息",
-      "publish_time": "2026-06-18 00:02:08",
+      "publish_time": "2026-06-18 19:12:51",
       "source": "东方财富",
       "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606183774977717.html"
+      "url": "http://finance.eastmoney.com/a/202606183776293552.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】金开新能接待投资者调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 18:32:22",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776267023.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "新华指数监测：高品质的特色鲜薯上市增量 巫溪洋芋产地价跌幅收窄",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 17:57:04",
+      "source": "东方财富",
+      "sentiment": "negative",
+      "url": "http://finance.eastmoney.com/a/202606183776558795.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "4股今日获机构买入评级",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 17:28:00",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183776241441.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "AI正在撑起中国出口增速的“半边天”？| 研报精选",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 17:18:00",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183776227097.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "今年前5个月上海口岸机器人出口额占中国逾四成",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 17:11:30",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776220281.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "新锦动力举办投资者交流会 多家机构现场深度调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 17:05:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776236758.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】红宝丽接待中信证券调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 16:50:57",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776188765.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "韩股疯狂一幕：500万亿韩元退休年金入市 券商喊出10000点",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 16:33:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776176086.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】澳华内镜接待中银基金等57家机构调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 16:16:28",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776146752.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "券商年度“大考”启动，功能性发挥变成硬评分",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 16:07:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776141695.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】飞科电器接待投资者调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 15:41:57",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776121058.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】红棉股份接待中信建投调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 15:35:15",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776114313.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】莱伯泰科接待银河证券调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 15:35:15",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776114188.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】西部矿业接待投资者网上提问调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 15:35:15",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776114448.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】航天软件接待中信证券调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 15:35:15",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776113886.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "前5个月上海口岸机器人出口83.6亿元，规模居全国首位",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 15:27:08",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776120568.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【风口研报】海内外多重消息共振催化  国产芯片有望打开广阔市场空间",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 15:10:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776096894.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "证券板块短期调整，证券ETF国泰（512880）盘中飘绿2.8%，估值低位配置价值凸显",
+      "type": "市场快讯",
+      "publish_time": "2026-06-18 14:22:22",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776059911.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "午后爆发！万亿巨头，触及涨停！",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 14:19:00",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183776054730.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "A股三大指数反转拉升，电子、半导体、AI芯片等板块表现活跃，中证1000ETF广发560010冲击5连涨，累计涨近8%",
+      "type": "市场快讯",
+      "publish_time": "2026-06-18 13:49:58",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776016237.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "券商股持续下挫",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 13:41:38",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776005886.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "基金份额连续6个交易日迭创新高！防御需求下港股通红利ETF华泰柏瑞（513530）“攻守兼备”特征受瞩目",
+      "type": "市场快讯",
+      "publish_time": "2026-06-18 13:06:16",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183775969280.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "皓元医药涨停 13只科创板股涨超10%",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 11:27:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183775907192.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "6月17日券商研报对A股公司盈利预测一览:下调8家，上调10家",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 11:11:49",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183775891583.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【盘中播报】裕太微-U盘中涨停",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 10:50:00",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183775895631.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "铜、稀土等有色概念多股涨停！有色ETF银华（159871）等涨超1%，分析师大幅上调铜价预期",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 10:28:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183775833697.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "铂力特盘中涨停",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 10:12:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183775810672.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】中集集团接待部分股东代表、证券分析师以及媒体记者等调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 10:11:16",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183775750715.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "20cm速递丨科创板改革再释信号，AI产业链景气持续，全市最低费率科创50ETF华夏（588000）冲击四连阳！",
+      "type": "市场快讯",
+      "publish_time": "2026-06-18 10:08:08",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776109098.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "涨超2.1%，科创50ETF华夏588000冲击4连涨",
+      "type": "市场快讯",
+      "publish_time": "2026-06-18 10:06:16",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183776040654.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "科创50ETF华夏588000冲击4连涨",
+      "type": "市场快讯",
+      "publish_time": "2026-06-18 10:05:10",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183776041446.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "成交额超5亿元，上证50ETF华夏510050近5个交易日净流入7.28亿元",
+      "type": "市场快讯",
+      "publish_time": "2026-06-18 10:03:43",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776170175.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "两市ETF融资余额增加16.76亿元",
+      "type": "市场快讯",
+      "publish_time": "2026-06-18 09:42:00",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183775707564.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】伟星股份接待Value Partners调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 09:40:11",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183775560592.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "瑞达期货走进桐柏县毛集镇王湾村—— 党建领航“菇”香路，金融活水润红土",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 09:28:36",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183775511134.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "祁星加入中信建投证券研究所，担任ESG及绿色金融首席分析师",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 09:05:38",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606183775422088.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "券商晨会观点速递",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 08:30:23",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183775437659.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "AI幻觉酿“研报乌龙” 券商投研乱象待治理",
+      "type": "研报资讯",
+      "publish_time": "2026-06-18 07:43:41",
+      "source": "东方财富",
+      "sentiment": "negative",
+      "url": "http://finance.eastmoney.com/a/202606183775053078.html"
     },
     {
       "stock_code": "",
       "stock_name": "",
       "title": "错把旧闻当新政！方正证券研报“大乌龙” 敲响AI投研合规警钟",
       "type": "研报资讯",
-      "publish_time": "2026-06-17 21:36:00",
+      "publish_time": "2026-06-18 00:06:00",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606173774886033.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【调研快报】斯迪克接待招商基金等3家机构调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-17 21:11:55",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173774826383.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【调研快报】石基信息接待东兴证券等8家机构调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-17 19:24:29",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173774746017.html"
     },
     {
       "stock_code": "",
@@ -62,6 +432,16 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606173774713976.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "异动，连阳，券商酝酿转机？顶流券商ETF华宝(512000)基金经理：“双背离”构筑性价比，修复行情有望继续",
+      "type": "研报资讯",
+      "publish_time": "2026-06-17 18:33:21",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606173775011624.html"
     },
     {
       "stock_code": "",
@@ -86,16 +466,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "7股今日获机构买入评级",
-      "type": "研报资讯",
-      "publish_time": "2026-06-17 17:34:00",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606173774670729.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "【数据看盘】机构抢筹多只PCB人气股，多路资金激烈博弈香农芯创",
       "type": "市场快讯",
       "publish_time": "2026-06-17 17:27:32",
@@ -106,32 +476,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【调研快报】龙高股份接待国泰海通调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-17 16:32:36",
+      "title": "ETF主力榜 | 科创50ETF华夏588000主力资金净流入5.74亿元，居股票型ETF基金第一-20260617",
+      "type": "市场快讯",
+      "publish_time": "2026-06-17 16:40:25",
       "source": "东方财富",
       "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173774575432.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【调研快报】同星科技接待东财机械调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-17 16:07:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173774551772.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【调研快报】新益昌接待天风证券等14家机构调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-17 15:41:54",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173774521948.html"
+      "url": "http://finance.eastmoney.com/a/202606173775027834.html"
     },
     {
       "stock_code": "",
@@ -172,16 +522,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606173774359057.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【调研快报】中船汉光接待中金公司调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-17 12:06:40",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173774309655.html"
     },
     {
       "stock_code": "",
@@ -266,42 +606,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "海星股份连收3个涨停板",
-      "type": "研报资讯",
-      "publish_time": "2026-06-17 09:58:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173774164663.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "两市ETF融券余额环比增加2.69亿元",
       "type": "市场快讯",
       "publish_time": "2026-06-17 09:26:00",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606173774134248.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "电子级PTFE有望大规模应用 | 券商晨会",
-      "type": "研报资讯",
-      "publish_time": "2026-06-17 08:49:30",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606173773738839.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "券商晨会观点速递",
-      "type": "研报资讯",
-      "publish_time": "2026-06-17 08:24:40",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173773732252.html"
     },
     {
       "stock_code": "",
@@ -336,52 +646,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "方正证券研报“乌龙”再曝合规漏洞，直指AI幻觉、人工审核不严谨问题",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 22:19:30",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163773394681.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "走进贝特瑞：以AI赋能新材料研发，三年现金分红超12亿元",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 19:37:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163773256629.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "【调研快报】盐湖股份接待投资者网上提问调研",
       "type": "调研信息",
       "publish_time": "2026-06-16 19:34:03",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606163773225236.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "“00后”股东激活资本市场治理新生态",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 19:08:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163773270228.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【调研快报】广东明珠接待投资者调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-16 18:19:04",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163773174050.html"
     },
     {
       "stock_code": "",
@@ -406,16 +676,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "3股今日获机构买入评级",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 17:32:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163773149097.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "多晶硅尾盘直线下跌 分析师：是对前期高估值的修正",
       "type": "研报资讯",
       "publish_time": "2026-06-16 16:52:12",
@@ -426,32 +686,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【调研快报】藏格矿业接待线上参与本次活动的投资者调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-16 16:48:52",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163773081538.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "【调研快报】金三江接待投资者网上提问调研",
       "type": "调研信息",
       "publish_time": "2026-06-16 16:39:45",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606163773072730.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "ETF主力榜 | 科创50ETF华夏588000主力资金净流入4768.06万元，居可比基金前2-20260616",
-      "type": "市场快讯",
-      "publish_time": "2026-06-16 16:37:59",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163773084136.html"
     },
     {
       "stock_code": "",
@@ -476,16 +716,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【调研快报】天佑德酒接待投资者网上提问调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-16 15:22:37",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163772994227.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "“科创中国——新质生产力调研行”走进海博思创",
       "type": "调研信息",
       "publish_time": "2026-06-16 15:19:00",
@@ -496,32 +726,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【风口研报】供需失衡刺激价格大幅攀升    六氟化钨国产替代或迎窗口期",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 15:10:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163772985119.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "大小盘盈利增速剪刀差持续走阔，2026年中证1000一致预期净利润增速高达25%，中证1000ETF广发560010今日",
       "type": "市场快讯",
       "publish_time": "2026-06-16 14:53:22",
       "source": "东方财富",
       "sentiment": "positive",
       "url": "http://finance.eastmoney.com/a/202606163772963769.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "中资券商股逆市走高",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 14:40:44",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163772947963.html"
     },
     {
       "stock_code": "",
@@ -566,16 +776,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "6月15日券商研报对A股公司盈利预测一览:下调14家，上调3家",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 11:01:21",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606163772776766.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "稀土正式被列入国家级战略性矿产资源目录！稀土ETF华泰柏瑞（516780）交投活跃，持有人户数超6万",
       "type": "市场快讯",
       "publish_time": "2026-06-16 10:51:18",
@@ -596,32 +796,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "A股稀土、券商板块，大涨！",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 10:17:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163772702580.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "券商板块异动拉升",
       "type": "研报资讯",
       "publish_time": "2026-06-16 10:13:53",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606163772708771.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "中金公司“三合一”重组获上交所受理；券商掀起万亿发债潮 | 券商基金早参",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 09:42:00",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606163772508563.html"
     },
     {
       "stock_code": "",
@@ -642,26 +822,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606163772555732.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "硅片涨价如期落地 上行周期开始 | 券商晨会",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 09:00:30",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606163772285289.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "光伏需求下半年有望复苏 机构积极评级三十二股",
-      "type": "研报资讯",
-      "publish_time": "2026-06-16 07:29:34",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606163771948183.html"
     },
     {
       "stock_code": "",
@@ -726,32 +886,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【调研快报】道恩股份接待投资者调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-15 17:26:28",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606153771623469.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "港股收盘 | 三大指数集体收涨 AI产业链再度爆发",
       "type": "研报资讯",
       "publish_time": "2026-06-15 16:43:00",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606153771587290.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【首席说】国盛证券具身智能研究院院长、机械首席分析师张一鸣：告别纯概念炒作，人形机器人量产时代正式到来！",
-      "type": "研报资讯",
-      "publish_time": "2026-06-15 16:27:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606153771582712.html"
     },
     {
       "stock_code": "",
@@ -782,16 +922,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606153771551747.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【风口研报】AI算力驱动MLCC量价齐升  行业高景气周期有望持续",
-      "type": "研报资讯",
-      "publish_time": "2026-06-15 15:10:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606153771495640.html"
     },
     {
       "stock_code": "",
@@ -836,16 +966,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "全球欢庆美伊达成协议？分析师“泼冷水”：还没正式签署 生变只在一瞬间！",
-      "type": "研报资讯",
-      "publish_time": "2026-06-15 11:26:40",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606153771310057.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "大模型概念港股异动 Anthropic退场智谱接棒",
       "type": "研报资讯",
       "publish_time": "2026-06-15 10:37:00",
@@ -862,16 +982,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606153771154827.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "成交额超5亿元，上证50ETF华夏510050近5个交易日净流入14.95亿元",
-      "type": "市场快讯",
-      "publish_time": "2026-06-15 10:04:14",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606153771155142.html"
     },
     {
       "stock_code": "",
@@ -906,16 +1016,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "券商股短线拉升",
-      "type": "研报资讯",
-      "publish_time": "2026-06-15 09:43:01",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606153771029964.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "ETF资金榜 | 上证50ETF华夏510050：净流入12.67亿元，居可比基金首位-20260612",
       "type": "市场快讯",
       "publish_time": "2026-06-15 09:29:29",
@@ -946,42 +1046,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "申万宏源研究非银金融首席分析师罗钻辉：券商板块或在下半年迎来业绩、估值双升",
-      "type": "研报资讯",
-      "publish_time": "2026-06-15 00:05:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606153770763855.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "精准助力浆纸产业高质量发展",
-      "type": "研报资讯",
-      "publish_time": "2026-06-14 22:30:47",
-      "source": "东方财富",
-      "sentiment": "negative",
-      "url": "http://finance.eastmoney.com/a/202606143770765682.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "从硅谷到东亚！基金经理“出海”调研热潮涌动",
       "type": "调研信息",
       "publish_time": "2026-06-14 14:57:00",
       "source": "东方财富",
       "sentiment": "positive",
       "url": "http://finance.eastmoney.com/a/202606143770676447.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "分析师：关注SpaceX的散户配售比例十分重要",
-      "type": "研报资讯",
-      "publish_time": "2026-06-12 22:09:43",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606123770194347.html"
     },
     {
       "stock_code": "",
@@ -1062,26 +1132,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "positive",
       "url": "http://finance.eastmoney.com/a/202606123769620727.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "涨超3.3%，科创50ETF华夏588000近5个交易日净流入1.18亿元",
-      "type": "市场快讯",
-      "publish_time": "2026-06-12 09:54:33",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606123769410885.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "ETF融资榜 | 科创50ETF华夏588000融资净买入5720.43万元，居可比基金第一-20260611",
-      "type": "市场快讯",
-      "publish_time": "2026-06-12 09:49:45",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606123769518123.html"
     },
     {
       "stock_code": "",
@@ -1196,16 +1246,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "证券ETF国泰（512880）逆势飘红超1.2%，近20日资金净流入超22亿元，行业估值处近一年低位",
-      "type": "市场快讯",
-      "publish_time": "2026-06-10 17:35:52",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606103767089014.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "国内先进制程扩产+全球AI资本开支扩容，利好半导体、算力类中小盘科创企业，中证1000ETF广发560010近一年累计上",
       "type": "市场快讯",
       "publish_time": "2026-06-10 13:29:37",
@@ -1246,42 +1286,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "涨超2.5%，科创50ETF华夏588000盘中上涨2.56%",
-      "type": "市场快讯",
-      "publish_time": "2026-06-10 09:50:21",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606103766608350.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "涨超1.3%，科创50ETF华夏588000盘中上涨1.31%",
-      "type": "市场快讯",
-      "publish_time": "2026-06-10 09:41:51",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606103766628163.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "两市ETF两融余额较上一日减少15.44亿元",
       "type": "市场快讯",
       "publish_time": "2026-06-10 09:17:00",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606103765998590.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "百亿量化私募优美利投资：经核查，网传公司参与相关企业调研的内容并非公司行为",
-      "type": "调研信息",
-      "publish_time": "2026-06-09 22:01:51",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606093765492861.html"
     },
     {
       "stock_code": "",
@@ -1352,16 +1362,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606083763677538.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "指数深度回调，上证50ETF华夏（510050）交额超19亿元，或为资金抢筹",
-      "type": "市场快讯",
-      "publish_time": "2026-06-08 14:31:59",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606083763507040.html"
     },
     {
       "stock_code": "",
@@ -1506,26 +1506,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "小盘成长风格持续受资金关注，中证1000ETF广发（560010）连续2日获资金净买入",
-      "type": "市场快讯",
-      "publish_time": "2026-06-02 15:28:00",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202606023757516714.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "海外研选日报0601 | 瑞银：美联储在明年3月前或将按兵不动",
-      "type": "研报资讯",
-      "publish_time": "2026-06-01 17:29:27",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606013756112531.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "ETF甄选 | 三大指数震荡走弱，软件、港股通互联网、红利等ETF表现亮眼",
       "type": "市场快讯",
       "publish_time": "2026-06-01 15:58:25",
@@ -1566,16 +1546,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "中证1000指数走出“四连阳”，低费率的中证1000ETF广发（560010）受关注",
-      "type": "市场快讯",
-      "publish_time": "2026-05-07 16:28:05",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202605073730153859.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "习近平在重庆考察时强调 进一步全面深化改革开放 不断谱写中国式现代化重庆篇章",
       "type": "政策信息",
       "publish_time": "20240424",
@@ -1586,7 +1556,7 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "对不起，可能是网络原因或无此页面，请稍后尝试。",
+      "title": "【央视快评】奋力谱写西部大开发新篇章",
       "type": "政策信息",
       "publish_time": "20240424",
       "source": "央视新闻",
