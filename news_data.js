@@ -1,8 +1,38 @@
-// L1 市场级新闻舆情 - 自动生成于 2026-06-18 16:50
+// L1 市场级新闻舆情 - 自动生成于 2026-06-19 16:23
 window.__NEWS_DATA__ = {
-  "date": "2026-06-18",
-  "total": 166,
+  "date": "2026-06-19",
+  "total": 165,
   "data": [
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】长安汽车接待西南证券等7家机构调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-19 11:51:10",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606193776811636.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】京东方A接待建信基金等6家机构调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-19 11:35:56",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606193776811187.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "百亿级券商并购新进展：获国资监管部门批复",
+      "type": "研报资讯",
+      "publish_time": "2026-06-19 10:08:21",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202606193776808566.html"
+    },
     {
       "stock_code": "",
       "stock_name": "",
@@ -22,16 +52,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "negative",
       "url": "http://finance.eastmoney.com/a/202606183776348360.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "【调研快报】汽轮科技接待道明资管等40家机构调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-18 19:12:51",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606183776293552.html"
     },
     {
       "stock_code": "",
@@ -116,16 +136,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【调研快报】澳华内镜接待中银基金等57家机构调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-18 16:16:28",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606183776146752.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "券商年度“大考”启动，功能性发挥变成硬评分",
       "type": "研报资讯",
       "publish_time": "2026-06-18 16:07:00",
@@ -146,22 +156,22 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "【调研快报】红棉股份接待中信建投调研",
-      "type": "调研信息",
-      "publish_time": "2026-06-18 15:35:15",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606183776114313.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "【调研快报】莱伯泰科接待银河证券调研",
       "type": "调研信息",
       "publish_time": "2026-06-18 15:35:15",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606183776114188.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "【调研快报】红棉股份接待中信建投调研",
+      "type": "调研信息",
+      "publish_time": "2026-06-18 15:35:15",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202606183776114313.html"
     },
     {
       "stock_code": "",
@@ -432,16 +442,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202606173774713976.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "异动，连阳，券商酝酿转机？顶流券商ETF华宝(512000)基金经理：“双背离”构筑性价比，修复行情有望继续",
-      "type": "研报资讯",
-      "publish_time": "2026-06-17 18:33:21",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202606173775011624.html"
     },
     {
       "stock_code": "",
@@ -1626,7 +1626,7 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "神舟十八号载人飞船发射窗口确定 航天员乘组亮相",
+      "title": "对不起，可能是网络原因或无此页面，请稍后尝试。",
       "type": "政策信息",
       "publish_time": "20240424",
       "source": "央视新闻",
@@ -1637,16 +1637,6 @@ window.__NEWS_DATA__ = {
       "stock_code": "",
       "stock_name": "",
       "title": "中央纪委国家监委公开通报八起违规吃喝典型问题",
-      "type": "政策信息",
-      "publish_time": "20240424",
-      "source": "央视新闻",
-      "sentiment": "negative",
-      "url": ""
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "我国设立国家海外知识产权纠纷应对指导中心 为企业挽回经济损失68.9亿元",
       "type": "政策信息",
       "publish_time": "20240424",
       "source": "央视新闻",
