@@ -1,8 +1,48 @@
-// L1 市场级新闻舆情 - 自动生成于 2026-09-24 17:59
+// L1 市场级新闻舆情 - 自动生成于 2026-09-25 18:05
 window.__NEWS_DATA__ = {
-  "date": "2026-09-24",
+  "date": "2026-09-25",
   "total": 163,
   "data": [
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "券商年内密集发债 低息“补血”加剧行业分层",
+      "type": "研报资讯",
+      "publish_time": "2026-09-25 12:34:33",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202609253884257835.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "两券商同日遭监管处罚",
+      "type": "研报资讯",
+      "publish_time": "2026-09-25 12:01:00",
+      "source": "东方财富",
+      "sentiment": "negative",
+      "url": "http://finance.eastmoney.com/a/202609253884254649.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "证监会出手！两券商同日遭重罚，暂停新开户3个月",
+      "type": "研报资讯",
+      "publish_time": "2026-09-25 09:23:26",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202609253884239814.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "被立案两券商重罚落地！暂停新开户3个月 多名高管遭罚",
+      "type": "研报资讯",
+      "publish_time": "2026-09-25 08:48:01",
+      "source": "东方财富",
+      "sentiment": "negative",
+      "url": "http://finance.eastmoney.com/a/202609253884222678.html"
+    },
     {
       "stock_code": "",
       "stock_name": "",
@@ -42,16 +82,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202609243883866028.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "万亿元券商航母落地，券业加速洗牌：下一桩合并指向谁？",
-      "type": "研报资讯",
-      "publish_time": "2026-09-24 20:17:08",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202609243883868549.html"
     },
     {
       "stock_code": "",
@@ -496,26 +526,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "券商9月去哪调研？电子、机械最受关注",
-      "type": "调研信息",
-      "publish_time": "2026-09-23 12:08:00",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202609233882302792.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "中金“三合一”落地 万亿券商航母迎整合下半场",
-      "type": "研报资讯",
-      "publish_time": "2026-09-23 11:43:41",
-      "source": "东方财富",
-      "sentiment": "negative",
-      "url": "http://finance.eastmoney.com/a/202609233882296032.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "【盘中播报】优利德盘中涨停",
       "type": "研报资讯",
       "publish_time": "2026-09-23 11:21:00",
@@ -552,16 +562,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "positive",
       "url": "http://finance.eastmoney.com/a/202609233882284019.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "券商并购重组进入政策与市场双轮驱动落地期，券商ETF银华（159842）等盘中小幅上涨，机构称板块盈利和估值依旧错配",
-      "type": "研报资讯",
-      "publish_time": "2026-09-23 10:06:00",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202609233882277081.html"
     },
     {
       "stock_code": "",
