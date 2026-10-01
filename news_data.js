@@ -1,8 +1,68 @@
-// L1 市场级新闻舆情 - 自动生成于 2026-09-30 18:35
+// L1 市场级新闻舆情 - 自动生成于 2026-10-01 19:02
 window.__NEWS_DATA__ = {
-  "date": "2026-09-30",
-  "total": 151,
+  "date": "2026-10-01",
+  "total": 152,
   "data": [
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "154只，券商10月金股名单来了",
+      "type": "研报资讯",
+      "publish_time": "2026-10-01 21:15:21",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202610013888263083.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "晓数点丨券商10月金股出炉，涉及医药、信息技术等领域",
+      "type": "研报资讯",
+      "publish_time": "2026-10-01 17:22:58",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202610013888245185.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "（乡村行·看振兴）广东东源大洋洲淡水蓝龙虾出塘 铺就产业致富新路",
+      "type": "研报资讯",
+      "publish_time": "2026-10-01 13:28:50",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202610013888214672.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "重大变化！新规生效 券商线上展业逻辑重塑",
+      "type": "研报资讯",
+      "publish_time": "2026-10-01 13:19:06",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202610013888212646.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "韩国将允许分析师匿名发布含“卖出”建议的研报",
+      "type": "研报资讯",
+      "publish_time": "2026-10-01 10:56:55",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202610013888194569.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "券商密集开展注销式回购 市值管理转向长期股东回报",
+      "type": "研报资讯",
+      "publish_time": "2026-10-01 08:02:44",
+      "source": "东方财富",
+      "sentiment": "neutral",
+      "url": "http://finance.eastmoney.com/a/202610013888186651.html"
+    },
     {
       "stock_code": "",
       "stock_name": "",
@@ -62,16 +122,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202609303887839937.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "券商文化建设评估指标大修，新的加分与扣分项注意了！",
-      "type": "研报资讯",
-      "publish_time": "2026-09-30 19:21:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202609303887844311.html"
     },
     {
       "stock_code": "",
@@ -246,16 +296,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "摩根大通分析师：外国投资者正持续加大对北美人工智能计算基础设施的资金投入",
-      "type": "研报资讯",
-      "publish_time": "2026-09-30 15:56:03",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202609303887693258.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "AI增长逻辑存在关键悖论！分析师接连质疑：巨额支出究竟谁买单？",
       "type": "研报资讯",
       "publish_time": "2026-09-30 15:30:13",
@@ -396,32 +436,12 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "水乡古镇飘出“世界味”，环球美食汇进入第四季，风味无界，吃遍全球",
-      "type": "研报资讯",
-      "publish_time": "2026-09-29 22:57:06",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202609293886806451.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "又一券商分析师出任董秘 | 董秘沙龙",
       "type": "研报资讯",
       "publish_time": "2026-09-29 21:04:40",
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202609293886678391.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "离岸人民币外汇市场扩容！5家券商境外子公司获批 券商FICC业务迎来新空间",
-      "type": "研报资讯",
-      "publish_time": "2026-09-29 20:32:00",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202609293886631495.html"
     },
     {
       "stock_code": "",
@@ -562,6 +582,16 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "neutral",
       "url": "http://finance.eastmoney.com/a/202609283885423159.html"
+    },
+    {
+      "stock_code": "",
+      "stock_name": "",
+      "title": "农林牧渔ETF上涨；债券ETF驶入发展快车道|ETF晚报",
+      "type": "市场快讯",
+      "publish_time": "2026-09-28 19:53:00",
+      "source": "东方财富",
+      "sentiment": "positive",
+      "url": "http://finance.eastmoney.com/a/202609283885357734.html"
     },
     {
       "stock_code": "",
@@ -786,16 +816,6 @@ window.__NEWS_DATA__ = {
     {
       "stock_code": "",
       "stock_name": "",
-      "title": "中信证券发布蚂蚁集团研报：AI、全球化与科技资产成为新的价值坐标",
-      "type": "研报资讯",
-      "publish_time": "2026-09-23 13:33:00",
-      "source": "东方财富",
-      "sentiment": "positive",
-      "url": "http://finance.eastmoney.com/a/202609233882348451.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
       "title": "港股红利资产吸引力提升！港股通红利ETF华泰柏瑞513530交投活跃",
       "type": "市场快讯",
       "publish_time": "2026-09-23 13:32:57",
@@ -872,16 +892,6 @@ window.__NEWS_DATA__ = {
       "source": "东方财富",
       "sentiment": "negative",
       "url": "http://finance.eastmoney.com/a/202609223881561794.html"
-    },
-    {
-      "stock_code": "",
-      "stock_name": "",
-      "title": "上证科创板50成份指数ETF今日合计成交额116.67亿元，环比增加38.79%",
-      "type": "市场快讯",
-      "publish_time": "2026-09-22 16:23:00",
-      "source": "东方财富",
-      "sentiment": "neutral",
-      "url": "http://finance.eastmoney.com/a/202609223881268846.html"
     },
     {
       "stock_code": "",
