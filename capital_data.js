@@ -1,37 +1,85 @@
-// 资本动作数据 - 2026-10-06 18:59
+// 资本动作数据 - 2026-10-07 19:26
 window.__CAPITAL_DATA__ = {
-  "2026-10-05": [
+  "2026-10-07": [
     {
-      "id": "1225594591",
-      "code": "06610",
-      "name": "飞天云动",
+      "id": "1225595948",
+      "code": "02228",
+      "name": "晶泰控股",
       "city": "未知",
       "mv": 0,
       "category": "增减持",
       "subType": "增持",
-      "summary": "就(I)建议<em>增</em>加法定股本 (II)建议更改每手买卖单位 及(III)建议以非包销基准按于记录日期每<em>持</em>有一(1)股股份获配发四",
-      "date": "2026-10-05",
+      "summary": "自愿性公告本公司董事会主席<em>增</em><em>持</em>股份",
+      "date": "2026-10-07",
       "star": 2,
       "claimed": false,
       "claimDept": "",
       "direction": "增减持产品（算法交易、场外期权）|专项融资|市值管理",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-10-05/1225594591.PDF"
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-07/1225595948.PDF"
     },
     {
-      "id": "1225594610",
-      "code": "01122",
-      "name": "庆铃汽车<em>股份</em>",
+      "id": "1225595946",
+      "code": "01150",
+      "name": "米兰站",
+      "city": "未知",
+      "mv": 0,
+      "category": "增减持",
+      "subType": "增持",
+      "summary": "(I) 建议<em>增</em>加法定股本 (II) 建议股份合并及更改每手买卖单位 (III) 建议按于记录日期每<em>持</em>有一(1) 股合并股份按",
+      "date": "2026-10-07",
+      "star": 2,
+      "claimed": false,
+      "claimDept": "",
+      "direction": "增减持产品（算法交易、场外期权）|专项融资|市值管理",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-07/1225595946.PDF"
+    },
+    {
+      "id": "1225595942",
+      "code": "08455",
+      "name": "礼建德集团",
+      "city": "未知",
+      "mv": 0,
+      "category": "增减持",
+      "subType": "增持",
+      "summary": "(1)建议股本重组 (2)建议更改每手买卖单位 (3)建议<em>增</em>加法定股本 (4)建议按记录日期每<em>持</em>有一股经调整股份获发两股供股",
+      "date": "2026-10-07",
+      "star": 2,
+      "claimed": false,
+      "claimDept": "",
+      "direction": "增减持产品（算法交易、场外期权）|专项融资|市值管理",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-07/1225595942.PDF"
+    },
+    {
+      "id": "1225595883",
+      "code": "08471",
+      "name": "新达控股",
+      "city": "未知",
+      "mv": 0,
+      "category": "增减持",
+      "subType": "增持",
+      "summary": "延迟寄发通函及经修订预期时间表有关(1)建议<em>增</em>加法定股本 及(2)建议按于记录日期每<em>持</em>有一(1)股股份获发三(3)股供股股份的基准进行供股",
+      "date": "2026-10-07",
+      "star": 2,
+      "claimed": false,
+      "claimDept": "",
+      "direction": "增减持产品（算法交易、场外期权）|专项融资|市值管理",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-07/1225595883.PDF"
+    },
+    {
+      "id": "1225595954",
+      "code": "03296",
+      "name": "华勤技术",
       "city": "未知",
       "mv": 0,
       "category": "股份回购",
       "subType": "股份回购",
-      "summary": "自愿性公告 - 订立<em>回购</em>协议",
-      "date": "2026-10-05",
+      "summary": "海外监管公告 – 关于2026年第二期<em>回购</em>A股<em>股份</em>事项前十大股东和前十大无限售条件股东持股情况的公告",
+      "date": "2026-10-07",
       "star": 2,
       "claimed": false,
       "claimDept": "",
       "direction": "回购账户开立|回购融资|库存股再激励方案",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-10-05/1225594610.PDF"
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-07/1225595954.PDF"
     }
   ]
 };
