@@ -1,4 +1,4 @@
-// 高管变动数据 - 2026-11-03 20:13
+// 高管变动数据 - 2026-11-04 20:31
 window.__EXECUTIVE_DATA__ = {
   "2026-11-03": [
     {
@@ -15,6 +15,32 @@ window.__EXECUTIVE_DATA__ = {
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225656194.PDF"
     },
     {
+      "id": "1225655449",
+      "stock_code": "600760",
+      "stock_name": "中航沈飞",
+      "change_type": "变动",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "中航沈飞股份有限公司关于董事会秘书变更的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655449.PDF"
+    },
+    {
+      "id": "1225654784",
+      "stock_code": "688450",
+      "stock_name": "光格科技",
+      "change_type": "变动",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "光格科技关于调整董事会成员人数、修订《公司章程》及部分治理制度并办理工商变更登记的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225654784.PDF"
+    },
+    {
       "id": "1225656422",
       "stock_code": "09985",
       "stock_name": "卫龙美味",
@@ -26,71 +52,6 @@ window.__EXECUTIVE_DATA__ = {
       "status": "已生效",
       "title": "首席执行官及高级管理层之变更 委任联席副董事长 及 委任首席财务官",
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225656422.PDF"
-    },
-    {
-      "id": "1225655719",
-      "stock_code": "524869",
-      "stock_name": "26粤科K2",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事长",
-      "change_reason": "",
-      "announce_date": "2026-11-03",
-      "status": "已生效",
-      "title": "广东省粤科金融集团有限公司关于董事长发生变动的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225655719.PDF"
-    },
-    {
-      "id": "1225655723",
-      "stock_code": "524738",
-      "stock_name": "26粤科K1",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事长",
-      "change_reason": "",
-      "announce_date": "2026-11-03",
-      "status": "已生效",
-      "title": "广东省粤科金融集团有限公司关于董事长发生变动的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225655723.PDF"
-    },
-    {
-      "id": "1225655722",
-      "stock_code": "524476",
-      "stock_name": "25粤科K2",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事长",
-      "change_reason": "",
-      "announce_date": "2026-11-03",
-      "status": "已生效",
-      "title": "广东省粤科金融集团有限公司关于董事长发生变动的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225655722.PDF"
-    },
-    {
-      "id": "1225655721",
-      "stock_code": "524421",
-      "stock_name": "25粤科K1",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事长",
-      "change_reason": "",
-      "announce_date": "2026-11-03",
-      "status": "已生效",
-      "title": "广东省粤科金融集团有限公司关于董事长发生变动的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225655721.PDF"
-    },
-    {
-      "id": "1225655720",
-      "stock_code": "524082",
-      "stock_name": "24粤科01",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事长",
-      "change_reason": "",
-      "announce_date": "2026-11-03",
-      "status": "已生效",
-      "title": "广东省粤科金融集团有限公司关于董事长发生变动的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225655720.PDF"
     },
     {
       "id": "1225654729",
@@ -184,6 +145,45 @@ window.__EXECUTIVE_DATA__ = {
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225654814.PDF"
     },
     {
+      "id": "1225655389",
+      "stock_code": "000504",
+      "stock_name": "南华生物",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事长",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "关于公司董事长、总经理辞职的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655389.PDF"
+    },
+    {
+      "id": "1225654805",
+      "stock_code": "688166",
+      "stock_name": "博瑞医药",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "关于公司独立董事、非独立董事辞职并调整董事会专门委员会委员的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225654805.PDF"
+    },
+    {
+      "id": "1225654694",
+      "stock_code": "603406",
+      "stock_name": "天富龙",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "关于公司独立董事离任的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225654694.PDF"
+    },
+    {
       "id": "1225654644",
       "stock_code": "301209",
       "stock_name": "联合化学",
@@ -195,6 +195,19 @@ window.__EXECUTIVE_DATA__ = {
       "status": "已生效",
       "title": "关于职工代表董事辞职的公告",
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225654644.PDF"
+    },
+    {
+      "id": "1225655476",
+      "stock_code": "600970",
+      "stock_name": "中材国际",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "中国中材国际工程股份有限公司关于职工董事、副总裁辞任的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655476.PDF"
     },
     {
       "id": "1225656539",
@@ -275,6 +288,19 @@ window.__EXECUTIVE_DATA__ = {
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225655526.PDF"
     },
     {
+      "id": "1225655997",
+      "stock_code": "600510",
+      "stock_name": "黑牡丹",
+      "change_type": "聘任",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "关于董事、高级管理人员离任暨聘任总裁、补选董事的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655997.PDF"
+    },
+    {
       "id": "1225655175",
       "stock_code": "301021",
       "stock_name": "英诺激光",
@@ -286,6 +312,71 @@ window.__EXECUTIVE_DATA__ = {
       "status": "已生效",
       "title": "关于董事会完成换届选举及聘任高级管理人员、证券事务代表的公告",
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225655175.PDF"
+    },
+    {
+      "id": "1225655481",
+      "stock_code": "600760",
+      "stock_name": "中航沈飞",
+      "change_type": "聘任",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "中航沈飞股份有限公司董事会提名委员会关于聘任公司董事会秘书的审核意见",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655481.PDF"
+    },
+    {
+      "id": "1225656327",
+      "stock_code": "000521",
+      "stock_name": "长虹美菱",
+      "change_type": "变动",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "关于增补董事会专门委员会委员的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225656327.PDF"
+    },
+    {
+      "id": "1225655701",
+      "stock_code": "688231",
+      "stock_name": "隆达股份",
+      "change_type": "换届",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "换届",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "关于公司董事会换届选举的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655701.PDF"
+    },
+    {
+      "id": "1225654819",
+      "stock_code": "002191",
+      "stock_name": "劲嘉股份",
+      "change_type": "换届",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "换届",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "关于董事会换届选举的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225654819.PDF"
+    },
+    {
+      "id": "1225654779",
+      "stock_code": "688450",
+      "stock_name": "光格科技",
+      "change_type": "换届",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "换届",
+      "announce_date": "2026-11-03",
+      "status": "已生效",
+      "title": "光格科技关于董事会换届选举的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225654779.PDF"
     },
     {
       "id": "1225656190",
@@ -338,6 +429,190 @@ window.__EXECUTIVE_DATA__ = {
       "status": "已生效",
       "title": "关于董事会延期换届选举的提示性公告",
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225655118.PDF"
+    },
+    {
+      "id": "1225654780",
+      "stock_code": "688450",
+      "stock_name": "光格科技",
+      "change_type": "变动",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-03",
+      "status": "待生效",
+      "title": "光格科技第二届董事会提名委员会关于董事候选人任职资格的审查意见",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225654780.PDF"
+    }
+  ],
+  "2026-11-04": [
+    {
+      "id": "1225658126",
+      "stock_code": "01252",
+      "stock_name": "中国天瑞水泥",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "执行董事辞任；提名委员会组成变更；及 未能符合上市规则",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658126.PDF"
+    },
+    {
+      "id": "1225658080",
+      "stock_code": "00871",
+      "stock_name": "中国疏浚环保",
+      "change_type": "变动",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "(1) 委任执行董事；及(2) 公司秘书及授权代表变更",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658080.PDF"
+    },
+    {
+      "id": "1225658509",
+      "stock_code": "01165",
+      "stock_name": "顺风清洁能源",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "公告额外复牌指引及有关董事辞任之补充资料",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658509.PDF"
+    },
+    {
+      "id": "1225658456",
+      "stock_code": "00092",
+      "stock_name": "冠军科技集团",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "核数师辞任及继续暂停买卖",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658456.PDF"
+    },
+    {
+      "id": "1225658437",
+      "stock_code": "02571",
+      "stock_name": "赛目科技",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "非执行董事辞任",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658437.PDF"
+    },
+    {
+      "id": "1225658435",
+      "stock_code": "01116",
+      "stock_name": "慧源同创科技",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "总裁",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "行政总裁辞任",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658435.PDF"
+    },
+    {
+      "id": "1225658282",
+      "stock_code": "00727",
+      "stock_name": "中国丰汇",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "(1)独立非执行董事辞任；(2)委任独立非执行董事",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658282.PDF"
+    },
+    {
+      "id": "1225658162",
+      "stock_code": "06199",
+      "stock_name": "贵州银行",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "执行董事辞任",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658162.PDF"
+    },
+    {
+      "id": "1225657957",
+      "stock_code": "300290",
+      "stock_name": "ST荣科",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "关于财务负责人辞职暨聘任财务负责人的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225657957.PDF"
+    },
+    {
+      "id": "1225657440",
+      "stock_code": "02553",
+      "stock_name": "首钢朗泽",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "非执行董事辞任",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225657440.PDF"
+    },
+    {
+      "id": "1225657122",
+      "stock_code": "01280",
+      "stock_name": "奇点国峰",
+      "change_type": "辞职",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "非执行董事辞任",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225657122.PDF"
+    },
+    {
+      "id": "1225658524",
+      "stock_code": "02636",
+      "stock_name": "传音控股",
+      "change_type": "换届",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "换届",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "董事会换届选举及临时股东会通告",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658524.PDF"
+    },
+    {
+      "id": "1225658523",
+      "stock_code": "02636",
+      "stock_name": "传音控股",
+      "change_type": "换届",
+      "person_name": "",
+      "position": "董事",
+      "change_reason": "换届",
+      "announce_date": "2026-11-04",
+      "status": "已生效",
+      "title": "建议董事会换届选举及选举职工代表董事",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225658523.PDF"
     }
   ],
   "2026-11-02": [
@@ -355,175 +630,6 @@ window.__EXECUTIVE_DATA__ = {
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225652204.PDF"
     },
     {
-      "id": "1225654419",
-      "stock_code": "00209",
-      "stock_name": "万维智能科技",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "独立非执行董事变更及董事委员会组成变更",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225654419.PDF"
-    },
-    {
-      "id": "1225654152",
-      "stock_code": "01660",
-      "stock_name": "七元投资",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "(1)独立非执行董事之辞任；及(2)独立非执行董事之委任；及(3)更换公司秘书及授权代表；及(4)董事委员会组成变更",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225654152.PDF"
-    },
-    {
-      "id": "1225653971",
-      "stock_code": "00713",
-      "stock_name": "世界(集团)",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "执行董事辞任及变更公司秘书",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225653971.PDF"
-    },
-    {
-      "id": "1225653829",
-      "stock_code": "01008",
-      "stock_name": "力图控股",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "独立非执行董事变更及董事会委员会组成变动",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225653829.PDF"
-    },
-    {
-      "id": "1225653608",
-      "stock_code": "02520",
-      "stock_name": "山西安装",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "变更执行董事",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225653608.PDF"
-    },
-    {
-      "id": "1225653481",
-      "stock_code": "01183",
-      "stock_name": "澳能建设",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "(1)独立非执行董事辞任；(2)委任独立非执行董事；及(3)董事委员会组成变更",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225653481.PDF"
-    },
-    {
-      "id": "1225652886",
-      "stock_code": "300422",
-      "stock_name": "博世科",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "董事长",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "关于董事长变更、经理辞职的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225652886.PDF"
-    },
-    {
-      "id": "1225652945",
-      "stock_code": "00496",
-      "stock_name": "卡森国际",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "董事、董事委员会成员变更及授权代表变更",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225652945.PDF"
-    },
-    {
-      "id": "1225652560",
-      "stock_code": "03860",
-      "stock_name": "EPS创健科技",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "(1)更换董事及行政总裁；(2)更换法定代表；及(3)变更董事委员会成员组成",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225652560.PDF"
-    },
-    {
-      "id": "1225651997",
-      "stock_code": "300389",
-      "stock_name": "艾比森",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "关于变更董事会秘书的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225651997.PDF"
-    },
-    {
-      "id": "1225654390",
-      "stock_code": "09982",
-      "stock_name": "中原建业",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "独立非执行董事变动及委任副主席",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225654390.PDF"
-    },
-    {
-      "id": "1225653672",
-      "stock_code": "01792",
-      "stock_name": "CMON",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "(1)非执行董事辞任；及(2)提名委员会成员变动",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225653672.PDF"
-    },
-    {
-      "id": "1225653323",
-      "stock_code": "01621",
-      "stock_name": "域高国际控股",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "(I) 委任独立非执行董事；(II) 董事会委员会组成变动；及 (III) 重新符合上市规则",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225653323.PDF"
-    },
-    {
       "id": "1225651927",
       "stock_code": "000791",
       "stock_name": "甘肃能源",
@@ -535,19 +641,6 @@ window.__EXECUTIVE_DATA__ = {
       "status": "已生效",
       "title": "关于公司副总经理辞职的公告",
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225651927.PDF"
-    },
-    {
-      "id": "1225652357",
-      "stock_code": "300149",
-      "stock_name": "睿智医药",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "关于董事、副总裁辞职的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225652357.PDF"
     },
     {
       "id": "1225652195",
@@ -641,19 +734,6 @@ window.__EXECUTIVE_DATA__ = {
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225651656.PDF"
     },
     {
-      "id": "1225651843",
-      "stock_code": "301268",
-      "stock_name": "铭利达",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "关于公司董事辞职的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225651843.PDF"
-    },
-    {
       "id": "1225652237",
       "stock_code": "600196",
       "stock_name": "复星医药",
@@ -665,45 +745,6 @@ window.__EXECUTIVE_DATA__ = {
       "status": "已生效",
       "title": "复星医药关于高级管理人员辞任的公告",
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225652237.PDF"
-    },
-    {
-      "id": "1225654212",
-      "stock_code": "08611",
-      "stock_name": "九福来",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "核数师辞任",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225654212.PDF"
-    },
-    {
-      "id": "1225653519",
-      "stock_code": "02196",
-      "stock_name": "复星医药",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "海外监管公告 - 关于高级管理人员辞任的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225653519.PDF"
-    },
-    {
-      "id": "1225653499",
-      "stock_code": "02689",
-      "stock_name": "玖龙纸业",
-      "change_type": "辞职",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "执行董事辞任",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225653499.PDF"
     },
     {
       "id": "1225652805",
@@ -782,19 +823,6 @@ window.__EXECUTIVE_DATA__ = {
       "status": "已生效",
       "title": "关于部分董事离任暨补选董事的公告",
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225651645.PDF"
-    },
-    {
-      "id": "1225654002",
-      "stock_code": "300467",
-      "stock_name": "迅游科技",
-      "change_type": "变动",
-      "person_name": "",
-      "position": "董事长",
-      "change_reason": "",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "关于完成董事增补、改选董事长及选举副董事长的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225654002.PDF"
     },
     {
       "id": "1225655945",
@@ -886,60 +914,6 @@ window.__EXECUTIVE_DATA__ = {
       "status": "已生效",
       "title": "关于董事会完成换届选举及聘任高级管理人员、内部审计负责人的公告",
       "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225652080.PDF"
-    },
-    {
-      "id": "1225652480",
-      "stock_code": "301395",
-      "stock_name": "仁信新材",
-      "change_type": "换届",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "换届",
-      "announce_date": "2026-11-02",
-      "status": "已生效",
-      "title": "关于董事会延期换届的提示性公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225652480.PDF"
-    }
-  ],
-  "2026-11-01": [
-    {
-      "id": "1225654198",
-      "stock_code": "920258",
-      "stock_name": "聚仁新材",
-      "change_type": "换届",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "换届",
-      "announce_date": "2026-11-01",
-      "status": "已生效",
-      "title": "第二届董事会专门委员会换届公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225654198.PDF"
-    },
-    {
-      "id": "1225652690",
-      "stock_code": "920285",
-      "stock_name": "远大健科",
-      "change_type": "换届",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "换届",
-      "announce_date": "2026-11-01",
-      "status": "已生效",
-      "title": "关于董事会、高级管理人员延期换届的提示性公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225652690.PDF"
-    },
-    {
-      "id": "1225650977",
-      "stock_code": "688047",
-      "stock_name": "龙芯中科",
-      "change_type": "换届",
-      "person_name": "",
-      "position": "董事",
-      "change_reason": "换届",
-      "announce_date": "2026-11-01",
-      "status": "已生效",
-      "title": "龙芯中科关于董事会换届选举的公告",
-      "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225650977.PDF"
     }
   ]
 };
